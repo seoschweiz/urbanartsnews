@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Art Is Trash",
+    "slug": "art-is-trash",
+    "city": "Barcelona",
+    "country": "Spain",
+    "instagram": "https://www.instagram.com/artistrash/",
+    "posts": [
+      "https://www.instagram.com/p/DcbCHdNgzo3/",
+      "https://www.instagram.com/p/DcV1qoNARP_/",
+      "https://www.instagram.com/p/DcMKWOSgySa/"
+    ]
+  },
+  {
+    "name": "Ashwan",
+    "slug": "ashwan",
+    "city": "Barcelona",
+    "country": "Spain",
+    "instagram": "https://www.instagram.com/ashwanarts/",
+    "posts": [
+      "https://www.instagram.com/p/DZV3g7rMe75/",
+      "https://www.instagram.com/p/DX4re3iszBi/",
+      "https://www.instagram.com/p/DR4wIlUjJ_w/"
+    ]
+  },
+  {
+    "name": "Si Beriana",
+    "slug": "si-beriana",
+    "city": "Barcelona",
+    "country": "Spain",
+    "instagram": "https://www.instagram.com/si.beriana/",
+    "posts": [
+      "https://www.instagram.com/p/DbfvCs6uj0k/",
+      "https://www.instagram.com/p/DYpXmYIiMMQ/",
+      "https://www.instagram.com/p/DTXSpF2gYmn/"
+    ]
+  },
+  {
+    "name": "Peeta",
+    "slug": "peeta",
+    "city": "Venice",
+    "country": "Italy",
+    "instagram": "https://www.instagram.com/peeta_ead/",
+    "posts": [
+      "https://www.instagram.com/p/DX86_6jiODf/",
+      "https://www.instagram.com/p/DNYfKBYoNrA/",
+      "https://www.instagram.com/p/CtRqlS-oKQB/"
+    ]
+  }
+]
