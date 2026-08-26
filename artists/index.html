@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Urban Artists | Street Art & Contemporary Urban Art | Urban Arts News</title>
+
+  <meta name="description"
+        content="Discover urban artists, street artists and contemporary creators featured by Urban Arts News. Explore Art Is Trash, Ashwan and emerging artists from Barcelona and beyond.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://urbanartsnews.com/artists/">
+
+  <meta property="og:title"
+        content="Urban Artists | Urban Arts News">
+
+  <meta property="og:description"
+        content="Discover street artists, urban artists and contemporary creators from Barcelona and around the world.">
+
+  <meta property="og:type" content="website">
+
+  <meta property="og:url"
+        content="https://urbanartsnews.com/artists/">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #161616;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      background: #090909;
+      color: white;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #ff5b21;
+    }
+
+    nav a {
+      margin-left: 22px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    nav a:hover {
+      color: #ff5b21;
+    }
+
+    .hero {
+      background: #111;
+      color: white;
+      padding: 100px 6%;
+    }
+
+    .hero-label {
+      color: #ff5b21;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 9vw, 100px);
+      line-height: .9;
+      text-transform: uppercase;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #ff5b21;
+    }
+
+    .hero p {
+      max-width: 800px;
+      color: #ccc;
+      font-size: 19px;
+    }
+
+    .container {
+      width: min(1300px, 92%);
+      margin: 60px auto;
+    }
+
+    .intro {
+      max-width: 900px;
+      margin-bottom: 55px;
+    }
+
+    .intro h2 {
+      font-size: 34px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .intro h2 span {
+      color: #ff5b21;
+    }
+
+    .intro p {
+      color: #555;
+      font-size: 16px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .section-title span {
+      color: #ff5b21;
+    }
+
+    .artist-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .artist-card {
+      background: white;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+      overflow: hidden;
+      transition: .2s;
+    }
+
+    .artist-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(0,0,0,.14);
+    }
+
+    .artist-top {
+      background: #111;
+      color: white;
+      padding: 45px 35px;
+    }
+
+    .artist-number {
+      color: #ff5b21;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .artist-top h2 {
+      font-size: clamp(35px, 5vw, 55px);
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .artist-location {
+      color: #aaa;
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .artist-content {
+      padding: 30px 35px 35px;
+    }
+
+    .artist-content p {
+      color: #555;
+      margin-bottom: 22px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 25px;
+    }
+
+    .tag {
+      background: #eee;
+      padding: 6px 9px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ff5b21;
+      color: white;
+      padding: 13px 18px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .button:hover {
+      background: #111;
+    }
+
+    .topics {
+      margin-top: 60px;
+      padding: 35px;
+      background: #111;
+      color: white;
+    }
+
+    .topics h2 {
+      font-size: 27px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .topic-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .topic-links a {
+      background: #ff5b21;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .topic-links a:hover {
+      background: white;
+      color: #111;
+    }
+
+    footer {
+      margin-top: 70px;
+      background: #090909;
+      color: #888;
+      text-align: center;
+      padding: 40px;
+      font-size: 13px;
+    }
+
+    @media(max-width: 800px) {
+      .artist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        display: block;
+      }
+
+      nav {
+        margin-top: 12px;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <a href="/" class="logo">
+    URBAN <span>ARTS</span> NEWS
+  </a>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/tags/street-art/">Street Art</a>
+    <a href="/tags/urban-art/">Urban Art</a>
+    <a href="/tags/barcelona-street-art/">Barcelona</a>
+    <a href="/artists/">Artists</a>
+  </nav>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="hero-label">
+    Urban Arts News · Artist Directory
+  </div>
+
+  <h1>
+    Urban<br>
+    <span>Artists</span>
+  </h1>
+
+  <p>
+    Discover street artists, urban creators and contemporary artists
+    whose work connects public space, graffiti, recycled materials,
+    lettering and urban culture.
+  </p>
+
+</section>
+
+
+<main class="container">
+
+  <section class="intro">
+
+    <h2>
+      Discover <span>Urban Artists</span>
+    </h2>
+
+    <p>
+      Urban Arts News documents artists working between the street,
+      contemporary art and urban culture. Explore artist profiles,
+      selected Instagram posts and stories behind the works appearing
+      in Barcelona and cities around the world.
+    </p>
+
+  </section>
+
+
+  <h2 class="section-title">
+    Featured <span>Artists</span>
+  </h2>
+
+
+  <div class="artist-grid">
+
+
+    <!-- ART IS TRASH -->
+
+    <article class="artist-card">
+
+      <div class="artist-top">
+
+        <div class="artist-number">
+          Artist 01 · Barcelona
+        </div>
+
+        <h2>
+          Art Is Trash
+        </h2>
+
+        <div class="artist-location">
+          Francisco de Pájaro · Barcelona, Spain
+        </div>
+
+      </div>
+
+      <div class="artist-content">
+
+        <p>
+          Francisco de Pájaro, known as Art Is Trash, transforms
+          discarded objects, cardboard, furniture and urban waste
+          into spontaneous temporary street-art interventions.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Street Art</span>
+          <span class="tag">Urban Art</span>
+          <span class="tag">Barcelona</span>
+          <span class="tag">Found Objects</span>
+        </div>
+
+        <a class="button"
+           href="/artists/art-is-trash/">
+          Explore Art Is Trash →
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- ASHWAN -->
+
+    <article class="artist-card">
+
+      <div class="artist-top">
+
+        <div class="artist-number">
+          Artist 02 · Barcelona
+        </div>
+
+        <h2>
+          Ashwan
+        </h2>
+
+        <div class="artist-location">
+          Liverpool · Barcelona
+        </div>
+
+      </div>
+
+      <div class="artist-content">
+
+        <p>
+          Ashwan combines hip-hop culture, graffiti influences,
+          lettering and mixed media with discarded cardboard,
+          transforming everyday materials into contemporary artworks.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Urban Art</span>
+          <span class="tag">Hip-Hop</span>
+          <span class="tag">Lettering</span>
+          <span class="tag">Mixed Media</span>
+        </div>
+
+        <a class="button"
+           href="/artists/ashwan/">
+          Explore Ashwan →
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <section class="topics">
+
+    <h2>
+      Explore Urban Art
+    </h2>
+
+    <div class="topic-links">
+
+      <a href="/tags/street-art/">
+        #StreetArt
+      </a>
+
+      <a href="/tags/urban-art/">
+        #UrbanArt
+      </a>
+
+      <a href="/tags/barcelona-street-art/">
+        #BarcelonaStreetArt
+      </a>
+
+      <a href="/">
+        Latest Posts
+      </a>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  © 2026 Urban Arts News · Street Artists · Urban Artists · Contemporary Urban Culture
+</footer>
+
+</body>
+</html>
