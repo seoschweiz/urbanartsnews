@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seoschweiz.github.io/urbanartsnews/sitemap.xml
