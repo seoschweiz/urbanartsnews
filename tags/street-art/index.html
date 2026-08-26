@@ -4,12 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>#StreetArt | Urban Arts News</title>
+  <title>Street Art | Urban Arts News</title>
 
   <meta name="description"
-        content="Discover Street Art from around the world on Urban Arts News. Explore street artists, urban interventions, graffiti and contemporary street culture.">
+        content="Discover street art, urban artists, graffiti and contemporary street interventions from Barcelona and around the world on Urban Arts News.">
 
   <meta name="robots" content="index, follow">
+
+  <link rel="canonical"
+        href="https://urbanartsnews.com/tags/street-art/">
+
+  <meta property="og:title"
+        content="Street Art | Urban Arts News">
+
+  <meta property="og:description"
+        content="Discover street art, graffiti, urban interventions and independent street artists on Urban Arts News.">
+
+  <meta property="og:type" content="website">
+
+  <meta property="og:url"
+        content="https://urbanartsnews.com/tags/street-art/">
 
   <style>
     * {
@@ -37,6 +51,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
 
     .logo {
@@ -63,7 +80,7 @@
     .hero {
       background: #111;
       color: white;
-      padding: 80px 6%;
+      padding: 85px 6%;
     }
 
     .hero-label {
@@ -79,6 +96,7 @@
       text-transform: uppercase;
       line-height: .95;
       margin-bottom: 20px;
+      letter-spacing: -2px;
     }
 
     .hero h1 span {
@@ -86,7 +104,7 @@
     }
 
     .hero p {
-      max-width: 700px;
+      max-width: 760px;
       color: #ccc;
       font-size: 18px;
     }
@@ -94,6 +112,26 @@
     .container {
       width: min(1300px, 92%);
       margin: 55px auto;
+    }
+
+    .intro {
+      max-width: 900px;
+      margin-bottom: 45px;
+    }
+
+    .intro h2 {
+      font-size: 32px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .intro h2 span {
+      color: #ff5b21;
+    }
+
+    .intro p {
+      color: #555;
+      font-size: 16px;
     }
 
     .section-title {
@@ -116,6 +154,12 @@
       background: white;
       overflow: hidden;
       box-shadow: 0 5px 18px rgba(0,0,0,.08);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.13);
     }
 
     .instagram-frame {
@@ -138,8 +182,9 @@
       margin-bottom: 7px;
     }
 
-    .post-info h2 {
+    .post-info h3 {
       font-size: 20px;
+      line-height: 1.2;
       margin-bottom: 10px;
     }
 
@@ -147,6 +192,14 @@
       color: #666;
       font-size: 14px;
       margin-bottom: 15px;
+    }
+
+    .artist-link {
+      font-weight: 800;
+    }
+
+    .artist-link:hover {
+      color: #ff5b21;
     }
 
     .tags {
@@ -157,7 +210,7 @@
 
     .tag {
       background: #eee;
-      padding: 5px 8px;
+      padding: 6px 9px;
       font-size: 11px;
       font-weight: 700;
     }
@@ -167,18 +220,45 @@
       color: white;
     }
 
+    .explore {
+      margin-top: 50px;
+      padding: 35px;
+      background: white;
+      box-shadow: 0 5px 18px rgba(0,0,0,.06);
+    }
+
+    .explore h2 {
+      font-size: 25px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .explore-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .explore-links a {
+      background: #111;
+      color: white;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .explore-links a:hover {
+      background: #ff5b21;
+    }
+
     .back {
       display: inline-block;
-      margin-top: 45px;
-      background: #111;
+      margin-top: 40px;
+      background: #ff5b21;
       color: white;
       padding: 14px 22px;
       font-weight: 800;
       text-transform: uppercase;
-    }
-
-    .back:hover {
-      background: #ff5b21;
     }
 
     footer {
@@ -225,18 +305,16 @@
 
 <header>
 
-  <a href="/urbanartsnews/" class="logo">
+  <a href="/" class="logo">
     URBAN <span>ARTS</span> NEWS
   </a>
 
   <nav>
-    <a href="/urbanartsnews/">Home</a>
-    <a href="/urbanartsnews/tags/street-art/">Street Art</a>
-    <a href="https://www.instagram.com/artistrash/"
-       target="_blank"
-       rel="noopener">
-       Instagram
-    </a>
+    <a href="/">Home</a>
+    <a href="/tags/street-art/">Street Art</a>
+    <a href="/tags/urban-art/">Urban Art</a>
+    <a href="/tags/barcelona-street-art/">Barcelona</a>
+    <a href="/artists/art-is-trash/">Artists</a>
   </nav>
 
 </header>
@@ -245,7 +323,7 @@
 <section class="hero">
 
   <div class="hero-label">
-    Urban Arts News Topic
+    Urban Arts News · Topic
   </div>
 
   <h1>
@@ -253,15 +331,30 @@
   </h1>
 
   <p>
-    Discover street art, urban interventions, graffiti and independent
-    artists from cities around the world. Explore selected Instagram
-    posts and contemporary urban culture on Urban Arts News.
+    Discover street art, graffiti, temporary urban interventions
+    and independent artists from Barcelona and cities around the world.
   </p>
 
 </section>
 
 
 <main class="container">
+
+  <section class="intro">
+
+    <h2>
+      Discover <span>Street Art</span>
+    </h2>
+
+    <p>
+      Street art transforms public space into an open visual landscape.
+      Urban Arts News collects selected works, Instagram posts and artist
+      stories documenting graffiti, urban interventions and contemporary
+      street culture.
+    </p>
+
+  </section>
+
 
   <h2 class="section-title">
     Latest <span>Street Art</span>
@@ -270,8 +363,6 @@
 
   <div class="posts-grid">
 
-
-    <!-- POST 1 -->
 
     <article class="post-card">
 
@@ -287,32 +378,46 @@
           Barcelona Street Art
         </div>
 
-        <h2>
-          Art Is Trash – Urban Art from Barcelona
-        </h2>
+        <h3>
+          <a class="artist-link"
+             href="/artists/art-is-trash/">
+            Art Is Trash – Urban Art from Barcelona
+          </a>
+        </h3>
 
         <p>
-          Discover street art and urban interventions by
-          Art Is Trash in Barcelona.
+          Discover temporary street interventions and contemporary
+          urban artwork by Art Is Trash in Barcelona.
         </p>
 
         <div class="tags">
+
           <a class="tag"
-             href="/urbanartsnews/tags/street-art/">
-             #StreetArt
+             href="/tags/street-art/">
+            #StreetArt
           </a>
 
-          <span class="tag">#BarcelonaStreetArt</span>
-          <span class="tag">#UrbanArt</span>
-          <span class="tag">#ArtIsTrash</span>
+          <a class="tag"
+             href="/tags/barcelona-street-art/">
+            #BarcelonaStreetArt
+          </a>
+
+          <a class="tag"
+             href="/tags/urban-art/">
+            #UrbanArt
+          </a>
+
+          <a class="tag"
+             href="/artists/art-is-trash/">
+            #ArtIsTrash
+          </a>
+
         </div>
 
       </div>
 
     </article>
 
-
-    <!-- POST 2 -->
 
     <article class="post-card">
 
@@ -328,32 +433,46 @@
           Urban Artist
         </div>
 
-        <h2>
-          Street Art by Art Is Trash
-        </h2>
+        <h3>
+          <a class="artist-link"
+             href="/artists/art-is-trash/">
+            Street Art by Art Is Trash
+          </a>
+        </h3>
 
         <p>
-          Discover contemporary street interventions and
-          urban culture from Barcelona.
+          Independent urban interventions and contemporary street
+          culture from Barcelona.
         </p>
 
         <div class="tags">
+
           <a class="tag"
-             href="/urbanartsnews/tags/street-art/">
-             #StreetArt
+             href="/tags/street-art/">
+            #StreetArt
           </a>
 
-          <span class="tag">#ArtIsTrash</span>
-          <span class="tag">#Barcelona</span>
-          <span class="tag">#UrbanCulture</span>
+          <a class="tag"
+             href="/tags/urban-art/">
+            #UrbanArt
+          </a>
+
+          <a class="tag"
+             href="/tags/barcelona-street-art/">
+            #BarcelonaStreetArt
+          </a>
+
+          <a class="tag"
+             href="/artists/art-is-trash/">
+            #ArtIsTrash
+          </a>
+
         </div>
 
       </div>
 
     </article>
 
-
-    <!-- POST 3 -->
 
     <article class="post-card">
 
@@ -369,36 +488,81 @@
           Street Art Barcelona
         </div>
 
-        <h2>
-          Contemporary Urban Art in Barcelona
-        </h2>
+        <h3>
+          <a class="artist-link"
+             href="/artists/art-is-trash/">
+            Contemporary Urban Art in Barcelona
+          </a>
+        </h3>
 
         <p>
-          Explore urban artwork from Barcelona and discover
-          the world of Art Is Trash.
+          Explore another example of Barcelona street culture
+          and the visual world of Art Is Trash.
         </p>
 
         <div class="tags">
+
           <a class="tag"
-             href="/urbanartsnews/tags/street-art/">
-             #StreetArt
+             href="/tags/street-art/">
+            #StreetArt
           </a>
 
-          <span class="tag">#Graffiti</span>
-          <span class="tag">#UrbanArtist</span>
-          <span class="tag">#ContemporaryArt</span>
+          <a class="tag"
+             href="/tags/barcelona-street-art/">
+            #BarcelonaStreetArt
+          </a>
+
+          <a class="tag"
+             href="/tags/urban-art/">
+            #UrbanArt
+          </a>
+
+          <a class="tag"
+             href="/artists/art-is-trash/">
+            #ArtIsTrash
+          </a>
+
         </div>
 
       </div>
 
     </article>
 
+
   </div>
 
 
-  <a class="back"
-     href="/urbanartsnews/">
-     ← Back to Urban Arts News
+  <section class="explore">
+
+    <h2>
+      Explore Urban Arts News
+    </h2>
+
+    <div class="explore-links">
+
+      <a href="/tags/street-art/">
+        #StreetArt
+      </a>
+
+      <a href="/tags/urban-art/">
+        #UrbanArt
+      </a>
+
+      <a href="/tags/barcelona-street-art/">
+        #BarcelonaStreetArt
+      </a>
+
+      <a href="/artists/art-is-trash/">
+        Art Is Trash
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <a class="back" href="/">
+    ← Back to Urban Arts News
   </a>
 
 </main>
