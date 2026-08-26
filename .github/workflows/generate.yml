@@ -1,0 +1,44 @@
+name: Generate Urban Arts News
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "data/artists.json"
+      - "generate.py"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate artist and city pages
+        run: python generate.py
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add artists cities sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+          else
+            git commit -m "Generate Urban Arts News pages"
+            git push
+          fi
