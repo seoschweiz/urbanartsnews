@@ -1,63 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Art Is Trash | Francisco de Pájaro | Barcelona Street Artist</title>
+
+<meta name="description"
+content="Discover Art Is Trash by Francisco de Pájaro, the Barcelona street artist known for transforming discarded objects and rubbish into temporary urban artworks.">
+
+<meta name="robots" content="index, follow">
+
+<meta property="og:title"
+content="Art Is Trash | Barcelona Street Artist | Urban Arts News">
+
+<meta property="og:description"
+content="Discover Art Is Trash by Francisco de Pájaro, street art, urban interventions and selected works from Barcelona.">
+
+<meta property="og:type" content="profile">
+
+<style>
+
+* {
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body {
+font-family:Arial,Helvetica,sans-serif;
+background:#f5f5f5;
+color:#161616;
+line-height:1.6;
+}
+
+a {
+color:inherit;
+text-decoration:none;
+}
+
+
+/* HEADER */
+
+header {
+background:#090909;
+color:white;
+padding:18px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:20;
+}
+
+.logo {
+font-size:28px;
+font-weight:900;
+letter-spacing:-1px;
+}
+
+.logo span {
+color:#ff5b21;
+}
+
+nav a {
+margin-left:24px;
+font-size:14px;
+font-weight:700;
+text-transform:uppercase;
+}
+
+nav a:hover {
+color:#ff5b21;
+}
+
+
+/* HERO */
+
+.hero {
+background:#111;
+color:white;
+padding:95px 6%;
+}
+
+.hero-label {
+color:#ff5b21;
+font-size:14px;
+font-weight:800;
+text-transform:uppercase;
+margin-bottom:12px;
+}
+
+.hero h1 {
+font-size:clamp(52px,8vw,95px);
+line-height:.95;
+text-transform:uppercase;
+letter-spacing:-3px;
+margin-bottom:22px;
+}
+
+.hero h1 span {
+color:#ff5b21;
+}
+
+.hero p {
+max-width:780px;
+font-size:19px;
+color:#ccc;
+}
+
+
+/* MAIN */
+
+.container {
+width:min(1300px,92%);
+margin:55px auto;
+}
+
+
+/* ARTIST */
+
+.artist-layout {
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:40px;
+margin-bottom:65px;
+}
+
+.artist-copy {
+background:white;
+padding:38px;
+box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.artist-copy h2 {
+font-size:34px;
+text-transform:uppercase;
+margin-bottom:25px;
+}
+
+.artist-copy h2 span {
+color:#ff5b21;
+}
+
+.artist-copy p {
+color:#505050;
+font-size:16px;
+margin-bottom:19px;
+}
+
+
+/* INFO */
+
+.artist-info {
+background:#111;
+color:white;
+padding:32px;
+height:fit-content;
+}
+
+.artist-info h3 {
+color:#ff5b21;
+text-transform:uppercase;
+margin-bottom:20px;
+font-size:21px;
+}
+
+.meta {
+padding:12px 0;
+border-bottom:1px solid #333;
+font-size:14px;
+}
+
+.meta strong {
+display:block;
+color:#999;
+font-size:11px;
+text-transform:uppercase;
+margin-bottom:2px;
+}
+
+.instagram {
+display:inline-block;
+background:#ff5b21;
+color:white;
+padding:13px 18px;
+margin-top:25px;
+font-size:13px;
+font-weight:800;
+text-transform:uppercase;
+}
+
+
+/* POSTS */
+
+.section-title {
+font-size:32px;
+text-transform:uppercase;
+margin-bottom:30px;
+}
+
+.section-title span {
+color:#ff5b21;
+}
+
+.posts {
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.card {
+background:white;
+overflow:hidden;
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+transition:.2s;
+}
+
+.card:hover {
+transform:translateY(-4px);
+box-shadow:0 12px 28px rgba(0,0,0,.13);
+}
+
+.instagram-frame {
+width:100%;
+height:520px;
+border:0;
+display:block;
+background:white;
+}
+
+.card-content {
+padding:20px;
+}
+
+.category {
+color:#ff5b21;
+font-size:12px;
+font-weight:800;
+text-transform:uppercase;
+margin-bottom:7px;
+}
+
+.card h3 {
+font-size:20px;
+line-height:1.2;
+margin-bottom:10px;
+}
+
+.card p {
+color:#666;
+font-size:14px;
+margin-bottom:15px;
+}
+
+
+/* TAGS */
+
+.tags {
+display:flex;
+flex-wrap:wrap;
+gap:7px;
+}
+
+.tag {
+background:#eee;
+padding:6px 9px;
+font-size:11px;
+font-weight:700;
+}
+
+.tag:hover {
+background:#ff5b21;
+color:white;
+}
+
+
+/* EXPLORE */
+
+.explore {
+margin-top:55px;
+background:white;
+padding:35px;
+box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.explore h2 {
+font-size:25px;
+text-transform:uppercase;
+margin-bottom:18px;
+}
+
+.explore-links {
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.explore-links a {
+background:#111;
+color:white;
+padding:10px 14px;
+font-size:13px;
+font-weight:800;
+}
+
+.explore-links a:hover {
+background:#ff5b21;
+}
+
+
+/* BACK */
+
+.back {
+display:inline-block;
+margin-top:40px;
+background:#ff5b21;
+color:white;
+padding:14px 22px;
+font-weight:800;
+text-transform:uppercase;
+}
+
+
+/* FOOTER */
+
+footer {
+margin-top:70px;
+background:#090909;
+color:#888;
+text-align:center;
+padding:40px;
+font-size:13px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+.artist-layout {
+grid-template-columns:1fr;
+}
+
+.posts {
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:650px){
+
+header {
+display:block;
+}
+
+nav {
+margin-top:12px;
+}
+
+nav a {
+margin-left:0;
+margin-right:12px;
+}
+
+.posts {
+grid-template-columns:1fr;
+}
+
+.instagram-frame {
+height:620px;
+}
+
+.artist-copy {
+padding:25px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<a href="/urbanartsnews/" class="logo">
+URBAN <span>ARTS</span> NEWS
+</a>
+
+<nav>
+
+<a href="/urbanartsnews/">
+Home
+</a>
+
+<a href="/urbanartsnews/tags/street-art/">
+Street Art
+</a>
+
+<a href="/urbanartsnews/tags/urban-art/">
+Urban Art
+</a>
+
+<a href="/urbanartsnews/tags/barcelona-street-art/">
+Barcelona
+</a>
+
+</nav>
+
+</header>
+
+
+
+<section class="hero">
+
+<div class="hero-label">
+Urban Arts News · Artist Profile
+</div>
+
+<h1>
+ART <span>IS TRASH</span>
+</h1>
+
 <p>
-Art Is Trash is the street-art identity of Spanish artist Francisco de Pájaro,
-an artist closely associated with Barcelona's independent urban-art scene.
-Born in Zafra, Spain, he eventually settled in Barcelona, where the streets
-became an important part of his artistic practice.
+Discover the street art, temporary urban interventions and creative
+world of Francisco de Pájaro, known internationally as Art Is Trash.
 </p>
+
+</section>
+
+
+
+<main class="container">
+
+
+<section class="artist-layout">
+
+
+<div class="artist-copy">
+
+<h2>
+About <span>Art Is Trash</span>
+</h2>
+
+
+<p>
+Art Is Trash is the street-art identity of Spanish artist Francisco
+de Pájaro, an artist closely associated with Barcelona's independent
+urban-art scene.
+</p>
+
 
 <p>
 Rather than limiting his work to traditional canvases and galleries,
-Art Is Trash became known for transforming materials abandoned in the city
-into spontaneous works of art. Cardboard boxes, discarded furniture,
-mattresses, rubbish bags and other unwanted objects can suddenly become
-characters, creatures and temporary urban sculptures.
+Art Is Trash became known for transforming materials abandoned in
+the city into spontaneous works of art. Cardboard boxes, discarded
+furniture, mattresses, rubbish bags and other unwanted objects can
+suddenly become characters, creatures and temporary urban sculptures.
 </p>
 
-<p>
-The project Art Is Trash developed in Barcelona around 2009. Frustration
-with the conventional gallery system, economic insecurity and the financial
-crisis contributed to Francisco de Pájaro taking his work directly into
-public space. The street offered him something that traditional exhibition
-spaces could not: immediacy, freedom and direct contact with people.
-</p>
 
 <p>
-Improvisation is central to his work. Instead of arriving with a finished
-composition, the artist responds to objects and situations that already
-exist in the urban environment. A discarded box, broken piece of furniture
-or pile of rubbish can provide the starting point for a new figure or scene.
+The Art Is Trash project developed in Barcelona around 2009.
+The streets provided Francisco de Pájaro with something completely
+different from a conventional exhibition space: immediacy, freedom
+and direct interaction with people moving through the city.
 </p>
 
-<p>
-This also makes much of his street work deliberately ephemeral. A work can
-appear in the evening and disappear when the city's rubbish is collected.
-Photography and social media therefore play an important role in documenting
-artworks that may physically exist for only a short period of time.
-</p>
 
 <p>
-Behind the humorous, grotesque and sometimes chaotic characters is often
-social criticism. Waste, consumption, inequality, the art establishment and
-everyday urban life become part of the visual language of Art Is Trash.
-Materials that society has rejected are temporarily given a new identity
-and returned to public attention.
+Improvisation is central to his artistic practice. Instead of
+starting with a finished composition, the artist responds to objects,
+materials and situations that already exist in the urban environment.
+A discarded box or broken piece of furniture can become the starting
+point for a completely new character or scene.
 </p>
 
-<p>
-Barcelona remains particularly important to the story of Art Is Trash.
-Neighbourhoods including the Raval and the Gothic Quarter provided an urban
-environment where temporary interventions could become part of everyday
-street life rather than objects separated from the public inside a gallery.
-</p>
 
 <p>
-The project has also travelled beyond Barcelona. Francisco de Pájaro has
-created street interventions in other cities, including London, bringing
-the same spontaneous approach to different urban environments.
+This approach also makes many Art Is Trash works deliberately
+ephemeral. An intervention can appear on a Barcelona street and
+disappear again when the city's rubbish is collected.
+Photography and social media therefore become important ways of
+documenting artworks that may physically exist for only a short time.
 </p>
+
+
+<p>
+Behind the humorous, grotesque and sometimes chaotic characters is
+often an element of social criticism. Waste, consumer culture,
+inequality, the traditional art establishment and everyday city life
+can all become part of the visual language of Art Is Trash.
+</p>
+
+
+<p>
+Materials that society has rejected are temporarily given a new
+identity. Instead of remaining invisible as rubbish, they become
+characters that confront pedestrians directly in public space.
+</p>
+
+
+<p>
+Barcelona is particularly important to the story of Art Is Trash.
+The city's streets and neighbourhoods provided an environment where
+temporary interventions could become part of everyday urban life
+rather than objects separated from the public inside a gallery.
+</p>
+
+
+<p>
+The project has subsequently travelled beyond Barcelona, with
+Francisco de Pájaro creating urban interventions in other cities
+and bringing the spontaneous Art Is Trash approach to different
+public environments.
+</p>
+
 
 <p>
 Urban Arts News documents selected works, Instagram posts and stories
-connected with Art Is Trash, preserving a digital record of an artistic
-practice whose physical works are often designed to disappear.
+connected with Art Is Trash, helping create a digital record of an
+artistic practice whose physical works are often temporary by nature.
 </p>
+
+
+</div>
+
+
+
+<aside class="artist-info">
+
+<h3>
+Artist Information
+</h3>
+
+
+<div class="meta">
+
+<strong>Artist</strong>
+
+Francisco de Pájaro
+
+</div>
+
+
+<div class="meta">
+
+<strong>Project</strong>
+
+Art Is Trash
+
+</div>
+
+
+<div class="meta">
+
+<strong>Location</strong>
+
+Barcelona, Spain
+
+</div>
+
+
+<div class="meta">
+
+<strong>Art</strong>
+
+Street Art / Urban Art
+
+</div>
+
+
+<div class="meta">
+
+<strong>Known for</strong>
+
+Temporary Urban Interventions
+
+</div>
+
+
+<div class="meta">
+
+<strong>Materials</strong>
+
+Discarded Objects / Cardboard / Urban Waste
+
+</div>
+
+
+<a class="instagram"
+href="https://www.instagram.com/artistrash/"
+target="_blank"
+rel="noopener">
+
+View @ArtIsTrash on Instagram
+
+</a>
+
+</aside>
+
+
+</section>
+
+
+
+<h2 class="section-title">
+Selected <span>Art Is Trash Posts</span>
+</h2>
+
+
+<div class="posts">
+
+
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DcbCHdNgzo3/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Art Is Trash · Barcelona
+</div>
+
+<h3>
+Urban Art from Barcelona
+</h3>
+
+<p>
+Selected urban intervention by Art Is Trash from Barcelona's
+street-art scene.
+</p>
+
+<div class="tags">
+
+<a class="tag"
+href="/urbanartsnews/tags/street-art/">
+#StreetArt
+</a>
+
+<a class="tag"
+href="/urbanartsnews/tags/urban-art/">
+#UrbanArt
+</a>
+
+<a class="tag"
+href="/urbanartsnews/tags/barcelona-street-art/">
+#BarcelonaStreetArt
+</a>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DcV1qoNARP_/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Urban Intervention
+</div>
+
+<h3>
+Street Art by Art Is Trash
+</h3>
+
+<p>
+Discover temporary street art and independent urban creativity
+from Barcelona.
+</p>
+
+<div class="tags">
+
+<a class="tag"
+href="/urbanartsnews/tags/street-art/">
+#StreetArt
+</a>
+
+<a class="tag"
+href="/urbanartsnews/tags/urban-art/">
+#UrbanArt
+</a>
+
+<a class="tag"
+href="/urbanartsnews/tags/barcelona-street-art/">
+#BarcelonaStreetArt
+</a>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DcMKWOSgySa/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Barcelona Street Artist
+</div>
+
+<h3>
+Art Is Trash and Urban Culture
+</h3>
+
+<p>
+Explore the relationship between Art Is Trash, Barcelona
+street culture and contemporary urban art.
+</p>
+
+<div class="tags">
+
+<a class="tag"
+href="/urbanartsnews/tags/street-art/">
+#StreetArt
+</a>
+
+<a class="tag"
+href="/urbanartsnews/tags/urban-art/">
+#UrbanArt
+</a>
+
+<a class="tag"
+href="/urbanartsnews/tags/barcelona-street-art/">
+#BarcelonaStreetArt
+</a>
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+
+
+<section class="explore">
+
+<h2>
+Explore Related Topics
+</h2>
+
+<div class="explore-links">
+
+<a href="/urbanartsnews/tags/street-art/">
+#StreetArt
+</a>
+
+<a href="/urbanartsnews/tags/urban-art/">
+#UrbanArt
+</a>
+
+<a href="/urbanartsnews/tags/barcelona-street-art/">
+#BarcelonaStreetArt
+</a>
+
+<a href="https://www.instagram.com/artistrash/"
+target="_blank"
+rel="noopener">
+@ArtIsTrash
+</a>
+
+</div>
+
+</section>
+
+
+<a class="back"
+href="/urbanartsnews/">
+
+← Back to Urban Arts News
+
+</a>
+
+
+</main>
+
+
+
+<footer>
+
+© 2026 Urban Arts News · Art Is Trash · Francisco de Pájaro · Barcelona Street Art
+
+</footer>
+
+
+</body>
+</html>
