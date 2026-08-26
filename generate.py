@@ -1,5 +1,4 @@
 import json
-import os
 import re
 from html import escape
 from pathlib import Path
@@ -341,8 +340,7 @@ def generate_artist_page(artist):
 
     output_file = artist_dir / "index.html"
 
-    # IMPORTANT:
-    # Do not overwrite artist pages already created manually.
+    # Do not overwrite manually created artist pages.
     if output_file.exists():
         print(f"KEEP existing artist page: {output_file}")
         return
@@ -374,11 +372,11 @@ loading="lazy">
 <div class="card-content">
 
 <div class="category">
-{name} · {city}
+{escape(name)} · {escape(city)}
 </div>
 
 <h3>
-{name} Urban Art · Post {index}
+{escape(name)} Urban Art · Post {index}
 </h3>
 
 <p>
@@ -628,6 +626,8 @@ def generate_city_pages(artists):
         city_slug = slugify(city)
         city_artists = cities[city]
 
+        plural = "s" if len(city_artists) != 1 else ""
+
         city_directory_cards += f"""
 <article class="card">
 
@@ -642,7 +642,7 @@ Urban Arts News · City
 </h2>
 
 <p>
-Explore {len(city_artists)} featured urban artist{"s" if len(city_artists) != 1 else ""}
+Explore {len(city_artists)} featured urban artist{plural}
 connected with {escape(city)}.
 </p>
 
@@ -662,6 +662,9 @@ Explore {escape(city)} →
         artist_cards = ""
 
         for artist in city_artists:
+            artist_name = artist["name"]
+            artist_slug = artist["slug"]
+
             artist_cards += f"""
 <article class="card">
 
@@ -672,16 +675,16 @@ Explore {escape(city)} →
 </div>
 
 <h2>
-{escape(artist["name"])}
+{escape(artist_name)}
 </h2>
 
 <p>
 Explore selected works and Instagram posts by
-{escape(artist["name"])}.
+{escape(artist_name)}.
 </p>
 
 <a class="button"
-href="/artists/{artist["slug"]}/">
+href="/artists/{artist_slug}/">
 Explore Artist →
 </a>
 
@@ -744,7 +747,6 @@ Artists in <span>{escape(city)}</span>
         print(f"UPDATE city page: {city_output}")
 
     # Main cities directory
-
     cities_html = page_head(
         "Urban Art Cities | Urban Arts News",
         "Explore street art and urban artists by city on Urban Arts News.",
@@ -852,11 +854,11 @@ def main():
 
     print(f"Artists loaded: {len(artists)}")
 
-    # Create only artist pages that do not already exist
+    # Existing manually-created artist pages stay untouched.
+    # New artist pages are generated automatically.
     for artist in artists:
         generate_artist_page(artist)
 
-    # These can safely be regenerated
     generate_artist_directory(artists)
     generate_city_pages(artists)
     generate_sitemap(artists)
