@@ -7,7 +7,7 @@
   <title>Urban Artists | Street Art & Contemporary Urban Art | Urban Arts News</title>
 
   <meta name="description"
-        content="Discover urban artists, street artists and contemporary creators featured by Urban Arts News. Explore Art Is Trash, Ashwan and emerging artists from Barcelona and beyond.">
+        content="Discover urban artists, street artists and contemporary creators featured by Urban Arts News. Explore Art Is Trash, Ashwan, Si Beriana and emerging artists from Barcelona and beyond.">
 
   <meta name="robots" content="index, follow">
 
@@ -20,9 +20,7 @@
         content="Discover street artists, urban artists and contemporary creators from Barcelona and around the world.">
 
   <meta property="og:type" content="website">
-
-  <meta property="og:url"
-        content="https://urbanartsnews.com/artists/">
+  <meta property="og:url" content="https://urbanartsnews.com/artists/">
 
   <style>
     * {
@@ -145,7 +143,7 @@
 
     .artist-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 30px;
     }
 
@@ -176,7 +174,7 @@
     }
 
     .artist-top h2 {
-      font-size: clamp(35px, 5vw, 55px);
+      font-size: clamp(32px, 4vw, 50px);
       line-height: 1;
       text-transform: uppercase;
       margin-bottom: 12px;
@@ -266,7 +264,13 @@
       font-size: 13px;
     }
 
-    @media(max-width: 800px) {
+    @media(max-width: 1100px) {
+      .artist-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 750px) {
       .artist-grid {
         grid-template-columns: 1fr;
       }
@@ -320,7 +324,7 @@
   <p>
     Discover street artists, urban creators and contemporary artists
     whose work connects public space, graffiti, recycled materials,
-    lettering and urban culture.
+    murals, lettering and urban culture.
   </p>
 
 </section>
@@ -337,7 +341,7 @@
     <p>
       Urban Arts News documents artists working between the street,
       contemporary art and urban culture. Explore artist profiles,
-      selected Instagram posts and stories behind the works appearing
+      selected Instagram posts and stories behind works appearing
       in Barcelona and cities around the world.
     </p>
 
@@ -351,8 +355,6 @@
 
   <div class="artist-grid">
 
-
-    <!-- ART IS TRASH -->
 
     <article class="artist-card">
 
@@ -397,8 +399,6 @@
     </article>
 
 
-    <!-- ASHWAN -->
-
     <article class="artist-card">
 
       <div class="artist-top">
@@ -440,6 +440,50 @@
       </div>
 
     </article>
+
+
+    <article class="artist-card">
+
+      <div class="artist-top">
+
+        <div class="artist-number">
+          Artist 03 · Barcelona
+        </div>
+
+        <h2>
+          Si Beriana
+        </h2>
+
+        <div class="artist-location">
+          Barcelona, Spain
+        </div>
+
+      </div>
+
+      <div class="artist-content">
+
+        <p>
+          Si Beriana creates colorful figurative street art and murals
+          connected with Barcelona's contemporary urban-art scene,
+          combining expressive characters, strong color and public space.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Street Art</span>
+          <span class="tag">Murals</span>
+          <span class="tag">Barcelona</span>
+          <span class="tag">Figurative Art</span>
+        </div>
+
+        <a class="button"
+           href="/artists/si-beriana/">
+          Explore Si Beriana →
+        </a>
+
+      </div>
+
+    </article>
+
 
   </div>
 
