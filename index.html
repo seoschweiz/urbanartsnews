@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Urban Arts News | Street Art, Graffiti & Urban Art Worldwide</title>
+
+  <meta name="description"
+        content="Urban Arts News is an independent street art and urban art discovery platform featuring artists, graffiti, murals, exhibitions and Instagram posts from around the world.">
+
+  <meta name="keywords"
+        content="urban art, street art, graffiti, street artists, urban artists, murals, Barcelona street art, Instagram street art, contemporary urban art">
+
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title"
+        content="Urban Arts News | Street Art, Graffiti & Urban Art">
+
+  <meta property="og:description"
+        content="Discover street art, graffiti, murals and urban artists from around the world.">
+
+  <meta property="og:type" content="website">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #161616;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      background: #090909;
+      color: white;
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #ff5b21;
+    }
+
+    nav a {
+      margin-left: 24px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    nav a:hover {
+      color: #ff5b21;
+    }
+
+    .hero {
+      min-height: 430px;
+      background:
+        linear-gradient(
+          rgba(0,0,0,.35),
+          rgba(0,0,0,.75)
+        ),
+        url("https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+
+      display: flex;
+      align-items: flex-end;
+      padding: 70px 6%;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 760px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: #ff5b21;
+      padding: 7px 12px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 80px);
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: -3px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 18px;
+      color: #eee;
+    }
+
+    .container {
+      width: min(1400px, 92%);
+      margin: 55px auto;
+    }
+
+    .section-title {
+      font-size: 34px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .section-title span {
+      color: #ff5b21;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(250px, 1fr);
+      gap: 38px;
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .post-card {
+      background: white;
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px rgba(0,0,0,.08);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.14);
+    }
+
+    .instagram-frame {
+      width: 100%;
+      height: 520px;
+      border: 0;
+      display: block;
+      background: #fafafa;
+    }
+
+    .post-info {
+      padding: 20px;
+    }
+
+    .category {
+      color: #ff5b21;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .post-info h2 {
+      font-size: 20px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .post-info p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      background: #efefef;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tag:hover {
+      background: #ff5b21;
+      color: white;
+    }
+
+    aside section {
+      background: white;
+      padding: 24px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.06);
+    }
+
+    aside h3 {
+      font-size: 18px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      border-bottom: 3px solid #ff5b21;
+      padding-bottom: 8px;
+    }
+
+    .side-tags a {
+      display: inline-block;
+      margin: 4px;
+      background: #111;
+      color: white;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .side-tags a:hover {
+      background: #ff5b21;
+    }
+
+    .cities a {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-weight: 700;
+    }
+
+    .cities a:hover {
+      color: #ff5b21;
+    }
+
+    .about p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: #ff5b21;
+      color: white;
+      padding: 12px 17px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .load-more {
+      text-align: center;
+      margin: 45px 0;
+    }
+
+    .load-more a {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 14px 26px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    footer {
+      background: #090909;
+      color: #ccc;
+      padding: 50px 6%;
+      margin-top: 70px;
+    }
+
+    .footer-inner {
+      width: min(1400px, 100%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    footer h3 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    footer p,
+    footer a {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    footer a {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    footer a:hover {
+      color: #ff5b21;
+    }
+
+    .copyright {
+      border-top: 1px solid #222;
+      margin-top: 40px;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+    }
+
+    @media (max-width: 1050px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      header {
+        display: block;
+      }
+
+      nav {
+        margin-top: 12px;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 14px;
+      }
+
+      .hero {
+        min-height: 350px;
+      }
+
+      .posts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .instagram-frame {
+        height: 620px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    URBAN <span>ARTS</span> NEWS
+  </div>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="#street-art">Street Art</a>
+    <a href="#artists">Artists</a>
+    <a href="#cities">Cities</a>
+    <a href="#instagram">Instagram</a>
+  </nav>
+</header>
+
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <span class="hero-label">
+      Street Art • Graffiti • Urban Culture
+    </span>
+
+    <h1>
+      Urban Art<br>
+      Via Instagram
+    </h1>
+
+    <p>
+      Discover street art, graffiti, murals and urban artists
+      from around the world through selected Instagram posts,
+      independent artists and urban culture.
+    </p>
+
+  </div>
+
+</section>
+
+
+<main class="container" id="instagram">
+
+  <h2 class="section-title">
+    Latest <span>Instagram Posts</span>
+  </h2>
+
+  <div class="layout">
+
+    <div>
+
+      <div class="posts-grid">
+
+
+        <!-- POST 1 -->
+
+        <article class="post-card">
+
+          <iframe
+            class="instagram-frame"
+            src="https://www.instagram.com/p/DcbCHdNgzo3/embed/"
+            loading="lazy">
+          </iframe>
+
+          <div class="post-info">
+
+            <div class="category">
+              Barcelona Street Art
+            </div>
+
+            <h2>
+              Art Is Trash – Urban Art from Barcelona
+            </h2>
+
+            <p>
+              Discover new street art and urban interventions
+              by Art Is Trash in Barcelona.
+            </p>
+
+            <div class="tags">
+              <a class="tag" href="#">#StreetArt</a>
+              <a class="tag" href="#">#BarcelonaStreetArt</a>
+              <a class="tag" href="#">#UrbanArt</a>
+              <a class="tag" href="#">#ArtIsTrash</a>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- POST 2 -->
+
+        <article class="post-card">
+
+          <iframe
+            class="instagram-frame"
+            src="https://www.instagram.com/p/DcV1qoNARP_/embed/"
+            loading="lazy">
+          </iframe>
+
+          <div class="post-info">
+
+            <div class="category">
+              Urban Artist
+            </div>
+
+            <h2>
+              Street Art by Art Is Trash
+            </h2>
+
+            <p>
+              Urban art, street interventions and contemporary
+              street culture from Barcelona-based artist Art Is Trash.
+            </p>
+
+            <div class="tags">
+              <a class="tag" href="#">#ArtIsTrash</a>
+              <a class="tag" href="#">#StreetArtist</a>
+              <a class="tag" href="#">#UrbanCulture</a>
+              <a class="tag" href="#">#Barcelona</a>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- POST 3 -->
+
+        <article class="post-card">
+
+          <iframe
+            class="instagram-frame"
+            src="https://www.instagram.com/p/DcMKWOSgySa/embed/"
+            loading="lazy">
+          </iframe>
+
+          <div class="post-info">
+
+            <div class="category">
+              Street Art Barcelona
+            </div>
+
+            <h2>
+              Contemporary Urban Art in Barcelona
+            </h2>
+
+            <p>
+              Explore another urban artwork from the streets
+              of Barcelona and discover the world of Art Is Trash.
+            </p>
+
+            <div class="tags">
+              <a class="tag" href="#">#Graffiti</a>
+              <a class="tag" href="#">#StreetArtBarcelona</a>
+              <a class="tag" href="#">#UrbanArtist</a>
+              <a class="tag" href="#">#ContemporaryArt</a>
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <div class="load-more">
+        <a href="https://www.instagram.com/artistrash/"
+           target="_blank"
+           rel="noopener">
+          View More Instagram Posts
+        </a>
+      </div>
+
+    </div>
+
+
+    <aside>
+
+      <section>
+        <h3>Popular Hashtags</h3>
+
+        <div class="side-tags">
+          <a href="#">#StreetArt</a>
+          <a href="#">#UrbanArt</a>
+          <a href="#">#Graffiti</a>
+          <a href="#">#BarcelonaStreetArt</a>
+          <a href="#">#Murals</a>
+          <a href="#">#StreetArtist</a>
+          <a href="#">#ArtIsTrash</a>
+          <a href="#">#UrbanCulture</a>
+        </div>
+      </section>
+
+
+      <section id="cities">
+        <h3>Explore Cities</h3>
+
+        <div class="cities">
+          <a href="#">Barcelona</a>
+          <a href="#">Berlin</a>
+          <a href="#">London</a>
+          <a href="#">Paris</a>
+          <a href="#">New York</a>
+          <a href="#">Lisbon</a>
+          <a href="#">Zürich</a>
+        </div>
+      </section>
+
+
+      <section class="about">
+        <h3>About Urban Arts News</h3>
+
+        <p>
+          Urban Arts News is an independent discovery platform
+          dedicated to street art, graffiti, murals, urban artists
+          and contemporary urban culture.
+        </p>
+
+        <a class="cta"
+           href="https://www.instagram.com/artistrash/"
+           target="_blank"
+           rel="noopener">
+          Follow Art Is Trash
+        </a>
+      </section>
+
+    </aside>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div>
+      <h3>URBAN ARTS NEWS</h3>
+
+      <p>
+        Discover street art, graffiti, murals, artists and
+        urban culture from cities around the world.
+      </p>
+    </div>
+
+    <div>
+      <h3>Explore</h3>
+      <a href="#">Street Art</a>
+      <a href="#">Artists</a>
+      <a href="#">Cities</a>
+      <a href="#">Instagram</a>
+    </div>
+
+    <div>
+      <h3>Popular</h3>
+      <a href="#">Barcelona Street Art</a>
+      <a href="#">Urban Art</a>
+      <a href="#">Graffiti</a>
+      <a href="#">Art Is Trash</a>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 Urban Arts News
+  </div>
+
+</footer>
+
+</body>
+</html>
