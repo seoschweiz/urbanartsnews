@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Urban Arts News | Street Art, Graffiti & Urban Art Worldwide</title>
+  <title>Urban Arts News | Street Art, Graffiti & Urban Artists</title>
 
   <meta name="description"
-        content="Discover street art, graffiti, urban artists and contemporary urban culture on Urban Arts News. Explore selected Instagram posts, artists and street art from Barcelona and beyond.">
+        content="Discover street art, graffiti, urban artists and contemporary urban culture. Explore selected Instagram posts and artists including Art Is Trash and Ashwan in Barcelona.">
 
   <meta name="robots" content="index, follow">
 
   <link rel="canonical" href="https://urbanartsnews.com/">
 
   <meta property="og:title"
-        content="Urban Arts News | Street Art, Graffiti & Urban Art">
+        content="Urban Arts News | Street Art, Graffiti & Urban Artists">
 
   <meta property="og:description"
         content="Discover street art, urban artists, graffiti and contemporary urban culture from Barcelona and around the world.">
@@ -146,7 +146,7 @@
       background: white;
       overflow: hidden;
       box-shadow: 0 5px 18px rgba(0,0,0,.08);
-      transition: transform .2s ease, box-shadow .2s ease;
+      transition: .2s;
     }
 
     .post-card:hover {
@@ -260,38 +260,23 @@
       font-weight: 700;
     }
 
-    .about p {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 15px;
+    .artists-section {
+      margin-top: 70px;
     }
 
-    .cta {
-      display: inline-block;
-      background: #ff5b21;
-      color: white;
-      padding: 12px 17px;
-      font-weight: 800;
-      text-transform: uppercase;
-      font-size: 13px;
-    }
-
-    .cta:hover {
-      background: #111;
-    }
-
-    .artist-feature {
-      margin-top: 55px;
-      background: #111;
-      color: white;
-      padding: 40px;
+    .artist-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
-      align-items: center;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
     }
 
-    .artist-feature-label {
+    .artist-card {
+      background: #111;
+      color: white;
+      padding: 38px;
+    }
+
+    .artist-label {
       color: #ff5b21;
       font-size: 12px;
       font-weight: 800;
@@ -299,29 +284,25 @@
       margin-bottom: 8px;
     }
 
-    .artist-feature h2 {
+    .artist-card h2 {
       font-size: 34px;
       text-transform: uppercase;
       margin-bottom: 12px;
     }
 
-    .artist-feature p {
+    .artist-card p {
       color: #bbb;
-      max-width: 750px;
+      margin-bottom: 22px;
     }
 
-    .artist-feature-button {
-      text-align: right;
-    }
-
-    .artist-feature-button a {
+    .artist-button {
       display: inline-block;
       background: #ff5b21;
       color: white;
-      padding: 14px 20px;
+      padding: 13px 18px;
+      font-size: 13px;
       font-weight: 800;
       text-transform: uppercase;
-      font-size: 13px;
     }
 
     footer {
@@ -392,24 +373,13 @@
         margin-right: 13px;
       }
 
-      .hero {
-        min-height: 360px;
-      }
-
-      .posts-grid {
+      .posts-grid,
+      .artist-grid {
         grid-template-columns: 1fr;
       }
 
       .instagram-frame {
         height: 620px;
-      }
-
-      .artist-feature {
-        grid-template-columns: 1fr;
-      }
-
-      .artist-feature-button {
-        text-align: left;
       }
 
       .footer-inner {
@@ -432,10 +402,11 @@
     <a href="/tags/street-art/">Street Art</a>
     <a href="/tags/urban-art/">Urban Art</a>
     <a href="/tags/barcelona-street-art/">Barcelona</a>
-    <a href="/artists/art-is-trash/">Artists</a>
+    <a href="#artists">Artists</a>
   </nav>
 
 </header>
+
 
 <section class="hero">
 
@@ -451,7 +422,7 @@
     </h1>
 
     <p>
-      Discover street art, graffiti, urban interventions and independent
+      Discover street art, urban interventions, graffiti and independent
       artists through selected Instagram posts and stories from the streets.
     </p>
 
@@ -459,11 +430,13 @@
 
 </section>
 
+
 <main class="container">
 
   <h2 class="section-title">
     Latest <span>Instagram Posts</span>
   </h2>
+
 
   <div class="layout">
 
@@ -471,12 +444,90 @@
 
       <div class="posts-grid">
 
+
+        <!-- ART IS TRASH 1 -->
+
         <article class="post-card">
 
-          <iframe
-            class="instagram-frame"
-            src="https://www.instagram.com/p/DcbCHdNgzo3/embed/"
-            loading="lazy">
+          <iframe class="instagram-frame"
+                  src="https://www.instagram.com/p/DcbCHdNgzo3/embed/"
+                  loading="lazy">
+          </iframe>
+
+          <div class="post-info">
+
+            <div class="category">
+              Art Is Trash · Barcelona
+            </div>
+
+            <h2>
+              <a class="artist-link"
+                 href="/artists/art-is-trash/">
+                Urban Art by Art Is Trash
+              </a>
+            </h2>
+
+            <p>
+              Temporary street intervention and contemporary urban art
+              from Barcelona.
+            </p>
+
+            <div class="tags">
+              <a class="tag" href="/tags/street-art/">#StreetArt</a>
+              <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+              <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaStreetArt</a>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- ART IS TRASH 2 -->
+
+        <article class="post-card">
+
+          <iframe class="instagram-frame"
+                  src="https://www.instagram.com/p/DcV1qoNARP_/embed/"
+                  loading="lazy">
+          </iframe>
+
+          <div class="post-info">
+
+            <div class="category">
+              Art Is Trash · Street Art
+            </div>
+
+            <h2>
+              <a class="artist-link"
+                 href="/artists/art-is-trash/">
+                Street Intervention in Barcelona
+              </a>
+            </h2>
+
+            <p>
+              Discover independent urban creativity and street culture
+              from Art Is Trash.
+            </p>
+
+            <div class="tags">
+              <a class="tag" href="/tags/street-art/">#StreetArt</a>
+              <a class="tag" href="/tags/barcelona-street-art/">#Barcelona</a>
+              <a class="tag" href="/artists/art-is-trash/">#ArtIsTrash</a>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- ART IS TRASH 3 -->
+
+        <article class="post-card">
+
+          <iframe class="instagram-frame"
+                  src="https://www.instagram.com/p/DcMKWOSgySa/embed/"
+                  loading="lazy">
           </iframe>
 
           <div class="post-info">
@@ -488,133 +539,133 @@
             <h2>
               <a class="artist-link"
                  href="/artists/art-is-trash/">
-                Art Is Trash – Urban Art from Barcelona
+                Art Is Trash and Urban Culture
               </a>
             </h2>
 
             <p>
-              Discover temporary street interventions and contemporary
-              urban art by Art Is Trash in Barcelona.
+              Explore contemporary Barcelona street culture through
+              the work of Art Is Trash.
             </p>
 
             <div class="tags">
-
-              <a class="tag" href="/tags/street-art/">
-                #StreetArt
-              </a>
-
-              <a class="tag" href="/tags/barcelona-street-art/">
-                #BarcelonaStreetArt
-              </a>
-
-              <a class="tag" href="/tags/urban-art/">
-                #UrbanArt
-              </a>
-
-              <a class="tag" href="/artists/art-is-trash/">
-                #ArtIsTrash
-              </a>
-
+              <a class="tag" href="/tags/street-art/">#StreetArt</a>
+              <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+              <a class="tag" href="/artists/art-is-trash/">#ArtIsTrash</a>
             </div>
 
           </div>
 
         </article>
 
+
+        <!-- ASHWAN 1 -->
+
         <article class="post-card">
 
-          <iframe
-            class="instagram-frame"
-            src="https://www.instagram.com/p/DcV1qoNARP_/embed/"
-            loading="lazy">
+          <iframe class="instagram-frame"
+                  src="https://www.instagram.com/p/DZV3g7rMe75/embed/"
+                  loading="lazy">
           </iframe>
 
           <div class="post-info">
 
             <div class="category">
-              Urban Artist
+              Ashwan · Barcelona
             </div>
 
             <h2>
               <a class="artist-link"
-                 href="/artists/art-is-trash/">
-                Street Art by Art Is Trash
+                 href="/artists/ashwan/">
+                Urban Art and Lettering by Ashwan
               </a>
             </h2>
 
             <p>
-              Independent urban interventions and contemporary
-              street culture from Barcelona.
+              Contemporary art connecting lettering, hip-hop and
+              Barcelona urban culture.
             </p>
 
             <div class="tags">
-
-              <a class="tag" href="/artists/art-is-trash/">
-                #ArtIsTrash
-              </a>
-
-              <a class="tag" href="/tags/street-art/">
-                #StreetArt
-              </a>
-
-              <a class="tag" href="/tags/urban-art/">
-                #UrbanArt
-              </a>
-
-              <a class="tag" href="/tags/barcelona-street-art/">
-                #Barcelona
-              </a>
-
+              <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+              <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaArt</a>
+              <a class="tag" href="/artists/ashwan/">#Ashwan</a>
             </div>
 
           </div>
 
         </article>
 
+
+        <!-- ASHWAN 2 -->
+
         <article class="post-card">
 
-          <iframe
-            class="instagram-frame"
-            src="https://www.instagram.com/p/DcMKWOSgySa/embed/"
-            loading="lazy">
+          <iframe class="instagram-frame"
+                  src="https://www.instagram.com/p/DX4re3iszBi/embed/"
+                  loading="lazy">
           </iframe>
 
           <div class="post-info">
 
             <div class="category">
-              Street Art Barcelona
+              Hip-Hop Inspired Art
             </div>
 
             <h2>
               <a class="artist-link"
-                 href="/artists/art-is-trash/">
-                Contemporary Urban Art in Barcelona
+                 href="/artists/ashwan/">
+                Ashwan – Visual Rhythm & Urban Culture
               </a>
             </h2>
 
             <p>
-              Explore another example of Barcelona street culture
-              and the visual world of Art Is Trash.
+              Explore mixed media, lettering and visual influences
+              from hip-hop culture.
             </p>
 
             <div class="tags">
+              <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+              <a class="tag" href="/artists/ashwan/">#AshwanArts</a>
+              <a class="tag" href="/tags/barcelona-street-art/">#Barcelona</a>
+            </div>
 
-              <a class="tag" href="/tags/street-art/">
-                #StreetArt
+          </div>
+
+        </article>
+
+
+        <!-- ASHWAN 3 -->
+
+        <article class="post-card">
+
+          <iframe class="instagram-frame"
+                  src="https://www.instagram.com/p/DR4wIlUjJ_w/embed/"
+                  loading="lazy">
+          </iframe>
+
+          <div class="post-info">
+
+            <div class="category">
+              Contemporary Urban Artist
+            </div>
+
+            <h2>
+              <a class="artist-link"
+                 href="/artists/ashwan/">
+                Mixed Media & Upcycled Cardboard
               </a>
+            </h2>
 
-              <a class="tag" href="/tags/barcelona-street-art/">
-                #BarcelonaStreetArt
-              </a>
+            <p>
+              Ashwan transforms everyday materials into layered
+              contemporary urban artworks.
+            </p>
 
-              <a class="tag" href="/tags/urban-art/">
-                #UrbanArt
-              </a>
-
-              <a class="tag" href="/artists/art-is-trash/">
-                #ArtIsTrash
-              </a>
-
+            <div class="tags">
+              <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+              <a class="tag" href="/artists/ashwan/">#Ashwan</a>
+              <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaArt</a>
             </div>
 
           </div>
@@ -624,6 +675,7 @@
       </div>
 
     </div>
+
 
     <aside>
 
@@ -636,9 +688,30 @@
           <a href="/tags/urban-art/">#UrbanArt</a>
           <a href="/tags/barcelona-street-art/">#BarcelonaStreetArt</a>
           <a href="/artists/art-is-trash/">#ArtIsTrash</a>
+          <a href="/artists/ashwan/">#Ashwan</a>
         </div>
 
       </section>
+
+
+      <section>
+
+        <h3>Artists</h3>
+
+        <div class="cities">
+
+          <a href="/artists/art-is-trash/">
+            Art Is Trash
+          </a>
+
+          <a href="/artists/ashwan/">
+            Ashwan
+          </a>
+
+        </div>
+
+      </section>
+
 
       <section>
 
@@ -659,57 +732,72 @@
 
       </section>
 
-      <section class="about">
-
-        <h3>About Urban Arts News</h3>
-
-        <p>
-          Urban Arts News is an independent discovery platform
-          dedicated to street art, urban artists, graffiti,
-          temporary interventions and contemporary urban culture.
-        </p>
-
-        <a class="cta" href="/artists/art-is-trash/">
-          Discover Art Is Trash
-        </a>
-
-      </section>
-
     </aside>
 
   </div>
 
-  <section class="artist-feature">
 
-    <div>
+  <section class="artists-section" id="artists">
 
-      <div class="artist-feature-label">
-        Featured Artist
-      </div>
+    <h2 class="section-title">
+      Featured <span>Artists</span>
+    </h2>
 
-      <h2>
-        Art Is Trash
-      </h2>
+    <div class="artist-grid">
 
-      <p>
-        Discover Francisco de Pájaro and Art Is Trash, the urban-art
-        project known for transforming discarded objects and everyday
-        street materials into temporary works of art.
-      </p>
+      <article class="artist-card">
 
-    </div>
+        <div class="artist-label">
+          Barcelona Street Artist
+        </div>
 
-    <div class="artist-feature-button">
+        <h2>
+          Art Is Trash
+        </h2>
 
-      <a href="/artists/art-is-trash/">
-        Explore Artist →
-      </a>
+        <p>
+          Francisco de Pájaro transforms discarded objects,
+          cardboard and urban waste into spontaneous temporary
+          street-art interventions.
+        </p>
+
+        <a class="artist-button"
+           href="/artists/art-is-trash/">
+          Explore Art Is Trash →
+        </a>
+
+      </article>
+
+
+      <article class="artist-card">
+
+        <div class="artist-label">
+          Barcelona Urban Artist
+        </div>
+
+        <h2>
+          Ashwan
+        </h2>
+
+        <p>
+          Ashwan connects hip-hop, graffiti influences, lettering,
+          mixed media and upcycled cardboard with contemporary
+          Barcelona urban culture.
+        </p>
+
+        <a class="artist-button"
+           href="/artists/ashwan/">
+          Explore Ashwan →
+        </a>
+
+      </article>
 
     </div>
 
   </section>
 
 </main>
+
 
 <footer>
 
@@ -726,37 +814,24 @@
 
     </div>
 
+
     <div>
 
       <h3>Explore</h3>
 
-      <a href="/tags/street-art/">
-        Street Art
-      </a>
-
-      <a href="/tags/urban-art/">
-        Urban Art
-      </a>
-
-      <a href="/tags/barcelona-street-art/">
-        Barcelona Street Art
-      </a>
+      <a href="/tags/street-art/">Street Art</a>
+      <a href="/tags/urban-art/">Urban Art</a>
+      <a href="/tags/barcelona-street-art/">Barcelona Street Art</a>
 
     </div>
+
 
     <div>
 
       <h3>Artists</h3>
 
-      <a href="/artists/art-is-trash/">
-        Art Is Trash
-      </a>
-
-      <a href="https://www.instagram.com/artistrash/"
-         target="_blank"
-         rel="noopener">
-        @ArtIsTrash Instagram
-      </a>
+      <a href="/artists/art-is-trash/">Art Is Trash</a>
+      <a href="/artists/ashwan/">Ashwan</a>
 
     </div>
 
