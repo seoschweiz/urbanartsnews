@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://urbanartsnews.com/</loc>
   </url>
-
   <url>
     <loc>https://urbanartsnews.com/artists/</loc>
   </url>
-
   <url>
     <loc>https://urbanartsnews.com/artists/art-is-trash/</loc>
   </url>
-
   <url>
     <loc>https://urbanartsnews.com/artists/ashwan/</loc>
   </url>
-
+  <url>
+    <loc>https://urbanartsnews.com/artists/peeta/</loc>
+  </url>
   <url>
     <loc>https://urbanartsnews.com/artists/si-beriana/</loc>
   </url>
-
   <url>
-    <loc>https://urbanartsnews.com/tags/street-art/</loc>
+    <loc>https://urbanartsnews.com/cities/</loc>
   </url>
-
   <url>
-    <loc>https://urbanartsnews.com/tags/urban-art/</loc>
+    <loc>https://urbanartsnews.com/cities/barcelona/</loc>
   </url>
-
+  <url>
+    <loc>https://urbanartsnews.com/cities/venice/</loc>
+  </url>
   <url>
     <loc>https://urbanartsnews.com/tags/barcelona-street-art/</loc>
   </url>
-
+  <url>
+    <loc>https://urbanartsnews.com/tags/street-art/</loc>
+  </url>
+  <url>
+    <loc>https://urbanartsnews.com/tags/urban-art/</loc>
+  </url>
 </urlset>
