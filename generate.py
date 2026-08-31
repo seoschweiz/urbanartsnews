@@ -8,6 +8,7 @@ DATA_FILE = Path("data/artists.json")
 
 ARTISTS_DIR = Path("artists")
 CITIES_DIR = Path("cities")
+IMAGES_DIR = Path("images")
 
 MANUAL_ARTIST_PAGES = {
     "art-is-trash",
@@ -419,6 +420,7 @@ footer {{
 <a href="/tags/urban-art/">Urban Art</a>
 <a href="/cities/">Cities</a>
 <a href="/artists/">Artists</a>
+<a href="/images/">Images</a>
 </nav>
 </header>
 """
@@ -989,6 +991,137 @@ Featured <span>Artists</span>
     print("UPDATE homepage: index.html")
 
 
+
+def build_mixed_works(artists):
+    """Round-robin works so cities and artists remain mixed."""
+    works = []
+    max_posts = max((len(a.get("posts", [])) for a in artists), default=0)
+    for post_index in range(max_posts):
+        for artist in artists:
+            posts = artist.get("posts", [])
+            if post_index < len(posts):
+                post_url = posts[post_index].split("?")[0].rstrip("/")
+                post_id = post_url.rsplit("/", 1)[-1]
+                works.append({
+                    "artist": artist,
+                    "post_url": post_url,
+                    "post_id": post_id,
+                    "number": post_index + 1,
+                    "slug": f"{artist['slug']}-{slugify(post_id)}",
+                })
+    return works
+
+
+def generate_image_gallery(artists):
+    ensure_directory(IMAGES_DIR)
+    works = build_mixed_works(artists)
+    per_page = 9
+    pages = [works[i:i + per_page] for i in range(0, len(works), per_page)] or [[]]
+
+    for work in works:
+        artist = work["artist"]
+        name = artist["name"]
+        city = artist["city"]
+        city_slug = slugify(city)
+        detail_dir = IMAGES_DIR / work["slug"]
+        ensure_directory(detail_dir)
+        canonical = f"{BASE_URL}/images/{work['slug']}/"
+        title = f"{name} Urban Art in {city} | Urban Arts News Image"
+        description = (
+            f"View selected urban art by {name}, connected with {city}. "
+            f"Explore the artist, city and original Instagram publication."
+        )
+        detail = page_head(title, description, canonical)
+        detail += f"""
+<section class="hero">
+<div class="hero-label">Urban Arts News · Selected Work · {escape(city)}</div>
+<h1><span>{escape(name)}</span></h1>
+<p>Selected urban-art work connected with {escape(city)}, {escape(artist['country'])}.</p>
+</section>
+<main class="container">
+<article class="card">
+<iframe class="instagram-frame" src="{instagram_embed_url(work['post_url'])}" loading="lazy"
+title="{escape(name)} urban art in {escape(city)}"></iframe>
+<div class="card-content">
+<div class="category">{escape(name)} · {escape(city)}</div>
+<h2>{escape(name)} Urban Art in {escape(city)}</h2>
+<p>This selected public Instagram work forms part of the mixed Urban Arts News visual archive.</p>
+<div class="tags">
+<a class="tag" href="/artists/{artist['slug']}/">#{escape(name.replace(' ', ''))}</a>
+<a class="tag" href="/cities/{city_slug}/">#{escape(city.replace(' ', ''))}</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+<a class="button" href="{escape(work['post_url'])}" target="_blank" rel="noopener">View Original Post</a>
+</div>
+</article>
+<section class="related">
+<h2>Explore the Artist and City</h2>
+<p>Continue to the complete artist profile or discover more urban art connected with {escape(city)}.</p>
+<a class="button" href="/artists/{artist['slug']}/">Explore {escape(name)} →</a>
+<a class="button" href="/cities/{city_slug}/">Explore {escape(city)} →</a>
+<a class="button" href="/images/">All Images →</a>
+</section>
+</main>
+"""
+        detail += page_footer()
+        (detail_dir / "index.html").write_text(detail, encoding="utf-8")
+
+    total_pages = len(pages)
+    for page_number, page_works in enumerate(pages, start=1):
+        page_dir = IMAGES_DIR if page_number == 1 else IMAGES_DIR / "page" / str(page_number)
+        ensure_directory(page_dir)
+        canonical = f"{BASE_URL}/images/" if page_number == 1 else f"{BASE_URL}/images/page/{page_number}/"
+        title = "Urban Art Images from Around the World | Urban Arts News"
+        if page_number > 1:
+            title = f"Urban Art Images – Page {page_number} | Urban Arts News"
+        description = (
+            "Explore a mixed visual gallery of street art and urban artists from Barcelona, "
+            "Badalona, Venice and cities around the world."
+        )
+        cards = ""
+        for work in page_works:
+            artist = work["artist"]
+            name = artist["name"]
+            city = artist["city"]
+            cards += f"""
+<article class="card">
+<iframe class="instagram-frame" src="{instagram_embed_url(work['post_url'])}" loading="lazy"
+title="{escape(name)} urban art in {escape(city)}"></iframe>
+<div class="card-content">
+<div class="category">{escape(city)} · {escape(name)}</div>
+<h2>{escape(name)} Urban Art in {escape(city)}</h2>
+<p>Selected work from the international Urban Arts News visual archive.</p>
+<a class="button" href="/images/{work['slug']}/">View Work →</a>
+<a class="button" href="/artists/{artist['slug']}/">Artist →</a>
+</div>
+</article>
+"""
+        pagination = '<div class="related"><h2>Explore More Images</h2>'
+        if page_number > 1:
+            prev = "/images/" if page_number == 2 else f"/images/page/{page_number - 1}/"
+            pagination += f'<a class="button" href="{prev}">← Previous</a> '
+        if page_number < total_pages:
+            pagination += f'<a class="button" href="/images/page/{page_number + 1}/">Next →</a>'
+        pagination += "</div>"
+
+        gallery = page_head(title, description, canonical)
+        gallery += f"""
+<section class="hero">
+<div class="hero-label">Urban Arts News · Mixed International Gallery</div>
+<h1>Urban Art <span>Images</span></h1>
+<p>Discover artists and selected works from all featured cities, mixed across pages with a maximum of nine works per page.</p>
+</section>
+<main class="container">
+<h2 class="section-title">Visual Archive <span>Page {page_number}</span></h2>
+<div class="grid">{cards}</div>
+{pagination}
+</main>
+"""
+        gallery += page_footer()
+        (page_dir / "index.html").write_text(gallery, encoding="utf-8")
+
+    print(f"UPDATE image gallery: {len(works)} works across {len(pages)} pages")
+
 def generate_sitemap(artists):
     urls = {
         f"{BASE_URL}/",
@@ -997,11 +1130,19 @@ def generate_sitemap(artists):
         f"{BASE_URL}/tags/street-art/",
         f"{BASE_URL}/tags/urban-art/",
         f"{BASE_URL}/tags/barcelona-street-art/",
+        f"{BASE_URL}/images/",
     }
 
     for artist in artists:
         urls.add(f"{BASE_URL}/artists/{artist['slug']}/")
         urls.add(f"{BASE_URL}/cities/{slugify(artist['city'])}/")
+
+    works = build_mixed_works(artists)
+    total_gallery_pages = max(1, (len(works) + 8) // 9)
+    for page_number in range(2, total_gallery_pages + 1):
+        urls.add(f"{BASE_URL}/images/page/{page_number}/")
+    for work in works:
+        urls.add(f"{BASE_URL}/images/{work['slug']}/")
 
     sitemap = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1033,6 +1174,7 @@ def main():
     generate_artist_directory(artists)
     generate_city_pages(artists)
     generate_homepage(artists)
+    generate_image_gallery(artists)
     generate_sitemap(artists)
 
     print("")
