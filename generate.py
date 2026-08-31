@@ -1,4 +1,4 @@
-# Generates artists, cities, mixed galleries, RSS news and sitemap.
+# Generates artists, cities, mixed galleries, RSS news, link status and sitemap.
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import re
