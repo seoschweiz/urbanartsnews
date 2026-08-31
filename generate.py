@@ -452,6 +452,7 @@ def generate_artist_page(artist):
     posts = artist.get("posts", [])
     headline = artist.get("headline", f"{name} – Urban Art from {city}")
     bio = artist.get("bio", f"{name} is an urban artist connected with {city}, {country}.")
+    seo_text = artist.get("seo_text", "")
     tags = artist.get("tags", ["Urban Art", city])
 
     artist_dir = ARTISTS_DIR / slug
@@ -559,6 +560,11 @@ View Instagram
 <div class="grid">
 {post_html}
 </div>
+
+<section class="related">
+<h2>About {escape(name)} and Urban Art in {escape(city)}</h2>
+<p>{escape(seo_text)}</p>
+</section>
 
 <section class="related">
 <h2>Explore {escape(city)}</h2>
