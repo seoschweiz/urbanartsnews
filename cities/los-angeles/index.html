@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Los Angeles Urban Art &amp; Street Artists | Urban Arts News</title>
+<meta name="description" content="Discover featured urban artists, street art and contemporary urban culture from Los Angeles.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://urbanartsnews.com/cities/los-angeles/">
+
+<meta property="og:title" content="Los Angeles Urban Art &amp; Street Artists | Urban Arts News">
+<meta property="og:description" content="Discover featured urban artists, street art and contemporary urban culture from Los Angeles.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://urbanartsnews.com/cities/los-angeles/">
+
+<style>
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f5f5;
+  color:#161616;
+  line-height:1.6;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+header {
+  background:#090909;
+  color:white;
+  padding:18px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.logo {
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.logo span {
+  color:#ff5b21;
+}
+
+nav a {
+  margin-left:22px;
+  font-size:14px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+
+nav a:hover {
+  color:#ff5b21;
+}
+
+.hero {
+  background:#111;
+  color:white;
+  padding:95px 6%;
+}
+
+.hero-label {
+  color:#ff5b21;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.hero h1 {
+  font-size:clamp(48px,8vw,92px);
+  line-height:.95;
+  text-transform:uppercase;
+  letter-spacing:-3px;
+  margin-bottom:20px;
+}
+
+.hero h1 span {
+  color:#ff5b21;
+}
+
+.hero p {
+  max-width:850px;
+  font-size:19px;
+  color:#ccc;
+}
+
+.container {
+  width:min(1400px,92%);
+  margin:55px auto;
+}
+
+.section-title {
+  font-size:32px;
+  text-transform:uppercase;
+  margin-bottom:30px;
+}
+
+.section-title span {
+  color:#ff5b21;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.card {
+  background:white;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  transition:.2s;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(0,0,0,.13);
+}
+
+.card-content {
+  padding:22px;
+}
+
+.card h2,
+.card h3 {
+  margin-bottom:10px;
+}
+
+.card p {
+  color:#666;
+  margin-bottom:16px;
+}
+
+.instagram-frame {
+  width:100%;
+  height:520px;
+  border:0;
+  display:block;
+  background:white;
+}
+
+.category {
+  color:#ff5b21;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+
+.tag {
+  background:#eee;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.tag:hover {
+  background:#ff5b21;
+  color:white;
+}
+
+.button {
+  display:inline-block;
+  background:#ff5b21;
+  color:white;
+  padding:13px 18px;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-top:12px;
+}
+
+.button:hover {
+  background:#111;
+}
+
+.home-layout {
+  display:grid;
+  grid-template-columns:minmax(0,3fr) minmax(260px,1fr);
+  gap:38px;
+}
+
+.sidebar-box {
+  background:white;
+  padding:24px;
+  margin-bottom:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.sidebar-box h3 {
+  text-transform:uppercase;
+  font-size:18px;
+  margin-bottom:15px;
+  border-bottom:3px solid #ff5b21;
+  padding-bottom:8px;
+}
+
+.sidebar-box a {
+  display:block;
+  padding:9px 0;
+  border-bottom:1px solid #eee;
+  font-weight:700;
+}
+
+.sidebar-box a:hover {
+  color:#ff5b21;
+}
+
+.profile-layout {
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(260px,1fr);
+  gap:40px;
+  margin-bottom:60px;
+}
+
+.profile-copy {
+  background:white;
+  padding:38px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.profile-copy h2 {
+  font-size:33px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.profile-copy h2 span {
+  color:#ff5b21;
+}
+
+.profile-copy p {
+  color:#505050;
+  font-size:16px;
+  margin-bottom:18px;
+}
+
+.info-box {
+  background:#111;
+  color:white;
+  padding:30px;
+  height:fit-content;
+}
+
+.info-box h3 {
+  color:#ff5b21;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.meta {
+  padding:11px 0;
+  border-bottom:1px solid #333;
+}
+
+.meta strong {
+  display:block;
+  color:#999;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:2px;
+}
+
+.artist-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.artist-tile {
+  background:#111;
+  color:white;
+  padding:28px;
+}
+
+.artist-tile .category {
+  margin-bottom:8px;
+}
+
+.artist-tile h2 {
+  font-size:28px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.artist-tile p {
+  color:#bbb;
+  margin-bottom:16px;
+}
+
+.related {
+  margin-top:50px;
+  background:white;
+  padding:30px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+footer {
+  margin-top:70px;
+  background:#090909;
+  color:#888;
+  text-align:center;
+  padding:40px;
+  font-size:13px;
+}
+
+@media(max-width:1100px) {
+  .home-layout {
+    grid-template-columns:1fr;
+  }
+
+  .grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .artist-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:750px) {
+  header {
+    display:block;
+  }
+
+  nav {
+    margin-top:12px;
+  }
+
+  nav a {
+    margin-left:0;
+    margin-right:12px;
+  }
+
+  .grid,
+  .artist-grid {
+    grid-template-columns:1fr;
+  }
+
+  .profile-layout {
+    grid-template-columns:1fr;
+  }
+
+  .instagram-frame {
+    height:620px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="/" class="logo">URBAN <span>ARTS</span> NEWS</a>
+
+<nav>
+<a href="/">Home</a>
+<a href="/tags/street-art/">Street Art</a>
+<a href="/tags/urban-art/">Urban Art</a>
+<a href="/cities/">Cities</a>
+<a href="/artists/">Artists</a>
+<a href="/images/">Images</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-label">Urban Arts News · City</div>
+<h1><span>Los Angeles</span></h1>
+
+<p>
+Discover selected street artists, urban creators and contemporary
+visual culture connected with Los Angeles.
+</p>
+</section>
+
+<main class="container">
+
+<h2 class="section-title">Artists in <span>Los Angeles</span></h2>
+
+<div class="grid">
+
+<article class="card">
+<div class="card-content">
+
+<div class="category">Los Angeles Featured Artist</div>
+<h2>Darel Carey</h2>
+<p>Darel Carey – Optical Art, Murals and Immersive Lines from Los Angeles</p>
+
+<a class="button" href="/artists/darel-carey/">
+Explore Artist →
+</a>
+
+</div>
+</article>
+
+</div>
+
+
+<section style="margin-top:70px;" aria-labelledby="city-news-title">
+<h2 class="section-title" id="city-news-title">Urban Art <span>Los Angeles News</span></h2>
+<p style="margin-bottom:25px;">Latest English-language news results for urban art, street art, murals and visual culture connected with Los Angeles.</p>
+<div class="grid">
+
+<article class="card">
+<div class="card-content">
+<div class="category">Los Angeles · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFAwUlgzTWpMLTB0SWxiRDhkczVuRnhVZW1sNGg1TUR2SkE0MnprRlBSRWtuYVA3Umx0WTZlUmJnTFVILTg0MVRLYVZ3QXNKRTVyd0xxZHR3RjBZa0E5QS00a3JKQjZIcXBXeTlIYzZhMWY?oc=5" target="_blank" rel="noopener noreferrer">Los Angeles art exhibitions: the best shows to see in September 2026 - wallpaper.com</a></h3>
+<p>wallpaper.com</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMicEFVX3lxTFAwUlgzTWpMLTB0SWxiRDhkczVuRnhVZW1sNGg1TUR2SkE0MnprRlBSRWtuYVA3Umx0WTZlUmJnTFVILTg0MVRLYVZ3QXNKRTVyd0xxZHR3RjBZa0E5QS00a3JKQjZIcXBXeTlIYzZhMWY?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Los Angeles · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPNko2VDRiVG1LY2J3UkhUQm5xTWxQeWJJd2VMa1dSWmJOTzJNLVg3ZjF5TEFScGZUeFdlUkowcHk3RVZQLTlrN3hSSWo1aHNLNWZtTU52MXYyLWhYQjk0R1lucDVKZlhXc0U5VEhnSzVCSkN3aHBiWGIyek9YOG40LUxLSmw4ZnFRa2RyZkhfY05fQUhhV05kc3E5MVZYZnZYOFdZX3FTUV9kam8tWjNHdm90WUJLd9IBuwFBVV95cUxPUXQzU1FERU9ENVpJSVoxWExPS3FFNXR0WlpwSXgxZm9KLVQ0a2FpaHdlZTFwdmcwbGF2MHRjLU1zelRGcC1zRE95RHI4cEg0WnA1TlR5LXMxWUZaeDdRRk1hd1pBczlqdDdzMXVmQ2VLTjlyT05oQU9lY0NuUEV3am5memlfSG44TzhVcEliV3ZnSHF4SGFVNXFCSTVKQmQ4UEhJdXBjSEptZU9lQnRlZ25zd3l6UWtiRU9v?oc=5" target="_blank" rel="noopener noreferrer">Downtown Los Angeles residents and businesses say surge in graffiti is hurting city&#x27;s image - ABC7 Los Angeles</a></h3>
+<p>ABC7 Los Angeles</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPNko2VDRiVG1LY2J3UkhUQm5xTWxQeWJJd2VMa1dSWmJOTzJNLVg3ZjF5TEFScGZUeFdlUkowcHk3RVZQLTlrN3hSSWo1aHNLNWZtTU52MXYyLWhYQjk0R1lucDVKZlhXc0U5VEhnSzVCSkN3aHBiWGIyek9YOG40LUxLSmw4ZnFRa2RyZkhfY05fQUhhV05kc3E5MVZYZnZYOFdZX3FTUV9kam8tWjNHdm90WUJLd9IBuwFBVV95cUxPUXQzU1FERU9ENVpJSVoxWExPS3FFNXR0WlpwSXgxZm9KLVQ0a2FpaHdlZTFwdmcwbGF2MHRjLU1zelRGcC1zRE95RHI4cEg0WnA1TlR5LXMxWUZaeDdRRk1hd1pBczlqdDdzMXVmQ2VLTjlyT05oQU9lY0NuUEV3am5memlfSG44TzhVcEliV3ZnSHF4SGFVNXFCSTVKQmQ4UEhJdXBjSEptZU9lQnRlZ25zd3l6UWtiRU9v?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Los Angeles · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxOQXdUTENqVTQyN0N3X3RqUlVjRjZIend4V0o5WGhLZ3VkZ2R5bmhuWlVaaGFMUi1LLU04QVdvcmRocWFocGc4eXdLZGJfOG4teld5R0dYTnd2cXYwZHdJQWl5bEtIdjVXZ0hUeGZybUlfVDJFVTJzN0FIVzJ3TXVWckhSVnZSV0N4UE9CWEtXNDdKeExaS3l2a2tBbjJaRTNNd3c3UUFSb25kX1RINEdTZUhuRGZIZVpuNDlTd3EwTmxmSGZ1MzloQnJIQ0w4VU5G?oc=5" target="_blank" rel="noopener noreferrer">Amid increased arrests and deportations, an immigrant artist confronts fear through street art - Los Angeles Times</a></h3>
+<p>Los Angeles Times</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxOQXdUTENqVTQyN0N3X3RqUlVjRjZIend4V0o5WGhLZ3VkZ2R5bmhuWlVaaGFMUi1LLU04QVdvcmRocWFocGc4eXdLZGJfOG4teld5R0dYTnd2cXYwZHdJQWl5bEtIdjVXZ0hUeGZybUlfVDJFVTJzN0FIVzJ3TXVWckhSVnZSV0N4UE9CWEtXNDdKeExaS3l2a2tBbjJaRTNNd3c3UUFSb25kX1RINEdTZUhuRGZIZVpuNDlTd3EwTmxmSGZ1MzloQnJIQ0w4VU5G?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Los Angeles · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNVE93amVPcWl6LW41bTlLR3RhNVY1d0lscWRONFVlVUdaZzVrVHU1YkxJMElRaXV5Y1ZydUpTdE1vN2FmeWVZRFNLakRHSW10ZkZCVm1VQVlGQnktVDZ0WnpnNUU1RkwzSEtuT29MU1k1Y0Y4OE5WaXBvMExXSmV2Z1dPenFDWG05MExtYzNPb3JOT09N?oc=5" target="_blank" rel="noopener noreferrer">In Sayre Gomez’s Art, L.A.’s Problems Move From Real to Hyper-Real - The New York Times</a></h3>
+<p>The New York Times</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNVE93amVPcWl6LW41bTlLR3RhNVY1d0lscWRONFVlVUdaZzVrVHU1YkxJMElRaXV5Y1ZydUpTdE1vN2FmeWVZRFNLakRHSW10ZkZCVm1VQVlGQnktVDZ0WnpnNUU1RkwzSEtuT29MU1k1Y0Y4OE5WaXBvMExXSmV2Z1dPenFDWG05MExtYzNPb3JOT09N?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Los Angeles · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNLU1BM1JUTUdLdWltUFNQd2drS3ZRLVRMU0xkajB0ei1ITVEySHhia2NNSTNPaXcwN2ZzYmlnY0ozcmdJLVBlVEo0a0RQUUJOVTBvaFVZRjFINjZtRms1WEtCeFYxSGxhUktpUXhwMFZBc0lMUUhVWDhHdnAxNllUam1jck53UzdXWnZQdzRyWXdrZ1JLbElfWHAtM3pPQW1naFVlQU5GaGJTZjlrcGJsZHNCcnE?oc=5" target="_blank" rel="noopener noreferrer">LA&#x27;s graffiti towers star as 9-foot miniature in Sayre Gomez art show - Archinect</a></h3>
+<p>Archinect</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNLU1BM1JUTUdLdWltUFNQd2drS3ZRLVRMU0xkajB0ei1ITVEySHhia2NNSTNPaXcwN2ZzYmlnY0ozcmdJLVBlVEo0a0RQUUJOVTBvaFVZRjFINjZtRms1WEtCeFYxSGxhUktpUXhwMFZBc0lMUUhVWDhHdnAxNllUam1jck53UzdXWnZQdzRyWXdrZ1JLbElfWHAtM3pPQW1naFVlQU5GaGJTZjlrcGJsZHNCcnE?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Los Angeles · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE5PLXdpZDFuWFZNRXBBUHV1elBPeXpPRjlDODQ1a1QwSWM3cUhPZV9PVzVpMHVmR09wU2wzdFZBTnJnRkFsTHRKcVd3V3dNRTRnU0pRVXpNSnFBZUY5dDZXVXE2TFFWaVdfSW9z?oc=5" target="_blank" rel="noopener noreferrer">Paris just got an exhibition that reveals its darkest and coolest side - Vogue Adria</a></h3>
+<p>Vogue Adria</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMia0FVX3lxTE5PLXdpZDFuWFZNRXBBUHV1elBPeXpPRjlDODQ1a1QwSWM3cUhPZV9PVzVpMHVmR09wU2wzdFZBTnJnRkFsTHRKcVd3V3dNRTRnU0pRVXpNSnFBZUY5dDZXVXE2TFFWaVdfSW9z?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+</div>
+<a class="button" href="https://news.google.com/rss/search?q=urban+art+Los+Angeles&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener noreferrer" type="application/rss+xml">English RSS Feed →</a>
+</section>
+
+
+</main>
+
+<footer>
+© 2026 Urban Arts News · Street Art · Urban Artists · Urban Culture
+</footer>
+</body>
+</html>
