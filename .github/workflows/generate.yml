@@ -1,6 +1,9 @@
 name: Generate Urban Arts News
 
 on:
+  schedule:
+    - cron: "23 */6 * * *"
+
   push:
     branches:
       - main
