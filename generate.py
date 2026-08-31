@@ -1,6 +1,4 @@
-from pathlib import Path
-
-content = r'''import json
+import json
 import re
 from html import escape
 from pathlib import Path
@@ -1038,9 +1036,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-'''
-
-path = Path("/mnt/data/generate_full_auto.py")
-path.write_text(content, encoding="utf-8")
-compile(content, str(path), "exec")
-print("Created and syntax-checked:", path)
