@@ -1,4 +1,4 @@
-# Generates artists, cities, mixed galleries and sitemap.
+# Generates artists, cities, mixed galleries, RSS news and sitemap.
 import json
 import re
 import urllib.parse
