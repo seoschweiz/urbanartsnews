@@ -1,1045 +1,2302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Urban Arts News | Street Art, Graffiti & Urban Artists</title>
-
-  <meta name="description"
-        content="Discover street art, graffiti, murals and contemporary urban artists. Explore Art Is Trash, Ashwan, Si Beriana and selected Instagram posts from Barcelona.">
-
-  <meta name="robots" content="index, follow">
-
-  <link rel="canonical" href="https://urbanartsnews.com/">
-
-  <meta property="og:title"
-        content="Urban Arts News | Street Art, Graffiti & Urban Artists">
-
-  <meta property="og:description"
-        content="Discover street art, murals, urban artists and contemporary visual culture from Barcelona and around the world.">
-
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://urbanartsnews.com/">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f5f5;
-      color: #161616;
-      line-height: 1.5;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    header {
-      background: #090909;
-      color: white;
-      padding: 18px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: #ff5b21;
-    }
-
-    nav a {
-      margin-left: 22px;
-      font-size: 14px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    nav a:hover {
-      color: #ff5b21;
-    }
-
-    .hero {
-      min-height: 440px;
-      background: #111;
-      display: flex;
-      align-items: flex-end;
-      padding: 70px 6%;
-      color: white;
-    }
-
-    .hero-content {
-      max-width: 820px;
-    }
-
-    .hero-label {
-      display: inline-block;
-      background: #ff5b21;
-      padding: 7px 12px;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-size: clamp(44px, 7vw, 82px);
-      line-height: .95;
-      text-transform: uppercase;
-      letter-spacing: -3px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: #ff5b21;
-    }
-
-    .hero p {
-      max-width: 720px;
-      font-size: 18px;
-      color: #ddd;
-    }
-
-    .container {
-      width: min(1400px, 92%);
-      margin: 55px auto;
-    }
-
-    .section-title {
-      font-size: 34px;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 30px;
-    }
-
-    .section-title span {
-      color: #ff5b21;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr);
-      gap: 38px;
-    }
-
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .post-card {
-      background: white;
-      overflow: hidden;
-      box-shadow: 0 5px 18px rgba(0,0,0,.08);
-      transition: .2s;
-    }
-
-    .post-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0,0,0,.14);
-    }
-
-    .instagram-frame {
-      width: 100%;
-      height: 520px;
-      border: 0;
-      display: block;
-      background: #fafafa;
-    }
-
-    .post-info {
-      padding: 20px;
-    }
-
-    .category {
-      color: #ff5b21;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 7px;
-    }
-
-    .post-info h2 {
-      font-size: 20px;
-      line-height: 1.2;
-      margin-bottom: 10px;
-    }
-
-    .post-info p {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-
-    .artist-link {
-      font-weight: 800;
-    }
-
-    .artist-link:hover {
-      color: #ff5b21;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .tag {
-      background: #efefef;
-      padding: 6px 9px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .tag:hover {
-      background: #ff5b21;
-      color: white;
-    }
-
-    aside section {
-      background: white;
-      padding: 24px;
-      margin-bottom: 25px;
-      box-shadow: 0 5px 18px rgba(0,0,0,.06);
-    }
-
-    aside h3 {
-      font-size: 18px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      border-bottom: 3px solid #ff5b21;
-      padding-bottom: 8px;
-    }
-
-    .side-links a {
-      display: block;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-      font-weight: 700;
-    }
-
-    .side-links a:hover {
-      color: #ff5b21;
-    }
-
-    .side-tags a {
-      display: inline-block;
-      margin: 4px;
-      background: #111;
-      color: white;
-      padding: 7px 10px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .side-tags a:hover {
-      background: #ff5b21;
-    }
-
-    .coming {
-      display: block;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-      color: #aaa;
-      font-weight: 700;
-    }
-
-    .artists-section {
-      margin-top: 70px;
-    }
-
-    .artist-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .artist-card {
-      background: #111;
-      color: white;
-      padding: 38px;
-    }
-
-    .artist-label {
-      color: #ff5b21;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .artist-card h2 {
-      font-size: 34px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .artist-card p {
-      color: #bbb;
-      margin-bottom: 22px;
-    }
-
-    .artist-button {
-      display: inline-block;
-      background: #ff5b21;
-      color: white;
-      padding: 13px 18px;
-      font-size: 13px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .directory-button {
-      display: inline-block;
-      margin-top: 28px;
-      background: #ff5b21;
-      color: white;
-      padding: 15px 22px;
-      font-size: 14px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    footer {
-      background: #090909;
-      color: #ccc;
-      padding: 50px 6%;
-      margin-top: 70px;
-    }
-
-    .footer-inner {
-      width: min(1400px, 100%);
-      margin: auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
-    }
-
-    footer h3 {
-      color: white;
-      margin-bottom: 15px;
-    }
-
-    footer p,
-    footer a {
-      font-size: 14px;
-      color: #aaa;
-    }
-
-    footer a {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    footer a:hover {
-      color: #ff5b21;
-    }
-
-    .copyright {
-      border-top: 1px solid #222;
-      margin-top: 40px;
-      padding-top: 20px;
-      text-align: center;
-      font-size: 12px;
-      color: #777;
-    }
-
-    @media (max-width: 1100px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .posts-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .artist-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 700px) {
-      header {
-        display: block;
-      }
-
-      nav {
-        margin-top: 12px;
-      }
-
-      nav a {
-        margin-left: 0;
-        margin-right: 13px;
-      }
-
-      .posts-grid,
-      .artist-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .instagram-frame {
-        height: 620px;
-      }
-
-      .footer-inner {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Urban Arts News | Street Art, Graffiti &amp; Urban Artists</title>
+<meta name="description" content="Discover street art, graffiti, murals and contemporary urban artists from Barcelona, Venice and cities around the world.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://urbanartsnews.com/">
+
+<meta property="og:title" content="Urban Arts News | Street Art, Graffiti &amp; Urban Artists">
+<meta property="og:description" content="Discover street art, graffiti, murals and contemporary urban artists from Barcelona, Venice and cities around the world.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://urbanartsnews.com/">
+
+<style>
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f5f5;
+  color:#161616;
+  line-height:1.6;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+header {
+  background:#090909;
+  color:white;
+  padding:18px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.logo {
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.logo span {
+  color:#ff5b21;
+}
+
+nav a {
+  margin-left:22px;
+  font-size:14px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+
+nav a:hover {
+  color:#ff5b21;
+}
+
+.hero {
+  background:#111;
+  color:white;
+  padding:95px 6%;
+}
+
+.hero-label {
+  color:#ff5b21;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.hero h1 {
+  font-size:clamp(48px,8vw,92px);
+  line-height:.95;
+  text-transform:uppercase;
+  letter-spacing:-3px;
+  margin-bottom:20px;
+}
+
+.hero h1 span {
+  color:#ff5b21;
+}
+
+.hero p {
+  max-width:850px;
+  font-size:19px;
+  color:#ccc;
+}
+
+.container {
+  width:min(1400px,92%);
+  margin:55px auto;
+}
+
+.section-title {
+  font-size:32px;
+  text-transform:uppercase;
+  margin-bottom:30px;
+}
+
+.section-title span {
+  color:#ff5b21;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.card {
+  background:white;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  transition:.2s;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(0,0,0,.13);
+}
+
+.card-content {
+  padding:22px;
+}
+
+.card h2,
+.card h3 {
+  margin-bottom:10px;
+}
+
+.card p {
+  color:#666;
+  margin-bottom:16px;
+}
+
+.instagram-frame {
+  width:100%;
+  height:520px;
+  border:0;
+  display:block;
+  background:white;
+}
+
+.category {
+  color:#ff5b21;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+
+.tag {
+  background:#eee;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.tag:hover {
+  background:#ff5b21;
+  color:white;
+}
+
+.button {
+  display:inline-block;
+  background:#ff5b21;
+  color:white;
+  padding:13px 18px;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-top:12px;
+}
+
+.button:hover {
+  background:#111;
+}
+
+.home-layout {
+  display:grid;
+  grid-template-columns:minmax(0,3fr) minmax(260px,1fr);
+  gap:38px;
+}
+
+.sidebar-box {
+  background:white;
+  padding:24px;
+  margin-bottom:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.sidebar-box h3 {
+  text-transform:uppercase;
+  font-size:18px;
+  margin-bottom:15px;
+  border-bottom:3px solid #ff5b21;
+  padding-bottom:8px;
+}
+
+.sidebar-box a {
+  display:block;
+  padding:9px 0;
+  border-bottom:1px solid #eee;
+  font-weight:700;
+}
+
+.sidebar-box a:hover {
+  color:#ff5b21;
+}
+
+.profile-layout {
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(260px,1fr);
+  gap:40px;
+  margin-bottom:60px;
+}
+
+.profile-copy {
+  background:white;
+  padding:38px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.profile-copy h2 {
+  font-size:33px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.profile-copy h2 span {
+  color:#ff5b21;
+}
+
+.profile-copy p {
+  color:#505050;
+  font-size:16px;
+  margin-bottom:18px;
+}
+
+.info-box {
+  background:#111;
+  color:white;
+  padding:30px;
+  height:fit-content;
+}
+
+.info-box h3 {
+  color:#ff5b21;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.meta {
+  padding:11px 0;
+  border-bottom:1px solid #333;
+}
+
+.meta strong {
+  display:block;
+  color:#999;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:2px;
+}
+
+.artist-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.artist-tile {
+  background:#111;
+  color:white;
+  padding:28px;
+}
+
+.artist-tile .category {
+  margin-bottom:8px;
+}
+
+.artist-tile h2 {
+  font-size:28px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.artist-tile p {
+  color:#bbb;
+  margin-bottom:16px;
+}
+
+.related {
+  margin-top:50px;
+  background:white;
+  padding:30px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+footer {
+  margin-top:70px;
+  background:#090909;
+  color:#888;
+  text-align:center;
+  padding:40px;
+  font-size:13px;
+}
+
+@media(max-width:1100px) {
+  .home-layout {
+    grid-template-columns:1fr;
+  }
+
+  .grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .artist-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:750px) {
+  header {
+    display:block;
+  }
+
+  nav {
+    margin-top:12px;
+  }
+
+  nav a {
+    margin-left:0;
+    margin-right:12px;
+  }
+
+  .grid,
+  .artist-grid {
+    grid-template-columns:1fr;
+  }
+
+  .profile-layout {
+    grid-template-columns:1fr;
+  }
+
+  .instagram-frame {
+    height:620px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
+<a href="/" class="logo">URBAN <span>ARTS</span> NEWS</a>
 
-  <a href="/" class="logo">
-    URBAN <span>ARTS</span> NEWS
-  </a>
-
-  <nav>
-    <a href="/">Home</a>
-    <a href="/tags/street-art/">Street Art</a>
-    <a href="/tags/urban-art/">Urban Art</a>
-    <a href="/tags/barcelona-street-art/">Barcelona</a>
-    <a href="/artists/">Artists</a>
-  </nav>
-
+<nav>
+<a href="/">Home</a>
+<a href="/tags/street-art/">Street Art</a>
+<a href="/tags/urban-art/">Urban Art</a>
+<a href="/cities/">Cities</a>
+<a href="/artists/">Artists</a>
+<a href="/images/">Images</a>
+</nav>
 </header>
-
 
 <section class="hero">
 
-  <div class="hero-content">
+<div class="hero-label">
+Street Art · Graffiti · Murals · Urban Culture
+</div>
 
-    <span class="hero-label">
-      Street Art · Graffiti · Murals · Urban Culture
-    </span>
+<h1>
+Urban <span>Arts</span> News
+</h1>
 
-    <h1>
-      Urban <span>Arts</span> News
-    </h1>
-
-    <p>
-      Discover street art, murals, urban interventions and independent
-      artists through selected Instagram posts and stories from Barcelona
-      and the streets of cities around the world.
-    </p>
-
-  </div>
+<p>
+A curated discovery platform for street art and contemporary urban artists.
+Barcelona is our local focus, while selected international artists connect
+Urban Arts News with cities around the world.
+</p>
 
 </section>
 
 
 <main class="container">
 
-  <h2 class="section-title">
-    Latest <span>Instagram Posts</span>
-  </h2>
+<h2 class="section-title">
+Latest <span>Instagram Posts</span>
+</h2>
 
+<div class="home-layout">
+
+<div>
 
-  <div class="layout">
+<div class="grid">
 
-    <div class="posts-grid">
+<article class="card">
 
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DcbCHdNgzo3/embed/"
+loading="lazy">
+</iframe>
 
-      <!-- ART IS TRASH 1 -->
+<div class="card-content">
 
-      <article class="post-card">
+<div class="category">
+Art Is Trash · Barcelona
+</div>
 
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DcbCHdNgzo3/embed/"
-                loading="lazy">
-        </iframe>
+<h2>
+<a href="/artists/art-is-trash/">
+Art Is Trash · Urban Art
+</a>
+</h2>
 
-        <div class="post-info">
+<p>
+Selected work by Art Is Trash from Barcelona.
+</p>
 
-          <div class="category">
-            Art Is Trash · Barcelona
-          </div>
+<div class="tags">
+<a class="tag" href="/artists/art-is-trash/">#ArtIsTrash</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
 
-          <h2>
-            <a class="artist-link" href="/artists/art-is-trash/">
-              Urban Art by Art Is Trash
-            </a>
-          </h2>
+</div>
+</article>
 
-          <p>
-            Temporary street intervention and contemporary urban art
-            from Barcelona.
-          </p>
+<article class="card">
 
-          <div class="tags">
-            <a class="tag" href="/tags/street-art/">#StreetArt</a>
-            <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-            <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaStreetArt</a>
-          </div>
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DcV1qoNARP_/embed/"
+loading="lazy">
+</iframe>
 
-        </div>
+<div class="card-content">
 
-      </article>
+<div class="category">
+Art Is Trash · Barcelona
+</div>
 
+<h2>
+<a href="/artists/art-is-trash/">
+Art Is Trash · Urban Art
+</a>
+</h2>
 
-      <!-- ART IS TRASH 2 -->
+<p>
+Selected work by Art Is Trash from Barcelona.
+</p>
 
-      <article class="post-card">
+<div class="tags">
+<a class="tag" href="/artists/art-is-trash/">#ArtIsTrash</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
 
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DcV1qoNARP_/embed/"
-                loading="lazy">
-        </iframe>
+</div>
+</article>
 
-        <div class="post-info">
+<article class="card">
 
-          <div class="category">
-            Art Is Trash · Street Art
-          </div>
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DcMKWOSgySa/embed/"
+loading="lazy">
+</iframe>
 
-          <h2>
-            <a class="artist-link" href="/artists/art-is-trash/">
-              Street Intervention in Barcelona
-            </a>
-          </h2>
+<div class="card-content">
 
-          <p>
-            Independent urban creativity and street culture
-            from Art Is Trash.
-          </p>
+<div class="category">
+Art Is Trash · Barcelona
+</div>
 
-          <div class="tags">
-            <a class="tag" href="/tags/street-art/">#StreetArt</a>
-            <a class="tag" href="/tags/barcelona-street-art/">#Barcelona</a>
-            <a class="tag" href="/artists/art-is-trash/">#ArtIsTrash</a>
-          </div>
+<h2>
+<a href="/artists/art-is-trash/">
+Art Is Trash · Urban Art
+</a>
+</h2>
 
-        </div>
+<p>
+Selected work by Art Is Trash from Barcelona.
+</p>
 
-      </article>
+<div class="tags">
+<a class="tag" href="/artists/art-is-trash/">#ArtIsTrash</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DZV3g7rMe75/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Ashwan · Barcelona
+</div>
+
+<h2>
+<a href="/artists/ashwan/">
+Ashwan · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Ashwan from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/ashwan/">#Ashwan</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DX4re3iszBi/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Ashwan · Barcelona
+</div>
+
+<h2>
+<a href="/artists/ashwan/">
+Ashwan · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Ashwan from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/ashwan/">#Ashwan</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DR4wIlUjJ_w/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Ashwan · Barcelona
+</div>
+
+<h2>
+<a href="/artists/ashwan/">
+Ashwan · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Ashwan from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/ashwan/">#Ashwan</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DbfvCs6uj0k/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Si Beriana · Barcelona
+</div>
+
+<h2>
+<a href="/artists/si-beriana/">
+Si Beriana · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Si Beriana from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/si-beriana/">#SiBeriana</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DYpXmYIiMMQ/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Si Beriana · Barcelona
+</div>
+
+<h2>
+<a href="/artists/si-beriana/">
+Si Beriana · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Si Beriana from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/si-beriana/">#SiBeriana</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DTXSpF2gYmn/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Si Beriana · Barcelona
+</div>
+
+<h2>
+<a href="/artists/si-beriana/">
+Si Beriana · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Si Beriana from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/si-beriana/">#SiBeriana</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DX86_6jiODf/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Peeta · Venice
+</div>
+
+<h2>
+<a href="/artists/peeta/">
+Peeta · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Peeta from Venice.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/peeta/">#Peeta</a>
+<a class="tag" href="/cities/venice/">#Venice</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DNYfKBYoNrA/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Peeta · Venice
+</div>
+
+<h2>
+<a href="/artists/peeta/">
+Peeta · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Peeta from Venice.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/peeta/">#Peeta</a>
+<a class="tag" href="/cities/venice/">#Venice</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/CtRqlS-oKQB/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Peeta · Venice
+</div>
+
+<h2>
+<a href="/artists/peeta/">
+Peeta · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Peeta from Venice.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/peeta/">#Peeta</a>
+<a class="tag" href="/cities/venice/">#Venice</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DX1O44AggGa/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Spogo · Badalona
+</div>
+
+<h2>
+<a href="/artists/spogo/">
+Spogo · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Spogo from Badalona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/spogo/">#Spogo</a>
+<a class="tag" href="/cities/badalona/">#Badalona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DO7_eUFAi1o/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Spogo · Badalona
+</div>
+
+<h2>
+<a href="/artists/spogo/">
+Spogo · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Spogo from Badalona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/spogo/">#Spogo</a>
+<a class="tag" href="/cities/badalona/">#Badalona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DJ3fPW_CXqj/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Spogo · Badalona
+</div>
+
+<h2>
+<a href="/artists/spogo/">
+Spogo · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Spogo from Badalona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/spogo/">#Spogo</a>
+<a class="tag" href="/cities/badalona/">#Badalona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DYRzqScjBc1/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Xavi Ceerre · Barcelona
+</div>
+
+<h2>
+<a href="/artists/xavi-ceerre/">
+Xavi Ceerre · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Xavi Ceerre from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/xavi-ceerre/">#XaviCeerre</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DXEoAACDDAy/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Xavi Ceerre · Barcelona
+</div>
+
+<h2>
+<a href="/artists/xavi-ceerre/">
+Xavi Ceerre · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Xavi Ceerre from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/xavi-ceerre/">#XaviCeerre</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DWWU6MwDLs6/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Xavi Ceerre · Barcelona
+</div>
+
+<h2>
+<a href="/artists/xavi-ceerre/">
+Xavi Ceerre · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Xavi Ceerre from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/xavi-ceerre/">#XaviCeerre</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DcrRADXjATe/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Camile Scruela · Barcelona
+</div>
+
+<h2>
+<a href="/artists/camile-scruela/">
+Camile Scruela · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Camile Scruela from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/camile-scruela/">#CamileScruela</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/Dcf2lrbl_D0/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Camile Scruela · Barcelona
+</div>
+
+<h2>
+<a href="/artists/camile-scruela/">
+Camile Scruela · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Camile Scruela from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/camile-scruela/">#CamileScruela</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DbFnj5tKupV/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Camile Scruela · Barcelona
+</div>
+
+<h2>
+<a href="/artists/camile-scruela/">
+Camile Scruela · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Camile Scruela from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/camile-scruela/">#CamileScruela</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/Db0nJPAKRYN/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Pop Art POV · Barcelona
+</div>
+
+<h2>
+<a href="/artists/pop-art-pov/">
+Pop Art POV · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Pop Art POV from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/pop-art-pov/">#PopArtPOV</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DXhbxtECq5B/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Pop Art POV · Barcelona
+</div>
+
+<h2>
+<a href="/artists/pop-art-pov/">
+Pop Art POV · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Pop Art POV from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/pop-art-pov/">#PopArtPOV</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DVv_YMnCInG/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Pop Art POV · Barcelona
+</div>
+
+<h2>
+<a href="/artists/pop-art-pov/">
+Pop Art POV · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Pop Art POV from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/pop-art-pov/">#PopArtPOV</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/ConclRCLPoC/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Eslicer · Barcelona
+</div>
+
+<h2>
+<a href="/artists/eslicer/">
+Eslicer · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Eslicer from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/eslicer/">#Eslicer</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DZ-uSsQDBI4/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Eslicer · Barcelona
+</div>
+
+<h2>
+<a href="/artists/eslicer/">
+Eslicer · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Eslicer from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/eslicer/">#Eslicer</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DZS5tZVDLwN/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Eslicer · Barcelona
+</div>
+
+<h2>
+<a href="/artists/eslicer/">
+Eslicer · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Eslicer from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/eslicer/">#Eslicer</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DPZnJKtABD1/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Causi Art · Buenos Aires
+</div>
+
+<h2>
+<a href="/artists/causi-art/">
+Causi Art · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Causi Art from Buenos Aires.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/causi-art/">#CausiArt</a>
+<a class="tag" href="/cities/buenos-aires/">#BuenosAires</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DaG0s5doxzw/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Causi Art · Buenos Aires
+</div>
+
+<h2>
+<a href="/artists/causi-art/">
+Causi Art · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Causi Art from Buenos Aires.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/causi-art/">#CausiArt</a>
+<a class="tag" href="/cities/buenos-aires/">#BuenosAires</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DZtSnMIG-4k/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Causi Art · Buenos Aires
+</div>
+
+<h2>
+<a href="/artists/causi-art/">
+Causi Art · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Causi Art from Buenos Aires.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/causi-art/">#CausiArt</a>
+<a class="tag" href="/cities/buenos-aires/">#BuenosAires</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/CtzTjkco4sR/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Werens Graffiti · Barcelona
+</div>
+
+<h2>
+<a href="/artists/werens-graffiti/">
+Werens Graffiti · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Werens Graffiti from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/werens-graffiti/">#WerensGraffiti</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/CqBK_zuo5fF/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Werens Graffiti · Barcelona
+</div>
+
+<h2>
+<a href="/artists/werens-graffiti/">
+Werens Graffiti · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Werens Graffiti from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/werens-graffiti/">#WerensGraffiti</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/Ck3jqUYIfC4/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Werens Graffiti · Barcelona
+</div>
+
+<h2>
+<a href="/artists/werens-graffiti/">
+Werens Graffiti · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Werens Graffiti from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/werens-graffiti/">#WerensGraffiti</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DPisS95iO5p/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+El Rughi · Barcelona
+</div>
+
+<h2>
+<a href="/artists/el-rughi/">
+El Rughi · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by El Rughi from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/el-rughi/">#ElRughi</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DXOu0TVjd3J/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+El Rughi · Barcelona
+</div>
+
+<h2>
+<a href="/artists/el-rughi/">
+El Rughi · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by El Rughi from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/el-rughi/">#ElRughi</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DNYIQCsMRAh/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+El Rughi · Barcelona
+</div>
+
+<h2>
+<a href="/artists/el-rughi/">
+El Rughi · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by El Rughi from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/el-rughi/">#ElRughi</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DXhVJ3RjgjC/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Stefano Phen · Barcelona
+</div>
+
+<h2>
+<a href="/artists/stefano-phen/">
+Stefano Phen · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Stefano Phen from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/stefano-phen/">#StefanoPhen</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DDRISq4txVL/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Stefano Phen · Barcelona
+</div>
+
+<h2>
+<a href="/artists/stefano-phen/">
+Stefano Phen · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Stefano Phen from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/stefano-phen/">#StefanoPhen</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/C4Qa1L4NcMv/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Stefano Phen · Barcelona
+</div>
+
+<h2>
+<a href="/artists/stefano-phen/">
+Stefano Phen · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Stefano Phen from Barcelona.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/stefano-phen/">#StefanoPhen</a>
+<a class="tag" href="/cities/barcelona/">#Barcelona</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DYA0caOINBh/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Darel Carey · Los Angeles
+</div>
+
+<h2>
+<a href="/artists/darel-carey/">
+Darel Carey · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Darel Carey from Los Angeles.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/darel-carey/">#DarelCarey</a>
+<a class="tag" href="/cities/los-angeles/">#LosAngeles</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DFgqi9JSHWU/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Darel Carey · Los Angeles
+</div>
+
+<h2>
+<a href="/artists/darel-carey/">
+Darel Carey · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Darel Carey from Los Angeles.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/darel-carey/">#DarelCarey</a>
+<a class="tag" href="/cities/los-angeles/">#LosAngeles</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/Dbo-8WfCRfK/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+Darel Carey · Los Angeles
+</div>
+
+<h2>
+<a href="/artists/darel-carey/">
+Darel Carey · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by Darel Carey from Los Angeles.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/darel-carey/">#DarelCarey</a>
+<a class="tag" href="/cities/los-angeles/">#LosAngeles</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DIKYDF_vhfD/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+JEKS · Ontario, California
+</div>
+
+<h2>
+<a href="/artists/jeks/">
+JEKS · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by JEKS from Ontario, California.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/jeks/">#JEKS</a>
+<a class="tag" href="/cities/ontario-california/">#Ontario,California</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/DGCABo3P1z4/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+JEKS · Ontario, California
+</div>
+
+<h2>
+<a href="/artists/jeks/">
+JEKS · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by JEKS from Ontario, California.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/jeks/">#JEKS</a>
+<a class="tag" href="/cities/ontario-california/">#Ontario,California</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+<article class="card">
+
+<iframe
+class="instagram-frame"
+src="https://www.instagram.com/p/Daq5whIhDHt/embed/"
+loading="lazy">
+</iframe>
+
+<div class="card-content">
+
+<div class="category">
+JEKS · Ontario, California
+</div>
+
+<h2>
+<a href="/artists/jeks/">
+JEKS · Urban Art
+</a>
+</h2>
+
+<p>
+Selected work by JEKS from Ontario, California.
+</p>
+
+<div class="tags">
+<a class="tag" href="/artists/jeks/">#JEKS</a>
+<a class="tag" href="/cities/ontario-california/">#Ontario,California</a>
+<a class="tag" href="/tags/urban-art/">#UrbanArt</a>
+</div>
+
+</div>
+</article>
+
+</div>
+
+</div>
+
+<aside>
+
+<section class="sidebar-box">
+
+<h3>
+Cities
+</h3>
+<a href="/cities/badalona/">Badalona</a>
+<a href="/cities/barcelona/">Barcelona</a>
+<a href="/cities/buenos-aires/">Buenos Aires</a>
+<a href="/cities/los-angeles/">Los Angeles</a>
+<a href="/cities/ontario-california/">Ontario, California</a>
+<a href="/cities/venice/">Venice</a>
+
+<a href="/cities/">View All Cities →</a>
+
+</section>
+
+
+<section class="sidebar-box">
+
+<h3>
+Artists
+</h3>
+<a href="/artists/art-is-trash/">Art Is Trash</a>
+<a href="/artists/ashwan/">Ashwan</a>
+<a href="/artists/si-beriana/">Si Beriana</a>
+<a href="/artists/peeta/">Peeta</a>
+<a href="/artists/spogo/">Spogo</a>
+<a href="/artists/xavi-ceerre/">Xavi Ceerre</a>
+<a href="/artists/camile-scruela/">Camile Scruela</a>
+<a href="/artists/pop-art-pov/">Pop Art POV</a>
+<a href="/artists/eslicer/">Eslicer</a>
+<a href="/artists/causi-art/">Causi Art</a>
+<a href="/artists/werens-graffiti/">Werens Graffiti</a>
+<a href="/artists/el-rughi/">El Rughi</a>
+<a href="/artists/stefano-phen/">Stefano Phen</a>
+<a href="/artists/darel-carey/">Darel Carey</a>
+<a href="/artists/jeks/">JEKS</a>
+
+<a href="/artists/">View All Artists →</a>
+
+</section>
+
+
+<section class="sidebar-box">
+
+<h3>
+Topics
+</h3>
+
+<a href="/tags/street-art/">Street Art</a>
+<a href="/tags/urban-art/">Urban Art</a>
+<a href="/tags/barcelona-street-art/">Barcelona Street Art</a>
+
+</section>
+
+</aside>
+
+</div>
+
+
+<section style="margin-top:70px;">
+
+<h2 class="section-title">
+Featured <span>Artists</span>
+</h2>
+
+<div class="artist-grid">
+
+<article class="artist-tile">
+
+<div class="category">
+Barcelona Featured Artist
+</div>
+
+<h2>
+Art Is Trash
+</h2>
+
+<p>
+Art Is Trash – Ephemeral Street Art from Barcelona
+</p>
+
+<a class="button"
+href="/artists/art-is-trash/">
+Explore Artist →
+</a>
+
+</article>
+
+<article class="artist-tile">
+
+<div class="category">
+Barcelona Featured Artist
+</div>
+
+<h2>
+Ashwan
+</h2>
+
+<p>
+Ashwan – Hip-Hop, Lettering and Contemporary Urban Art
+</p>
+
+<a class="button"
+href="/artists/ashwan/">
+Explore Artist →
+</a>
+
+</article>
+
+<article class="artist-tile">
+
+<div class="category">
+Barcelona Featured Artist
+</div>
+
+<h2>
+Si Beriana
+</h2>
+
+<p>
+Si Beriana – Colorful Figurative Street Art in Barcelona
+</p>
+
+<a class="button"
+href="/artists/si-beriana/">
+Explore Artist →
+</a>
+
+</article>
+
+<article class="artist-tile">
+
+<div class="category">
+Venice Featured Artist
+</div>
+
+<h2>
+Peeta
+</h2>
+
+<p>
+Peeta – Sculpting Urban Space Through Optical Illusion
+</p>
+
+<a class="button"
+href="/artists/peeta/">
+Explore Artist →
+</a>
+
+</article>
 
+<article class="artist-tile">
+
+<div class="category">
+Badalona Featured Artist
+</div>
 
-      <!-- ART IS TRASH 3 -->
+<h2>
+Spogo
+</h2>
 
-      <article class="post-card">
+<p>
+Spogo – Contemporary Urban Art from Badalona
+</p>
 
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DcMKWOSgySa/embed/"
-                loading="lazy">
-        </iframe>
+<a class="button"
+href="/artists/spogo/">
+Explore Artist →
+</a>
 
-        <div class="post-info">
+</article>
 
-          <div class="category">
-            Barcelona Street Art
-          </div>
+<article class="artist-tile">
 
-          <h2>
-            <a class="artist-link" href="/artists/art-is-trash/">
-              Art Is Trash and Urban Culture
-            </a>
-          </h2>
+<div class="category">
+Barcelona Featured Artist
+</div>
 
-          <p>
-            Explore contemporary Barcelona street culture through
-            the work of Art Is Trash.
-          </p>
+<h2>
+Xavi Ceerre
+</h2>
 
-          <div class="tags">
-            <a class="tag" href="/tags/street-art/">#StreetArt</a>
-            <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-            <a class="tag" href="/artists/art-is-trash/">#ArtIsTrash</a>
-          </div>
+<p>
+Xavi Ceerre – Contemporary Urban Art from Barcelona
+</p>
 
-        </div>
+<a class="button"
+href="/artists/xavi-ceerre/">
+Explore Artist →
+</a>
 
-      </article>
+</article>
 
+<article class="artist-tile">
 
-      <!-- ASHWAN 1 -->
+<div class="category">
+Barcelona Featured Artist
+</div>
 
-      <article class="post-card">
+<h2>
+Camile Scruela
+</h2>
 
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DZV3g7rMe75/embed/"
-                loading="lazy">
-        </iframe>
+<p>
+Camile Scruela – Contemporary Urban Art from Barcelona
+</p>
 
-        <div class="post-info">
+<a class="button"
+href="/artists/camile-scruela/">
+Explore Artist →
+</a>
 
-          <div class="category">
-            Ashwan · Barcelona
-          </div>
+</article>
 
-          <h2>
-            <a class="artist-link" href="/artists/ashwan/">
-              Urban Art and Lettering by Ashwan
-            </a>
-          </h2>
+<article class="artist-tile">
 
-          <p>
-            Contemporary art connecting lettering, hip-hop and
-            Barcelona urban culture.
-          </p>
+<div class="category">
+Barcelona Featured Artist
+</div>
 
-          <div class="tags">
-            <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-            <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaArt</a>
-            <a class="tag" href="/artists/ashwan/">#Ashwan</a>
-          </div>
+<h2>
+Pop Art POV
+</h2>
 
-        </div>
+<p>
+Pop Art POV – Contemporary Urban Art from Barcelona
+</p>
 
-      </article>
+<a class="button"
+href="/artists/pop-art-pov/">
+Explore Artist →
+</a>
 
+</article>
 
-      <!-- ASHWAN 2 -->
+<article class="artist-tile">
 
-      <article class="post-card">
+<div class="category">
+Barcelona Featured Artist
+</div>
 
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DX4re3iszBi/embed/"
-                loading="lazy">
-        </iframe>
+<h2>
+Eslicer
+</h2>
 
-        <div class="post-info">
+<p>
+Eslicer – Contemporary Urban Art from Barcelona
+</p>
 
-          <div class="category">
-            Hip-Hop Inspired Art
-          </div>
+<a class="button"
+href="/artists/eslicer/">
+Explore Artist →
+</a>
 
-          <h2>
-            <a class="artist-link" href="/artists/ashwan/">
-              Ashwan – Visual Rhythm & Urban Culture
-            </a>
-          </h2>
+</article>
 
-          <p>
-            Mixed media, lettering and visual influences
-            from hip-hop culture.
-          </p>
+<article class="artist-tile">
 
-          <div class="tags">
-            <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-            <a class="tag" href="/artists/ashwan/">#AshwanArts</a>
-            <a class="tag" href="/tags/barcelona-street-art/">#Barcelona</a>
-          </div>
+<div class="category">
+Buenos Aires Featured Artist
+</div>
 
-        </div>
+<h2>
+Causi Art
+</h2>
 
-      </article>
+<p>
+Causi Art – Contemporary Urban Art from Buenos Aires
+</p>
 
+<a class="button"
+href="/artists/causi-art/">
+Explore Artist →
+</a>
 
-      <!-- ASHWAN 3 -->
+</article>
 
-      <article class="post-card">
+<article class="artist-tile">
 
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DR4wIlUjJ_w/embed/"
-                loading="lazy">
-        </iframe>
+<div class="category">
+Barcelona Featured Artist
+</div>
 
-        <div class="post-info">
+<h2>
+Werens Graffiti
+</h2>
 
-          <div class="category">
-            Contemporary Urban Artist
-          </div>
+<p>
+Werens Graffiti – Urban Art and Graffiti from Barcelona
+</p>
 
-          <h2>
-            <a class="artist-link" href="/artists/ashwan/">
-              Mixed Media & Upcycled Cardboard
-            </a>
-          </h2>
+<a class="button"
+href="/artists/werens-graffiti/">
+Explore Artist →
+</a>
 
-          <p>
-            Ashwan transforms everyday materials into layered
-            contemporary urban artworks.
-          </p>
+</article>
 
-          <div class="tags">
-            <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-            <a class="tag" href="/artists/ashwan/">#Ashwan</a>
-            <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaArt</a>
-          </div>
+<article class="artist-tile">
 
-        </div>
+<div class="category">
+Barcelona Featured Artist
+</div>
 
-      </article>
+<h2>
+El Rughi
+</h2>
 
+<p>
+El Rughi – Italian Psychedelic Graffiti Artist Based in Barcelona
+</p>
 
-      <!-- SI BERIANA 1 -->
+<a class="button"
+href="/artists/el-rughi/">
+Explore Artist →
+</a>
 
-      <article class="post-card">
+</article>
 
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DbfvCs6uj0k/embed/"
-                loading="lazy">
-        </iframe>
+<article class="artist-tile">
 
-        <div class="post-info">
+<div class="category">
+Barcelona Featured Artist
+</div>
 
-          <div class="category">
-            Si Beriana · Barcelona
-          </div>
+<h2>
+Stefano Phen
+</h2>
 
-          <h2>
-            <a class="artist-link" href="/artists/si-beriana/">
-              Colorful Street Art by Si Beriana
-            </a>
-          </h2>
+<p>
+Stefano Phen – Contemporary Urban Art from Barcelona
+</p>
 
-          <p>
-            Figurative street art and vibrant urban imagery
-            from Barcelona.
-          </p>
+<a class="button"
+href="/artists/stefano-phen/">
+Explore Artist →
+</a>
 
-          <div class="tags">
-            <a class="tag" href="/tags/street-art/">#StreetArt</a>
-            <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaStreetArt</a>
-            <a class="tag" href="/artists/si-beriana/">#SiBeriana</a>
-          </div>
+</article>
 
-        </div>
+<article class="artist-tile">
 
-      </article>
+<div class="category">
+Los Angeles Featured Artist
+</div>
 
+<h2>
+Darel Carey
+</h2>
 
-      <!-- SI BERIANA 2 -->
+<p>
+Darel Carey – Optical Art, Murals and Immersive Lines from Los Angeles
+</p>
 
-      <article class="post-card">
+<a class="button"
+href="/artists/darel-carey/">
+Explore Artist →
+</a>
 
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DYpXmYIiMMQ/embed/"
-                loading="lazy">
-        </iframe>
+</article>
 
-        <div class="post-info">
+<article class="artist-tile">
 
-          <div class="category">
-            Barcelona Urban Art
-          </div>
+<div class="category">
+Ontario, California Featured Artist
+</div>
 
-          <h2>
-            <a class="artist-link" href="/artists/si-beriana/">
-              Figurative Urban Art in Barcelona
-            </a>
-          </h2>
+<h2>
+JEKS
+</h2>
 
-          <p>
-            Strong color, expressive characters and contemporary
-            Barcelona street culture.
-          </p>
+<p>
+JEKS – Hyperrealistic Murals in Ontario, California
+</p>
 
-          <div class="tags">
-            <a class="tag" href="/tags/street-art/">#StreetArt</a>
-            <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-            <a class="tag" href="/artists/si-beriana/">#SiBeriana</a>
-          </div>
+<a class="button"
+href="/artists/jeks/">
+Explore Artist →
+</a>
 
-        </div>
+</article>
 
-      </article>
+</div>
 
-
-      <!-- SI BERIANA 3 -->
-
-      <article class="post-card">
-
-        <iframe class="instagram-frame"
-                src="https://www.instagram.com/p/DTXSpF2gYmn/embed/"
-                loading="lazy">
-        </iframe>
-
-        <div class="post-info">
-
-          <div class="category">
-            Contemporary Street Artist
-          </div>
-
-          <h2>
-            <a class="artist-link" href="/artists/si-beriana/">
-              Si Beriana – Urban Color and Character
-            </a>
-          </h2>
-
-          <p>
-            Explore another selected work from Si Beriana's
-            colorful urban-art practice.
-          </p>
-
-          <div class="tags">
-            <a class="tag" href="/tags/street-art/">#StreetArt</a>
-            <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaArt</a>
-            <a class="tag" href="/artists/si-beriana/">#SiBeriana</a>
-          </div>
-
-        </div>
-
-      </article>
-
-
-    </div>
-
-
-    <aside>
-
-      <section>
-
-        <h3>Popular Hashtags</h3>
-
-        <div class="side-tags">
-          <a href="/tags/street-art/">#StreetArt</a>
-          <a href="/tags/urban-art/">#UrbanArt</a>
-          <a href="/tags/barcelona-street-art/">#BarcelonaStreetArt</a>
-          <a href="/artists/art-is-trash/">#ArtIsTrash</a>
-          <a href="/artists/ashwan/">#Ashwan</a>
-          <a href="/artists/si-beriana/">#SiBeriana</a>
-        </div>
-
-      </section>
-
-
-      <section>
-
-        <h3>Artists</h3>
-
-        <div class="side-links">
-
-          <a href="/artists/">
-            All Artists
-          </a>
-
-          <a href="/artists/art-is-trash/">
-            Art Is Trash
-          </a>
-
-          <a href="/artists/ashwan/">
-            Ashwan
-          </a>
-
-          <a href="/artists/si-beriana/">
-            Si Beriana
-          </a>
-
-        </div>
-
-      </section>
-
-
-      <section>
-
-        <h3>Explore Cities</h3>
-
-        <div class="side-links">
-
-          <a href="/tags/barcelona-street-art/">
-            Barcelona
-          </a>
-
-          <span class="coming">
-            Berlin · Coming Soon
-          </span>
-
-          <span class="coming">
-            London · Coming Soon
-          </span>
-
-          <span class="coming">
-            Paris · Coming Soon
-          </span>
-
-          <span class="coming">
-            New York · Coming Soon
-          </span>
-
-        </div>
-
-      </section>
-
-    </aside>
-
-  </div>
-
-
-  <section class="artists-section">
-
-    <h2 class="section-title">
-      Featured <span>Artists</span>
-    </h2>
-
-    <div class="artist-grid">
-
-
-      <article class="artist-card">
-
-        <div class="artist-label">
-          Barcelona Street Artist
-        </div>
-
-        <h2>
-          Art Is Trash
-        </h2>
-
-        <p>
-          Francisco de Pájaro transforms discarded objects,
-          cardboard and urban waste into spontaneous temporary
-          street-art interventions.
-        </p>
-
-        <a class="artist-button"
-           href="/artists/art-is-trash/">
-          Explore Art Is Trash →
-        </a>
-
-      </article>
-
-
-      <article class="artist-card">
-
-        <div class="artist-label">
-          Barcelona Urban Artist
-        </div>
-
-        <h2>
-          Ashwan
-        </h2>
-
-        <p>
-          Ashwan connects hip-hop, graffiti influences, lettering,
-          mixed media and upcycled cardboard with contemporary
-          Barcelona urban culture.
-        </p>
-
-        <a class="artist-button"
-           href="/artists/ashwan/">
-          Explore Ashwan →
-        </a>
-
-      </article>
-
-
-      <article class="artist-card">
-
-        <div class="artist-label">
-          Barcelona Street Artist
-        </div>
-
-        <h2>
-          Si Beriana
-        </h2>
-
-        <p>
-          Si Beriana creates colorful figurative murals and
-          contemporary street art with expressive characters
-          and a strong visual connection to Barcelona.
-        </p>
-
-        <a class="artist-button"
-           href="/artists/si-beriana/">
-          Explore Si Beriana →
-        </a>
-
-      </article>
-
-
-    </div>
-
-
-    <a class="directory-button"
-       href="/artists/">
-      View All Urban Artists →
-    </a>
-
-  </section>
+</section>
 
 </main>
 
-
 <footer>
-
-  <div class="footer-inner">
-
-    <div>
-
-      <h3>
-        URBAN ARTS NEWS
-      </h3>
-
-      <p>
-        Street art, graffiti, murals, urban artists and
-        contemporary visual culture from cities around the world.
-      </p>
-
-    </div>
-
-
-    <div>
-
-      <h3>
-        Explore
-      </h3>
-
-      <a href="/tags/street-art/">
-        Street Art
-      </a>
-
-      <a href="/tags/urban-art/">
-        Urban Art
-      </a>
-
-      <a href="/tags/barcelona-street-art/">
-        Barcelona Street Art
-      </a>
-
-    </div>
-
-
-    <div>
-
-      <h3>
-        Artists
-      </h3>
-
-      <a href="/artists/">
-        All Artists
-      </a>
-
-      <a href="/artists/art-is-trash/">
-        Art Is Trash
-      </a>
-
-      <a href="/artists/ashwan/">
-        Ashwan
-      </a>
-
-      <a href="/artists/si-beriana/">
-        Si Beriana
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <div class="copyright">
-    © 2026 Urban Arts News
-  </div>
-
+© 2026 Urban Arts News · Street Art · Urban Artists · Urban Culture
 </footer>
-
 </body>
 </html>
