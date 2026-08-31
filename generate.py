@@ -1,3 +1,4 @@
+# Generates artists, cities, mixed galleries and sitemap.
 import json
 import re
 from html import escape
