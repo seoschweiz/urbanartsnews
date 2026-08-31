@@ -128,5 +128,27 @@
       "https://www.instagram.com/p/DXEoAACDDAy/",
       "https://www.instagram.com/p/DWWU6MwDLs6/"
     ]
+  },
+  {
+    "name": "Camile Scruela",
+    "slug": "camile-scruela",
+    "city": "Barcelona",
+    "country": "Spain",
+    "instagram": "https://www.instagram.com/camilescruela/",
+    "headline": "Camile Scruela – Contemporary Urban Art from Barcelona",
+    "bio": "Camile Scruela is an artist connected with Barcelona's contemporary urban-art scene. Urban Arts News presents selected works from the artist's public Instagram archive as part of its city-based documentation of street art, visual culture and independent urban creativity.",
+    "tags": [
+      "Camile Scruela",
+      "Barcelona Street Art",
+      "Barcelona Urban Art",
+      "Spanish Street Art",
+      "Street Art",
+      "Urban Art"
+    ],
+    "posts": [
+      "https://www.instagram.com/p/DcrRADXjATe/",
+      "https://www.instagram.com/p/Dcf2lrbl_D0/",
+      "https://www.instagram.com/p/DbFnj5tKupV/"
+    ]
   }
 ]
