@@ -1,6 +1,9 @@
 # Generates artists, cities, mixed galleries, RSS news and sitemap.
 import json
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import re
+import shutil
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -9,6 +12,8 @@ from pathlib import Path
 
 BASE_URL = "https://urbanartsnews.com"
 DATA_FILE = Path("data/artists.json")
+POST_STATUS_FILE = Path("data/post_status.json")
+POST_STATUS = {}
 
 ARTISTS_DIR = Path("artists")
 CITIES_DIR = Path("cities")
@@ -40,6 +45,118 @@ def load_artists():
     with DATA_FILE.open("r", encoding="utf-8") as f:
         return json.load(f)
 
+
+
+def normalize_instagram_post(url):
+    return url.split("?")[0].rstrip("/") + "/"
+
+
+def check_instagram_post(url):
+    """Return True for reachable, False only for definite removal, None for temporary uncertainty."""
+    embed_url = instagram_embed_url(url)
+    request = urllib.request.Request(
+        embed_url,
+        headers={
+            "User-Agent": "Mozilla/5.0 UrbanArtsNews-LinkChecker/1.0",
+            "Accept-Language": "en-US,en;q=0.9",
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            content = response.read(600000).decode("utf-8", errors="ignore").lower()
+            if response.status in (404, 410):
+                return False
+            if response.status != 200:
+                return None
+    except urllib.error.HTTPError as exc:
+        if exc.code in (404, 410):
+            return False
+        return None
+    except Exception:
+        return None
+
+    definite_missing = (
+        "post isn't available",
+        "post is not available",
+        "page isn't available",
+        "page is not available",
+        "sorry, this page isn't available",
+        "the link you followed may be broken",
+        "content unavailable",
+    )
+    if any(marker in content for marker in definite_missing):
+        return False
+    return True
+
+
+def refresh_post_status(artists):
+    global POST_STATUS
+    if POST_STATUS_FILE.exists():
+        try:
+            loaded = json.loads(POST_STATUS_FILE.read_text(encoding="utf-8"))
+            POST_STATUS = loaded if isinstance(loaded, dict) else {}
+        except Exception:
+            POST_STATUS = {}
+    else:
+        POST_STATUS = {}
+
+    urls = []
+    seen = set()
+    for artist in artists:
+        for post in artist.get("posts", []):
+            url = normalize_instagram_post(post)
+            if url not in seen:
+                seen.add(url)
+                urls.append(url)
+
+    results = {}
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures = {executor.submit(check_instagram_post, url): url for url in urls}
+        for future in as_completed(futures):
+            url = futures[future]
+            try:
+                results[url] = future.result()
+            except Exception:
+                results[url] = None
+
+    for url in urls:
+        previous = POST_STATUS.get(url, {})
+        failures = int(previous.get("consecutive_failures", 0))
+        result = results.get(url)
+        if result is True:
+            failures = 0
+            state = "available"
+        elif result is False:
+            failures = min(2, failures + 1)
+            state = "hidden" if failures >= 2 else "warning"
+        else:
+            state = previous.get("state", "unknown")
+        POST_STATUS[url] = {
+            "consecutive_failures": failures,
+            "state": state,
+        }
+
+    # Remove status records for links no longer present in artists.json.
+    POST_STATUS = {url: POST_STATUS[url] for url in urls}
+    POST_STATUS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    POST_STATUS_FILE.write_text(
+        json.dumps(POST_STATUS, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    hidden = sum(1 for value in POST_STATUS.values() if value.get("consecutive_failures", 0) >= 2)
+    warnings = sum(1 for value in POST_STATUS.values() if value.get("consecutive_failures", 0) == 1)
+    print(f"Instagram link check: {len(urls)} checked, {warnings} warning, {hidden} hidden")
+
+
+def get_active_posts(artist):
+    active = []
+    for post in artist.get("posts", []):
+        url = normalize_instagram_post(post)
+        status = POST_STATUS.get(url, {})
+        if int(status.get("consecutive_failures", 0)) < 2:
+            active.append(url)
+    return active
 
 def page_head(title, description, canonical):
     return f"""<!DOCTYPE html>
@@ -455,7 +572,7 @@ def generate_artist_page(artist):
     city = artist["city"]
     country = artist["country"]
     instagram = artist["instagram"]
-    posts = artist.get("posts", [])
+    posts = get_active_posts(artist)
     headline = artist.get("headline", f"{name} – Urban Art from {city}")
     bio = artist.get("bio", f"{name} is an urban artist connected with {city}, {country}.")
     seo_text = artist.get("seo_text", "")
@@ -465,7 +582,7 @@ def generate_artist_page(artist):
     ensure_directory(artist_dir)
     output_file = artist_dir / "index.html"
 
-    if slug in MANUAL_ARTIST_PAGES and output_file.exists():
+    if slug in MANUAL_ARTIST_PAGES and output_file.exists() and len(posts) == len(artist.get("posts", [])):
         print(f"KEEP manual artist page: {output_file}")
         return
 
@@ -872,7 +989,7 @@ def generate_homepage(artists):
         slug = artist["slug"]
         city = artist["city"]
         city_slug = slugify(city)
-        posts = artist.get("posts", [])
+        posts = get_active_posts(artist)
 
         for index, post in enumerate(posts, start=1):
             embed = instagram_embed_url(post)
@@ -1067,10 +1184,10 @@ Featured <span>Artists</span>
 def build_mixed_works(artists):
     """Round-robin works so cities and artists remain mixed."""
     works = []
-    max_posts = max((len(a.get("posts", [])) for a in artists), default=0)
+    max_posts = max((len(get_active_posts(a)) for a in artists), default=0)
     for post_index in range(max_posts):
         for artist in artists:
-            posts = artist.get("posts", [])
+            posts = get_active_posts(artist)
             if post_index < len(posts):
                 post_url = posts[post_index].split("?")[0].rstrip("/")
                 post_id = post_url.rsplit("/", 1)[-1]
@@ -1085,6 +1202,8 @@ def build_mixed_works(artists):
 
 
 def generate_image_gallery(artists):
+    if IMAGES_DIR.exists():
+        shutil.rmtree(IMAGES_DIR)
     ensure_directory(IMAGES_DIR)
     works = build_mixed_works(artists)
     per_page = 9
@@ -1239,6 +1358,7 @@ def main():
 
     artists = load_artists()
     print(f"Artists loaded: {len(artists)}")
+    refresh_post_status(artists)
 
     for artist in artists:
         generate_artist_page(artist)
