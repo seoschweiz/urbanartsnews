@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Urban Arts News</title>
+  <desc id="desc">UAN monogram in orange on black</desc>
+  <rect width="64" height="64" rx="12" fill="#090909"/>
+  <path d="M11 15h8v21c0 7 3 10 8 10s8-3 8-10V15h8v22c0 12-6 17-16 17S11 49 11 37V15Z" fill="#ff5b21"/>
+  <path d="M45 15h8v39h-8z" fill="#fff"/>
+  <path d="M45 15h8l8 17v17l-8-17z" fill="#ff5b21"/>
+</svg>
