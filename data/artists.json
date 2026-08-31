@@ -84,5 +84,27 @@
       "https://www.instagram.com/p/DNYfKBYoNrA/",
       "https://www.instagram.com/p/CtRqlS-oKQB/"
     ]
+  },
+  {
+    "name": "Spogo",
+    "slug": "spogo",
+    "city": "Badalona",
+    "country": "Spain",
+    "instagram": "https://www.instagram.com/spogo15/",
+    "headline": "Spogo – Contemporary Urban Art from Badalona",
+    "bio": "Spogo is an urban artist connected with Badalona, Spain. Urban Arts News presents selected works from the artist's public Instagram archive as part of its city-based documentation of contemporary street art, visual culture and independent urban creativity.",
+    "tags": [
+      "Spogo",
+      "Badalona Street Art",
+      "Badalona Urban Art",
+      "Spanish Street Art",
+      "Street Art",
+      "Urban Art"
+    ],
+    "posts": [
+      "https://www.instagram.com/p/DX1O44AggGa/",
+      "https://www.instagram.com/p/DO7_eUFAi1o/",
+      "https://www.instagram.com/p/DJ3fPW_CXqj/"
+    ]
   }
 ]
