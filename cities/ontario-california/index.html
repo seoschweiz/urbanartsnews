@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ontario, California Urban Art &amp; Street Artists | Urban Arts News</title>
+<meta name="description" content="Discover featured urban artists, street art and contemporary urban culture from Ontario, California.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://urbanartsnews.com/cities/ontario-california/">
+
+<meta property="og:title" content="Ontario, California Urban Art &amp; Street Artists | Urban Arts News">
+<meta property="og:description" content="Discover featured urban artists, street art and contemporary urban culture from Ontario, California.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://urbanartsnews.com/cities/ontario-california/">
+
+<style>
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f5f5;
+  color:#161616;
+  line-height:1.6;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+header {
+  background:#090909;
+  color:white;
+  padding:18px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.logo {
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.logo span {
+  color:#ff5b21;
+}
+
+nav a {
+  margin-left:22px;
+  font-size:14px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+
+nav a:hover {
+  color:#ff5b21;
+}
+
+.hero {
+  background:#111;
+  color:white;
+  padding:95px 6%;
+}
+
+.hero-label {
+  color:#ff5b21;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.hero h1 {
+  font-size:clamp(48px,8vw,92px);
+  line-height:.95;
+  text-transform:uppercase;
+  letter-spacing:-3px;
+  margin-bottom:20px;
+}
+
+.hero h1 span {
+  color:#ff5b21;
+}
+
+.hero p {
+  max-width:850px;
+  font-size:19px;
+  color:#ccc;
+}
+
+.container {
+  width:min(1400px,92%);
+  margin:55px auto;
+}
+
+.section-title {
+  font-size:32px;
+  text-transform:uppercase;
+  margin-bottom:30px;
+}
+
+.section-title span {
+  color:#ff5b21;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.card {
+  background:white;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  transition:.2s;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(0,0,0,.13);
+}
+
+.card-content {
+  padding:22px;
+}
+
+.card h2,
+.card h3 {
+  margin-bottom:10px;
+}
+
+.card p {
+  color:#666;
+  margin-bottom:16px;
+}
+
+.instagram-frame {
+  width:100%;
+  height:520px;
+  border:0;
+  display:block;
+  background:white;
+}
+
+.category {
+  color:#ff5b21;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+
+.tag {
+  background:#eee;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.tag:hover {
+  background:#ff5b21;
+  color:white;
+}
+
+.button {
+  display:inline-block;
+  background:#ff5b21;
+  color:white;
+  padding:13px 18px;
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  margin-top:12px;
+}
+
+.button:hover {
+  background:#111;
+}
+
+.home-layout {
+  display:grid;
+  grid-template-columns:minmax(0,3fr) minmax(260px,1fr);
+  gap:38px;
+}
+
+.sidebar-box {
+  background:white;
+  padding:24px;
+  margin-bottom:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.sidebar-box h3 {
+  text-transform:uppercase;
+  font-size:18px;
+  margin-bottom:15px;
+  border-bottom:3px solid #ff5b21;
+  padding-bottom:8px;
+}
+
+.sidebar-box a {
+  display:block;
+  padding:9px 0;
+  border-bottom:1px solid #eee;
+  font-weight:700;
+}
+
+.sidebar-box a:hover {
+  color:#ff5b21;
+}
+
+.profile-layout {
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(260px,1fr);
+  gap:40px;
+  margin-bottom:60px;
+}
+
+.profile-copy {
+  background:white;
+  padding:38px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.profile-copy h2 {
+  font-size:33px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.profile-copy h2 span {
+  color:#ff5b21;
+}
+
+.profile-copy p {
+  color:#505050;
+  font-size:16px;
+  margin-bottom:18px;
+}
+
+.info-box {
+  background:#111;
+  color:white;
+  padding:30px;
+  height:fit-content;
+}
+
+.info-box h3 {
+  color:#ff5b21;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.meta {
+  padding:11px 0;
+  border-bottom:1px solid #333;
+}
+
+.meta strong {
+  display:block;
+  color:#999;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:2px;
+}
+
+.artist-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.artist-tile {
+  background:#111;
+  color:white;
+  padding:28px;
+}
+
+.artist-tile .category {
+  margin-bottom:8px;
+}
+
+.artist-tile h2 {
+  font-size:28px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.artist-tile p {
+  color:#bbb;
+  margin-bottom:16px;
+}
+
+.related {
+  margin-top:50px;
+  background:white;
+  padding:30px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+footer {
+  margin-top:70px;
+  background:#090909;
+  color:#888;
+  text-align:center;
+  padding:40px;
+  font-size:13px;
+}
+
+@media(max-width:1100px) {
+  .home-layout {
+    grid-template-columns:1fr;
+  }
+
+  .grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .artist-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:750px) {
+  header {
+    display:block;
+  }
+
+  nav {
+    margin-top:12px;
+  }
+
+  nav a {
+    margin-left:0;
+    margin-right:12px;
+  }
+
+  .grid,
+  .artist-grid {
+    grid-template-columns:1fr;
+  }
+
+  .profile-layout {
+    grid-template-columns:1fr;
+  }
+
+  .instagram-frame {
+    height:620px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="/" class="logo">URBAN <span>ARTS</span> NEWS</a>
+
+<nav>
+<a href="/">Home</a>
+<a href="/tags/street-art/">Street Art</a>
+<a href="/tags/urban-art/">Urban Art</a>
+<a href="/cities/">Cities</a>
+<a href="/artists/">Artists</a>
+<a href="/images/">Images</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-label">Urban Arts News · City</div>
+<h1><span>Ontario, California</span></h1>
+
+<p>
+Discover selected street artists, urban creators and contemporary
+visual culture connected with Ontario, California.
+</p>
+</section>
+
+<main class="container">
+
+<h2 class="section-title">Artists in <span>Ontario, California</span></h2>
+
+<div class="grid">
+
+<article class="card">
+<div class="card-content">
+
+<div class="category">Ontario, California Featured Artist</div>
+<h2>JEKS</h2>
+<p>JEKS – Hyperrealistic Murals in Ontario, California</p>
+
+<a class="button" href="/artists/jeks/">
+Explore Artist →
+</a>
+
+</div>
+</article>
+
+</div>
+
+
+<section style="margin-top:70px;" aria-labelledby="city-news-title">
+<h2 class="section-title" id="city-news-title">Urban Art <span>Ontario, California News</span></h2>
+<p style="margin-bottom:25px;">Latest English-language news results for urban art, street art, murals and visual culture connected with Ontario, California.</p>
+<div class="grid">
+
+<article class="card">
+<div class="card-content">
+<div class="category">Ontario, California · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPOEpYWXR2end0SnRrNVdBeFJwVlExNERKRTRNWmJMNzQ1S0dfd3IxMVpMcHVYM3BlTlBfSVFTd1JodU9razhrMEJ6STRuQmZwQW5Qa0QtZjN6R3BoMlMyZkNCWnFkVVVxYUpIaEhSSVZDdGV0WUw5V0lwa1dnMjhlQnBYTk9Eb2Nwc2NXTzdna2xKaUIzY2J2Ng?oc=5" target="_blank" rel="noopener noreferrer">Notable movie and TV show filming locations in Ontario - Destination Ontario</a></h3>
+<p>Destination Ontario</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPOEpYWXR2end0SnRrNVdBeFJwVlExNERKRTRNWmJMNzQ1S0dfd3IxMVpMcHVYM3BlTlBfSVFTd1JodU9razhrMEJ6STRuQmZwQW5Qa0QtZjN6R3BoMlMyZkNCWnFkVVVxYUpIaEhSSVZDdGV0WUw5V0lwa1dnMjhlQnBYTk9Eb2Nwc2NXTzdna2xKaUIzY2J2Ng?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Ontario, California · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxPaVVJWlVoTWZoODJNMDJXWVJxX3UwOF85WjZhQ1dqMUZYWEFJLU9WUUNBRk1DcHAxLW1OVnZjejlXU0RWT01pa1ZYelVTbVhWUHMyU3lkV24xYTVQRm5pQUJMU1RXZDIxN3N3N1NmN0RsZ0NyRkx6UzRtak5TclFueEp4NUlEQnVSU2FyWm16MDJtWTNZMXd6SEpkV0NVdXlhRTh1eg?oc=5" target="_blank" rel="noopener noreferrer">Twelve Artists Selected for Inaugural City of Ontario Pilot Microgrant Program - City of Ontario, California (.gov)</a></h3>
+<p>City of Ontario, California (.gov)</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMipAFBVV95cUxPaVVJWlVoTWZoODJNMDJXWVJxX3UwOF85WjZhQ1dqMUZYWEFJLU9WUUNBRk1DcHAxLW1OVnZjejlXU0RWT01pa1ZYelVTbVhWUHMyU3lkV24xYTVQRm5pQUJMU1RXZDIxN3N3N1NmN0RsZ0NyRkx6UzRtak5TclFueEp4NUlEQnVSU2FyWm16MDJtWTNZMXd6SEpkV0NVdXlhRTh1eg?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Ontario, California · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTFAyOTVncnBmeUYwYkN4Zmo3ckprWV9UT2xEdnhLajFjYkI2Nm9LanVuazNONllFMERCR3p1Uk5QUzFjbXktR0RCUE9OMmRVeGwtVEpQQ2RFMk13VER3MVE?oc=5" target="_blank" rel="noopener noreferrer">‘The Messenger’ in Vista - Atlas Obscura</a></h3>
+<p>Atlas Obscura</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMiXkFVX3lxTFAyOTVncnBmeUYwYkN4Zmo3ckprWV9UT2xEdnhLajFjYkI2Nm9LanVuazNONllFMERCR3p1Uk5QUzFjbXktR0RCUE9OMmRVeGwtVEpQQ2RFMk13VER3MVE?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Ontario, California · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxQcV9QVXlIaUZmLXNOODJpUVdFeXFMczFpM1NRc3Jla0RjWFduSE4wZHFCT1FLdTFaeWVoVmVsOXVla0h2YUlJUE1GWWpMWWRGTTROeWc5QWpTQWh5VndvR2w0N1FuYTkyVlFGTTQzQk51X2JHZWdwa1VOMXJndnJVYlR0Z1B0YUdwMHY1bA?oc=5" target="_blank" rel="noopener noreferrer">Blue Jays’ Dylan Cease, Art Gallery of Ontario to launch collaboration - CityNews Toronto</a></h3>
+<p>CityNews Toronto</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMijAFBVV95cUxQcV9QVXlIaUZmLXNOODJpUVdFeXFMczFpM1NRc3Jla0RjWFduSE4wZHFCT1FLdTFaeWVoVmVsOXVla0h2YUlJUE1GWWpMWWRGTTROeWc5QWpTQWh5VndvR2w0N1FuYTkyVlFGTTQzQk51X2JHZWdwa1VOMXJndnJVYlR0Z1B0YUdwMHY1bA?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Ontario, California · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxOdmRhMlVKWUVPd0NlWi0yc3lSa0VCUVFCNGlueXJLZFktMGdTdlNZa0NLeWVKcEl4RTA1S2c2bTJPUXNURUdjMTJYcFJqTmszRXkyTmhyNVdvQjNHOHZ3c1J6QUVEZC02dE1DQW1JbUpvVEZwckpldEk4LUFxYVhUaDJDZzEzb1pmZmVSVUtDZkR4dmZOM3FWSTdJd3dUTGEwcFNsV2pibElXRnVqM1U1ZHlteTYzTnJpMlpFV2huTFd0cTJMcWMza2dCZExTSWJ6WGtjNVVQQU40ZHlZZzNUNksteFctaEQ0?oc=5" target="_blank" rel="noopener noreferrer">A View from the Throne: Gina Schock Inside The Go-Gos at The Haight Street Art Center - San Francisco Examiner</a></h3>
+<p>San Francisco Examiner</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxOdmRhMlVKWUVPd0NlWi0yc3lSa0VCUVFCNGlueXJLZFktMGdTdlNZa0NLeWVKcEl4RTA1S2c2bTJPUXNURUdjMTJYcFJqTmszRXkyTmhyNVdvQjNHOHZ3c1J6QUVEZC02dE1DQW1JbUpvVEZwckpldEk4LUFxYVhUaDJDZzEzb1pmZmVSVUtDZkR4dmZOM3FWSTdJd3dUTGEwcFNsV2pibElXRnVqM1U1ZHlteTYzTnJpMlpFV2huTFd0cTJMcWMza2dCZExTSWJ6WGtjNVVQQU40ZHlZZzNUNksteFctaEQ0?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+<article class="card">
+<div class="card-content">
+<div class="category">Ontario, California · Urban Art News</div>
+<h3><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQeF9JaHdUczBGdTk3NllVRG5Jb3hLTHBHcFJBR0tzMVQ0b0tFeUpQWXYyM3ZYQzVaTXRnMjUyd3dwZWJZeTVuelRkSEM4dXUwbTR4X1RNbFhadGRFZjNNSi11bFJXVzRTdEx6Z3RMdk12UXpFUUtFX0F3UjJVZ1Fra1Nn?oc=5" target="_blank" rel="noopener noreferrer">Light Rail Transit (LRT) - City of Hamilton</a></h3>
+<p>City of Hamilton</p>
+<a class="button" href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQeF9JaHdUczBGdTk3NllVRG5Jb3hLTHBHcFJBR0tzMVQ0b0tFeUpQWXYyM3ZYQzVaTXRnMjUyd3dwZWJZeTVuelRkSEM4dXUwbTR4X1RNbFhadGRFZjNNSi11bFJXVzRTdEx6Z3RMdk12UXpFUUtFX0F3UjJVZ1Fra1Nn?oc=5" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+
+</div>
+<a class="button" href="https://news.google.com/rss/search?q=urban+art+Ontario%2C+California&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener noreferrer" type="application/rss+xml">English RSS Feed →</a>
+</section>
+
+
+</main>
+
+<footer>
+© 2026 Urban Arts News · Street Art · Urban Artists · Urban Culture
+</footer>
+</body>
+</html>
