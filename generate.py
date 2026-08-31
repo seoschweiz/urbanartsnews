@@ -1,6 +1,9 @@
 # Generates artists, cities, mixed galleries and sitemap.
 import json
 import re
+import urllib.parse
+import urllib.request
+import xml.etree.ElementTree as ET
 from html import escape
 from pathlib import Path
 
@@ -660,6 +663,72 @@ and the world's most important urban-art scenes.
     print(f"UPDATE artist directory: {output_file}")
 
 
+
+def city_news_rss_url(city):
+    query = urllib.parse.quote_plus(f"urban art {city}")
+    return f"https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en"
+
+
+def fetch_city_news(city, limit=6):
+    rss_url = city_news_rss_url(city)
+    request = urllib.request.Request(
+        rss_url,
+        headers={"User-Agent": "Mozilla/5.0 UrbanArtsNews/1.0"}
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            root = ET.fromstring(response.read())
+        items = []
+        for item in root.findall("./channel/item")[:limit]:
+            title = (item.findtext("title") or "").strip()
+            link = (item.findtext("link") or "").strip()
+            date = (item.findtext("pubDate") or "").strip()
+            source_node = item.find("source")
+            source = (source_node.text or "").strip() if source_node is not None else ""
+            if title and link:
+                items.append({"title": title, "link": link, "date": date, "source": source})
+        return items
+    except Exception as exc:
+        print(f"WARNING city news unavailable for {city}: {exc}")
+        return []
+
+
+def render_city_news(city):
+    items = fetch_city_news(city)
+    rss_url = city_news_rss_url(city)
+    cards = ""
+    for item in items:
+        source_line = item["source"] or "English news source"
+        cards += f"""
+<article class="card">
+<div class="card-content">
+<div class="category">{escape(city)} · Urban Art News</div>
+<h3><a href="{escape(item['link'])}" target="_blank" rel="noopener noreferrer">{escape(item['title'])}</a></h3>
+<p>{escape(source_line)}</p>
+<a class="button" href="{escape(item['link'])}" target="_blank" rel="noopener noreferrer">Read News →</a>
+</div>
+</article>
+"""
+    if not cards:
+        cards = f"""
+<article class="card">
+<div class="card-content">
+<h3>Urban Art {escape(city)} News</h3>
+<p>The live English news feed is temporarily unavailable. Open the RSS source directly for the latest results.</p>
+</div>
+</article>
+"""
+    return f"""
+<section style="margin-top:70px;" aria-labelledby="city-news-title">
+<h2 class="section-title" id="city-news-title">Urban Art <span>{escape(city)} News</span></h2>
+<p style="margin-bottom:25px;">Latest English-language news results for urban art, street art, murals and visual culture connected with {escape(city)}.</p>
+<div class="grid">
+{cards}
+</div>
+<a class="button" href="{escape(rss_url)}" target="_blank" rel="noopener noreferrer" type="application/rss+xml">English RSS Feed →</a>
+</section>
+"""
+
 def generate_city_pages(artists):
     ensure_directory(CITIES_DIR)
 
@@ -744,6 +813,8 @@ visual culture connected with {escape(city)}.
 <div class="grid">
 {artist_cards}
 </div>
+
+{render_city_news(city)}
 
 </main>
 """
