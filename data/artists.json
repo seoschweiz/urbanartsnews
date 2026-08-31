@@ -106,5 +106,27 @@
       "https://www.instagram.com/p/DO7_eUFAi1o/",
       "https://www.instagram.com/p/DJ3fPW_CXqj/"
     ]
+  },
+  {
+    "name": "Xavi Ceerre",
+    "slug": "xavi-ceerre",
+    "city": "Barcelona",
+    "country": "Spain",
+    "instagram": "https://www.instagram.com/xaviceerre/",
+    "headline": "Xavi Ceerre – Contemporary Urban Art from Barcelona",
+    "bio": "Xavi Ceerre is an artist connected with Barcelona's contemporary urban-art scene. Urban Arts News presents selected works from the artist's public Instagram archive as part of its city-based documentation of street art, visual culture and independent urban creativity.",
+    "tags": [
+      "Xavi Ceerre",
+      "Barcelona Street Art",
+      "Barcelona Urban Art",
+      "Spanish Street Art",
+      "Street Art",
+      "Urban Art"
+    ],
+    "posts": [
+      "https://www.instagram.com/p/DYRzqScjBc1/",
+      "https://www.instagram.com/p/DXEoAACDDAy/",
+      "https://www.instagram.com/p/DWWU6MwDLs6/"
+    ]
   }
 ]
