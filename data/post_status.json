@@ -71,7 +71,15 @@
     "consecutive_failures": 0,
     "state": "available"
   },
+  "https://www.instagram.com/p/DTixcOMDQ8Z/": {
+    "consecutive_failures": 0,
+    "state": "available"
+  },
   "https://www.instagram.com/p/DVv_YMnCInG/": {
+    "consecutive_failures": 0,
+    "state": "available"
+  },
+  "https://www.instagram.com/p/DWE_l_oDZzm/": {
     "consecutive_failures": 0,
     "state": "available"
   },
@@ -116,6 +124,10 @@
     "state": "available"
   },
   "https://www.instagram.com/p/DYpXmYIiMMQ/": {
+    "consecutive_failures": 0,
+    "state": "available"
+  },
+  "https://www.instagram.com/p/DZ-XHFajYqq/": {
     "consecutive_failures": 0,
     "state": "available"
   },
