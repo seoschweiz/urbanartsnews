@@ -7,3 +7,4 @@ Sitemap: https://urbanartsnews.com/image-sitemap-los-angeles.xml
 Sitemap: https://urbanartsnews.com/image-sitemap-barcelona.xml
 Sitemap: https://urbanartsnews.com/image-sitemap-badalona.xml
 Sitemap: https://urbanartsnews.com/image-sitemap-buenos-aires.xml
+Sitemap: https://urbanartsnews.com/image-sitemap-ashwan.xml
