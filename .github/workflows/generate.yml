@@ -50,12 +50,15 @@ jobs:
       - name: Generate Buenos Aires photo gallery
         run: python generate_buenos_aires_gallery.py
 
+      - name: Generate Urban Art Music pages
+        run: python generate_urban_art_music.py
+
       - name: Commit generated files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -A index.html artists cities urban-art-cities images assets tags sitemap.xml image-sitemap-los-angeles.xml image-sitemap-barcelona.xml image-sitemap-badalona.xml image-sitemap-buenos-aires.xml robots.txt data
+          git add -A index.html artists cities urban-art-cities urban-art-music images assets tags sitemap.xml image-sitemap-los-angeles.xml image-sitemap-barcelona.xml image-sitemap-badalona.xml image-sitemap-buenos-aires.xml robots.txt data
 
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
