@@ -137,10 +137,33 @@ def activate_known_tag_links(html):
     return pattern.sub(activate, html)
 
 
+def activate_artist_tag_labels(path, html):
+    if len(path.parts) != 3 or path.parts[0] != "artists" or path.parts[-1] != "index.html":
+        return html
+    data_path = Path("data/artists.json")
+    if not data_path.exists():
+        return html
+    try:
+        artists = json.loads(data_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return html
+    slug = path.parts[1]
+    instagram = next((item.get("instagram", "") for item in artists if item.get("slug") == slug), "")
+    if not instagram:
+        return html
+    return re.sub(
+        r'<span\s+class=["\']tag["\']>(#[^<]+)</span>',
+        lambda match: f'<a class="tag" href="{escape(instagram, quote=True)}" target="_blank" rel="nofollow noopener">{match.group(1)}</a>',
+        html,
+        flags=re.I,
+    )
+
+
 def finalize_page(path):
     html = path.read_text(encoding="utf-8", errors="ignore")
     html = normalize_json_ld(html)
     html = activate_known_tag_links(html)
+    html = activate_artist_tag_labels(path, html)
     html = html.replace(".tag:hover", ".tag[href]:hover")
     page_language = first_match(r'<html\s+[^>]*lang=["\']([^"\']+)', html) or "en"
     html = re.sub(

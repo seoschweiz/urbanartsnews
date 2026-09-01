@@ -644,7 +644,7 @@ def page_footer():
 """
 
 
-def make_tag_html(tags):
+def make_tag_html(tags, fallback_url=""):
     html = ""
     for tag in tags:
         clean = re.sub(r"[^A-Za-z0-9]+", "", tag)
@@ -660,6 +660,8 @@ def make_tag_html(tags):
                 url = ""
             if url:
                 html += f'<a class="tag" href="{url}">#{escape(clean)}</a>\n'
+            elif fallback_url:
+                html += f'<a class="tag" href="{escape(fallback_url)}" target="_blank" rel="nofollow noopener">#{escape(clean)}</a>\n'
             else:
                 html += f'<span class="tag">#{escape(clean)}</span>\n'
     return html
@@ -758,7 +760,7 @@ independent editorial profile and city-based discovery.
 
 <h3>Artist Tags</h3>
 <div class="tags">
-{make_tag_html(tags)}
+{make_tag_html(tags, instagram)}
 </div>
 </div>
 
