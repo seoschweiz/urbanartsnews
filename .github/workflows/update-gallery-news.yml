@@ -1,0 +1,42 @@
+name: Update Gallery News
+
+on:
+  schedule:
+    - cron: "37 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install image optimizer
+        run: python -m pip install --disable-pip-version-check Pillow
+
+      - name: Generate latest gallery news
+        run: python generate_urban_art_gallery_news.py
+
+      - name: Apply site-wide SEO baseline
+        run: python seo_finalize.py
+
+      - name: Commit generated gallery news
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add urban-art-gallery-news assets/images/urban-art-gallery-news image-sitemap-urban-art-gallery-news.xml sitemap.xml robots.txt
+          if git diff --cached --quiet; then
+            echo "No gallery news changes to commit."
+          else
+            git commit -m "Update latest gallery news"
+            git push
+          fi

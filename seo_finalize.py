@@ -1,0 +1,277 @@
+"""Apply a consistent technical SEO baseline to every generated HTML page."""
+
+import json
+import re
+from html import escape, unescape
+from pathlib import Path
+from urllib.parse import urljoin
+
+
+BASE_URL = "https://urbanartsnews.com"
+DEFAULT_IMAGE = f"{BASE_URL}/assets/images/urban-art-gallery-news/group-exhibition-gallery-wall.jpg"
+SITE_NAME = "Urban Arts News"
+LANGUAGE_MENU = '''<details class="language-menu"><summary>Languages</summary><div class="language-menu-list"><a href="/sq/urban-art-news/" hreflang="sq">Shqip</a><a href="/de/urban-art-news/" hreflang="de">Deutsch</a><a href="/es/urban-art-news/" hreflang="es">Español</a><a href="/ca/urban-art-news/" hreflang="ca">Català</a><a href="/pt/urban-art-news/" hreflang="pt">Português</a><a href="/it/urban-art-news/" hreflang="it">Italiano</a><a href="/fr/urban-art-news/" hreflang="fr">Français</a><a href="/ja/urban-art-news/" hreflang="ja">日本語</a><a href="/ar/urban-art-news/" hreflang="ar">العربية</a><a href="/languages/">All Languages</a></div></details>'''
+LANGUAGE_CSS = '''<style>.language-menu{display:inline-block;position:relative;margin-left:18px}.language-menu summary{cursor:pointer;font-size:14px;font-weight:800;text-transform:uppercase;list-style:none}.language-menu summary::-webkit-details-marker{display:none}.language-menu summary:after{content:" ▾"}.language-menu-list{display:none;position:absolute;right:0;top:100%;min-width:190px;background:#111;padding:10px;box-shadow:0 12px 30px #0006;z-index:100}.language-menu[open] .language-menu-list,.language-menu:hover .language-menu-list{display:block}.language-menu-list a{display:block!important;color:#fff!important;padding:9px 12px!important;margin:0!important;text-align:left;text-transform:none!important}.language-menu-list a:hover,.language-menu-list a:focus{color:#ff5b21!important}@media(max-width:750px){.language-menu{margin:12px 0 0}.language-menu-list{position:static;margin-top:8px}}</style>'''
+
+
+def first_match(pattern, text, flags=re.I | re.S):
+    match = re.search(pattern, text, flags)
+    return unescape(match.group(1).strip()) if match else ""
+
+
+def plain_text(value):
+    value = re.sub(r"<[^>]+>", " ", value)
+    return re.sub(r"\s+", " ", unescape(value)).strip()
+
+
+def page_url(path):
+    relative = path.parent.as_posix()
+    if relative == ".":
+        return f"{BASE_URL}/"
+    return f"{BASE_URL}/{relative.strip('/')}/"
+
+
+def add_before_head(html, markup):
+    return html.replace("</head>", markup + "\n</head>", 1)
+
+
+def normalize_json_ld(html, canonical="", title="", description="", page_language="en"):
+    pattern = re.compile(
+        r'(<script\s+type=["\']application/ld\+json["\']>)(.*?)(</script>)',
+        re.I | re.S,
+    )
+
+    def clean(match):
+        try:
+            data = json.loads(match.group(2), strict=False)
+        except (TypeError, ValueError):
+            return match.group(0)
+
+        def synchronize(item):
+            if isinstance(item, list):
+                for child in item:
+                    synchronize(child)
+            elif isinstance(item, dict):
+                item_type = item.get("@type")
+                item_id = str(item.get("@id", ""))
+                item_url = str(item.get("url", ""))
+                if canonical and item_type in {"WebPage", "CollectionPage", "ProfilePage"} and (
+                    item_url == canonical or item_id.startswith(canonical + "#")
+                ):
+                    item["name"] = title
+                    item["description"] = description
+                    item["inLanguage"] = page_language
+                for child in item.values():
+                    synchronize(child)
+
+        synchronize(data)
+        payload = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+        return match.group(1) + payload + match.group(3)
+
+    return pattern.sub(clean, html)
+
+
+def uniquify_image_titles(pages):
+    groups = {}
+    for path in pages:
+        if len(path.parts) != 3 or path.parts[0] != "images" or path.parts[-1] != "index.html":
+            continue
+        html = path.read_text(encoding="utf-8", errors="ignore")
+        title = plain_text(first_match(r"<title>(.*?)</title>", html))
+        groups.setdefault(title, []).append(path)
+
+    for title, paths in groups.items():
+        if not title or len(paths) < 2:
+            continue
+        subject = title.split("|")[0].strip()
+        for number, path in enumerate(sorted(paths), start=1):
+            html = path.read_text(encoding="utf-8", errors="ignore")
+            unique_title = f"{subject} – Selected Work {number} | Urban Arts News"
+            html = re.sub(
+                r"<title>.*?</title>",
+                f"<title>{escape(unique_title)}</title>",
+                html,
+                count=1,
+                flags=re.I | re.S,
+            )
+            description = first_match(r'<meta\s+name=["\']description["\']\s+content=["\']([^"\']*)', html)
+            if description and f"Selected work {number}" not in description:
+                unique_description = f"Selected work {number}: {description[0].lower() + description[1:]}"
+                html = replace_or_add_meta(html, "name", "description", unique_description)
+            path.write_text(html, encoding="utf-8")
+
+
+def absolute_image(html):
+    image = first_match(r'<meta\s+property=["\']og:image["\']\s+content=["\']([^"\']+)', html)
+    if not image:
+        image = first_match(r'<img\b[^>]*\bsrc=["\']([^"\']+)', html)
+    if not image or image.startswith("data:"):
+        return DEFAULT_IMAGE
+    return urljoin(f"{BASE_URL}/", image)
+
+
+def replace_or_add_meta(html, attribute, key, content):
+    pattern = rf'<meta\s+{attribute}=["\']{re.escape(key)}["\'][^>]*>'
+    replacement = f'<meta {attribute}="{key}" content="{escape(content, quote=True)}">'
+    if re.search(pattern, html, re.I):
+        return re.sub(pattern, replacement, html, count=1, flags=re.I)
+    return add_before_head(html, replacement)
+
+
+def finalize_page(path):
+    html = path.read_text(encoding="utf-8", errors="ignore")
+    html = normalize_json_ld(html)
+    page_language = first_match(r'<html\s+[^>]*lang=["\']([^"\']+)', html) or "en"
+    html = re.sub(
+        r'<link\s+rel=["\']icon["\'][^>]*>',
+        '<link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">',
+        html,
+        count=1,
+        flags=re.I,
+    )
+    if not re.search(r'<link\s+rel=["\']icon["\']', html, re.I):
+        html = add_before_head(html, '<link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">')
+    if not re.search(r'<link\s+rel=["\']apple-touch-icon["\']', html, re.I):
+        html = add_before_head(html, '<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">')
+    canonical = first_match(r'<link\s+rel=["\']canonical["\']\s+href=["\']([^"\']+)', html)
+    if not canonical:
+        canonical = page_url(path)
+        html = add_before_head(html, f'<link rel="canonical" href="{canonical}">')
+
+    title = plain_text(first_match(r"<title>(.*?)</title>", html))
+    if not title:
+        h1 = plain_text(first_match(r"<h1[^>]*>(.*?)</h1>", html)) or SITE_NAME
+        title = f"{h1} | {SITE_NAME}" if h1 != SITE_NAME else SITE_NAME
+        html = add_before_head(html, f"<title>{escape(title)}</title>")
+
+    description = first_match(r'<meta\s+name=["\']description["\']\s+content=["\']([^"\']*)', html)
+    if path == Path("images/index.html") or (
+        len(path.parts) == 4 and path.parts[0] == "images" and path.parts[1] == "page"
+    ):
+        page_number = 1 if path == Path("images/index.html") else int(path.parts[2])
+        description = (
+            f"Explore page {page_number} of our mixed visual gallery featuring street art and "
+            "urban artists from Barcelona, Badalona, Venice and cities around the world."
+        )
+        html = replace_or_add_meta(html, "name", "description", description)
+    if not description:
+        description = plain_text(first_match(r"<p[^>]*>(.*?)</p>", html))
+        description = (description[:157].rstrip(" ,.;:") + "…") if len(description) > 160 else description
+        description = description or "Explore street art, urban artists, galleries, murals and visual culture with Urban Arts News."
+        html = add_before_head(html, f'<meta name="description" content="{escape(description, quote=True)}">')
+
+    html = normalize_json_ld(html, canonical, title, description, page_language)
+
+    robots = first_match(r'<meta\s+name=["\']robots["\']\s+content=["\']([^"\']*)', html)
+    if "noindex" not in robots.lower():
+        html = replace_or_add_meta(
+            html,
+            "name",
+            "robots",
+            "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+        )
+
+    image = absolute_image(html)
+    social = (
+        ("property", "og:title", title),
+        ("property", "og:description", description),
+        ("property", "og:type", "website"),
+        ("property", "og:url", canonical),
+        ("property", "og:site_name", SITE_NAME),
+        ("property", "og:locale", {"ca": "ca_ES", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "it": "it_IT", "fr": "fr_FR", "sq": "sq_AL", "ja": "ja_JP", "ar": "ar_AR"}.get(page_language, "en_US")),
+        ("property", "og:image", image),
+        ("name", "twitter:card", "summary_large_image"),
+        ("name", "twitter:title", title),
+        ("name", "twitter:description", description),
+        ("name", "twitter:image", image),
+    )
+    for attribute, key, value in social:
+        html = replace_or_add_meta(html, attribute, key, value)
+
+    if not re.search(r'<meta\s+name=["\']referrer["\']', html, re.I):
+        html = add_before_head(html, '<meta name="referrer" content="strict-origin-when-cross-origin">')
+    if not re.search(r'<link\s+rel=["\']alternate["\'][^>]+application/rss\+xml', html, re.I):
+        html = add_before_head(
+            html,
+            '<link rel="alternate" type="application/rss+xml" title="Urban Art Gallery News" href="/urban-art-gallery-news/feed.xml">',
+        )
+    if path != Path("cities/barcelona/index.html") and "language-menu" not in html and re.search(r"<header\b", html, re.I):
+        if re.search(r"</nav>", html, re.I):
+            html = re.sub(r"</nav>", LANGUAGE_MENU + "</nav>", html, count=1, flags=re.I)
+        else:
+            html = re.sub(r"</header>", LANGUAGE_MENU + "</header>", html, count=1, flags=re.I)
+        html = add_before_head(html, LANGUAGE_CSS)
+    if not re.search(r'<script\s+type=["\']application/ld\+json["\']', html, re.I):
+        schema = {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": title,
+            "description": description,
+            "url": canonical,
+            "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": f"{BASE_URL}/"},
+            "inLanguage": page_language,
+        }
+        html = add_before_head(
+            html,
+            f'<script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(",", ":"))}</script>',
+        )
+
+    path.write_text(html, encoding="utf-8")
+    return canonical, "noindex" in robots.lower()
+
+
+def enforce_url_migrations(pages):
+    old_path = Path("cities/barcelona/index.html")
+    new_url = f"{BASE_URL}/urban-art-city/barcelona/spain/"
+    if old_path.exists():
+        old_path.write_text(
+            '<!DOCTYPE html>\n<html lang="en"><head><meta charset="UTF-8">\n'
+            '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
+            '<meta name="robots" content="noindex,follow">\n'
+            f'<link rel="canonical" href="{new_url}">\n'
+            '<meta http-equiv="refresh" content="0; url=/urban-art-city/barcelona/spain/">\n'
+            '<title>Barcelona Urban Art | Urban Arts News</title>\n'
+            '<script>window.location.replace("/urban-art-city/barcelona/spain/");</script>\n'
+            '</head><body><p>This page has moved to '
+            '<a href="/urban-art-city/barcelona/spain/">Barcelona Urban Art</a>.</p></body></html>\n',
+            encoding="utf-8",
+        )
+    for path in pages:
+        if path == old_path:
+            continue
+        html = path.read_text(encoding="utf-8", errors="ignore")
+        updated = re.sub(
+            r'href=(["\'])/cities/barcelona/\1',
+            r'href=\1/urban-art-city/barcelona/spain/\1',
+            html,
+        )
+        if updated != html:
+            path.write_text(updated, encoding="utf-8")
+
+
+def rebuild_sitemap(indexed_urls):
+    rows = "\n".join(f"  <url>\n    <loc>{escape(url)}</loc>\n  </url>" for url in sorted(indexed_urls))
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{rows}\n"
+        "</urlset>\n"
+    )
+    Path("sitemap.xml").write_text(xml, encoding="utf-8")
+
+
+def main():
+    pages = sorted(path for path in Path(".").rglob("index.html") if ".git" not in path.parts)
+    enforce_url_migrations(pages)
+    uniquify_image_titles(pages)
+    indexed_urls = set()
+    for path in pages:
+        canonical, noindex = finalize_page(path)
+        if not noindex and canonical.startswith(f"{BASE_URL}/"):
+            indexed_urls.add(canonical)
+    rebuild_sitemap(indexed_urls)
+    print(f"SEO finalized: {len(pages)} pages checked; {len(indexed_urls)} canonical URLs in sitemap")
+
+
+if __name__ == "__main__":
+    main()

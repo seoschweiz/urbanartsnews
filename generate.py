@@ -1006,6 +1006,16 @@ Explore Artist →
         city_dir = CITIES_DIR / city_slug
         ensure_directory(city_dir)
 
+        gallery_guide_block = ""
+        if city == "Barcelona":
+            gallery_guide_block = """
+<section class="related" style="margin-bottom:45px">
+<h2>Street Art Gallery Barcelona</h2>
+<p>Explore three distinctive Barcelona spaces for street and urban art: Artevistas Gallery, BienCuadrado and BAS Barcelona Art Street Museum.</p>
+<a class="button" href="/street-art-galleries-barcelona/">Discover Barcelona Urban Art Galleries →</a>
+</section>
+"""
+
         city_html = page_head(
             f"{city} Urban Art & Street Artists | Urban Arts News",
             f"Discover featured urban artists, street art and contemporary urban culture from {city}.",
@@ -1024,6 +1034,7 @@ visual culture connected with {escape(city)}.
 </section>
 
 <main class="container">
+{gallery_guide_block}
 
 <h2 class="section-title">Artists in <span>{escape(city)}</span></h2>
 
@@ -1189,8 +1200,8 @@ Explore Artist →
         artist_links += f'<a href="/artists/{artist["slug"]}/">{escape(artist["name"])}</a>\n'
 
     html = page_head(
-        "Urban Arts News | Street Art, Graffiti & Urban Artists",
-        "Discover street art, graffiti, murals and contemporary urban artists from Barcelona, Venice and cities around the world.",
+        "Urban Art News | Street Art, Artists & Galleries",
+        "Read urban art news and discover street art, graffiti, murals, artists, galleries and visual culture from Barcelona and cities around the world.",
         f"{BASE_URL}/"
     )
 
@@ -1202,13 +1213,13 @@ Street Art · Graffiti · Murals · Urban Culture
 </div>
 
 <h1>
-Urban <span>Arts</span> News
+Urban Art <span>News</span>
 </h1>
 
 <p>
-A curated discovery platform for street art and contemporary urban artists.
-Barcelona is our local focus, while selected international artists connect
-Urban Arts News with cities around the world.
+Independent urban art news, street art, graffiti, murals, artists and galleries.
+Barcelona is our local focus, while selected international artists and cities
+connect Urban Arts News with visual culture around the world.
 </p>
 
 </section>
@@ -1337,9 +1348,9 @@ def generate_image_gallery(artists):
         detail_dir = IMAGES_DIR / work["slug"]
         ensure_directory(detail_dir)
         canonical = f"{BASE_URL}/images/{work['slug']}/"
-        title = f"{name} Urban Art in {city} | Urban Arts News Image"
+        title = f"{name} Urban Art in {city} – Selected Work {work['number']} | Urban Arts News"
         description = (
-            f"View selected urban art by {name}, connected with {city}. "
+            f"Selected work {work['number']}: view urban art by {name}, connected with {city}. "
             f"Explore the artist, city and original Instagram publication."
         )
         detail = page_head(title, description, canonical)
@@ -1386,8 +1397,8 @@ title="{escape(name)} urban art in {escape(city)}"></iframe>
         if page_number > 1:
             title = f"Urban Art Images – Page {page_number} | Urban Arts News"
         description = (
-            "Explore a mixed visual gallery of street art and urban artists from Barcelona, "
-            "Badalona, Venice and cities around the world."
+            f"Explore page {page_number} of our mixed visual gallery featuring street art and "
+            "urban artists from Barcelona, Badalona, Venice and cities around the world."
         )
         cards = ""
         for work in page_works:
@@ -1514,6 +1525,7 @@ def generate_sitemap(artists):
         f"{BASE_URL}/tags/urban-art/",
         f"{BASE_URL}/tags/barcelona-street-art/",
         f"{BASE_URL}/images/",
+        f"{BASE_URL}/street-art-galleries-barcelona/",
     }
 
     for artist in artists:
