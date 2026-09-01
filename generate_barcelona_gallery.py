@@ -2,7 +2,8 @@ from pathlib import Path
 import base64
 import html
 import json
-from PIL import Image
+import unicodedata
+from PIL import Image, ImageDraw, ImageFont
 
 BASE = "https://urbanartsnews.com"
 UPLOAD_DIR = Path("data/image_uploads")
@@ -22,8 +23,55 @@ PHOTOS = [
     {"n": 9, "slug": "historic-central-barcelona-street", "title": "Historic Architecture in Central Barcelona", "description": "A central Barcelona avenue lined with ornate historic buildings and active city traffic.", "alt": "Historic buildings along a central Barcelona city street", "width": 1600, "height": 1200},
 ]
 
+WATERMARK = "urbanartsnews.com"
+FONT_CANDIDATES = (
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf",
+)
+
 def esc(value):
     return html.escape(str(value), quote=True)
+
+def watermark_image(image):
+    """Return an RGB image with a legible, unobtrusive brand watermark."""
+    image = image.convert("RGBA")
+    overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    font_size = max(18, round(image.width * 0.022))
+    font_path = next((path for path in FONT_CANDIDATES if Path(path).exists()), None)
+    font = ImageFont.truetype(font_path, font_size) if font_path else ImageFont.load_default()
+    bbox = draw.textbbox((0, 0), WATERMARK, font=font)
+    text_width, text_height = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    pad_x, pad_y = round(font_size * 0.62), round(font_size * 0.42)
+    margin = max(14, round(image.width * 0.018))
+    right = image.width - margin
+    bottom = image.height - margin
+    left = right - text_width - 2 * pad_x
+    top = bottom - text_height - 2 * pad_y
+    radius = max(8, round(font_size * 0.38))
+    draw.rounded_rectangle((left, top, right, bottom), radius=radius, fill=(0, 0, 0, 145))
+    draw.text((left + pad_x, top + pad_y - bbox[1]), WATERMARK, font=font, fill=(255, 255, 255, 225))
+    return Image.alpha_composite(image, overlay).convert("RGB")
+
+def seo_exif(photo):
+    """Create embedded JPEG metadata that describes the photograph accurately."""
+    exif = Image.Exif()
+    keywords = "Barcelona; Urban Art; Barcelona Photography; Urban Arts News; Spain"
+    full_description = f"{photo['title']}. {photo['description']}"
+    ascii_description = unicodedata.normalize("NFKD", full_description).encode("ascii", "ignore").decode("ascii")
+    exif[270] = ascii_description
+    exif[315] = "Urban Arts News"
+    exif[33432] = "Copyright Urban Arts News / respective copyright holder"
+    exif[40091] = (photo["title"] + "\0").encode("utf-16le")
+    exif[40092] = (full_description + "\0").encode("utf-16le")
+    exif[40094] = (keywords + "\0").encode("utf-16le")
+    return exif
+
+def prepare_original(source, photo):
+    """Apply watermark and SEO metadata once to a newly imported original."""
+    with Image.open(source) as original:
+        branded = watermark_image(original)
+        branded.save(source, "JPEG", quality=88, optimize=True, progressive=True, exif=seo_exif(photo))
 
 def decode_staged_images():
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
@@ -32,6 +80,7 @@ def decode_staged_images():
         target = ASSET_DIR / f"{photo['slug']}.jpg"
         if staged.exists():
             target.write_bytes(base64.b64decode(staged.read_text(encoding="utf-8")))
+            prepare_original(target, photo)
             staged.unlink()
             print(f"IMPORT Barcelona image: {target}")
 
