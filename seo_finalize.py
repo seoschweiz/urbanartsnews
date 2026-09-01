@@ -118,9 +118,30 @@ def replace_or_add_meta(html, attribute, key, content):
     return add_before_head(html, replacement)
 
 
+def activate_known_tag_links(html):
+    pattern = re.compile(r'<span\s+class=["\']tag["\']>(#[^<]+)</span>', re.I)
+
+    def activate(match):
+        label = match.group(1)
+        normalized = re.sub(r"[^a-z0-9]+", "", label.lower())
+        if "barcelona" in normalized and "streetart" in normalized:
+            url = "/tags/barcelona-street-art/"
+        elif "streetart" in normalized or "graffiti" in normalized or "mural" in normalized:
+            url = "/tags/street-art/"
+        elif "urbanart" in normalized:
+            url = "/tags/urban-art/"
+        else:
+            return match.group(0)
+        return f'<a class="tag" href="{url}">{label}</a>'
+
+    return pattern.sub(activate, html)
+
+
 def finalize_page(path):
     html = path.read_text(encoding="utf-8", errors="ignore")
     html = normalize_json_ld(html)
+    html = activate_known_tag_links(html)
+    html = html.replace(".tag:hover", ".tag[href]:hover")
     page_language = first_match(r'<html\s+[^>]*lang=["\']([^"\']+)', html) or "en"
     html = re.sub(
         r'<link\s+rel=["\']icon["\'][^>]*>',

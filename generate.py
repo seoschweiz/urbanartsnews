@@ -649,7 +649,19 @@ def make_tag_html(tags):
     for tag in tags:
         clean = re.sub(r"[^A-Za-z0-9]+", "", tag)
         if clean:
-            html += f'<span class="tag">#{escape(clean)}</span>\n'
+            normalized = clean.lower()
+            if "barcelona" in normalized and "streetart" in normalized:
+                url = "/tags/barcelona-street-art/"
+            elif "streetart" in normalized or "graffiti" in normalized or "mural" in normalized:
+                url = "/tags/street-art/"
+            elif "urbanart" in normalized:
+                url = "/tags/urban-art/"
+            else:
+                url = ""
+            if url:
+                html += f'<a class="tag" href="{url}">#{escape(clean)}</a>\n'
+            else:
+                html += f'<span class="tag">#{escape(clean)}</span>\n'
     return html
 
 
