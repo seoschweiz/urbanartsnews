@@ -152,12 +152,20 @@ def render_page(code, item):
 def patch_original():
     path = Path("artists/art-is-trash/index.html")
     html = path.read_text(encoding="utf-8")
-    html = re.sub(r'\n?<section class="artist-language-versions".*?</section>\n?', "\n", html, flags=re.I | re.S)
-    block = f'''<section class="artist-language-versions related"><h2>Read Art Is Trash in Other Languages</h2><p>Choose a complete localized artist profile.</p><div class="language-links">{language_links('en')}</div></section>'''
-    html = html.replace("</main>", block + "</main>", 1)
+    html = re.sub(r'\n?<section class="artist-language-versions[^"]*".*?</section>\n?', "\n", html, flags=re.I | re.S)
+    block = f'''<section class="artist-language-versions"><h2>Read this article in another language</h2><div class="language-links">{language_links('en')}</div></section>'''
+    artist_info_marker = '<aside class="artist-info">'
+    marker_position = html.find(artist_info_marker)
+    if marker_position == -1:
+        raise RuntimeError("Artist information block not found")
+    copy_end = html.rfind("</div>", 0, marker_position)
+    if copy_end == -1:
+        raise RuntimeError("Artist text ending not found")
+    html = html[:copy_end] + block + "\n\n" + html[copy_end:]
     if "artist-language-style" not in html:
         style = '<style id="artist-language-style">.language-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.language-links a{background:#111;color:#fff;padding:9px 12px;text-decoration:none;font-weight:800}.language-links a:hover,.language-links a.active{background:#ff5b21}</style>'
         html = html.replace("</head>", alternates() + style + "</head>", 1)
+    html = re.sub(r'(?m)^[ \t]+$', '', html)
     path.write_text(html, encoding="utf-8")
 
 

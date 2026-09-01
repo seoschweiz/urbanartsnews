@@ -99,582 +99,4 @@
     }
 
     .hero h1 span {
-      color: #ff5b21;
-    }
-
-    .hero p {
-      max-width: 820px;
-      font-size: 19px;
-      color: #ccc;
-    }
-
-    .container {
-      width: min(1300px, 92%);
-      margin: 55px auto;
-    }
-
-    .artist-layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 40px;
-      margin-bottom: 65px;
-    }
-
-    .artist-copy {
-      background: white;
-      padding: 38px;
-      box-shadow: 0 5px 18px rgba(0,0,0,.06);
-    }
-
-    .artist-copy h2 {
-      font-size: 34px;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-    }
-
-    .artist-copy h2 span {
-      color: #ff5b21;
-    }
-
-    .artist-copy p {
-      color: #505050;
-      font-size: 16px;
-      margin-bottom: 19px;
-    }
-
-    .artist-info {
-      background: #111;
-      color: white;
-      padding: 32px;
-      height: fit-content;
-    }
-
-    .artist-info h3 {
-      color: #ff5b21;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      font-size: 21px;
-    }
-
-    .meta {
-      padding: 12px 0;
-      border-bottom: 1px solid #333;
-      font-size: 14px;
-    }
-
-    .meta strong {
-      display: block;
-      color: #999;
-      font-size: 11px;
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-
-    .instagram {
-      display: inline-block;
-      background: #ff5b21;
-      color: white;
-      padding: 13px 18px;
-      margin-top: 25px;
-      font-size: 13px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .profile-links { margin-top: 32px; }
-    .profile-links h3 { margin-bottom: 8px; }
-    .profile-links p { color: #aaa; font-size: 13px; margin-bottom: 12px; }
-    .profile-link { display:block; border:1px solid #3b3b3b; color:white; padding:11px 13px; margin-top:8px; font-size:12px; font-weight:800; }
-    .profile-link:hover { background:#ff5b21; border-color:#ff5b21; }
-
-    .section-title {
-      font-size: 32px;
-      text-transform: uppercase;
-      margin-bottom: 30px;
-    }
-
-    .section-title span {
-      color: #ff5b21;
-    }
-
-    .posts {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .card {
-      background: white;
-      overflow: hidden;
-      box-shadow: 0 5px 18px rgba(0,0,0,.08);
-      transition: .2s;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.13);
-    }
-
-    .instagram-frame {
-      width: 100%;
-      height: 520px;
-      border: 0;
-      display: block;
-      background: white;
-    }
-
-    .card-content {
-      padding: 20px;
-    }
-
-    .category {
-      color: #ff5b21;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 7px;
-    }
-
-    .card h3 {
-      font-size: 20px;
-      line-height: 1.2;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .tag {
-      background: #eee;
-      padding: 6px 9px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .tag[href]:hover {
-      background: #ff5b21;
-      color: white;
-    }
-
-    .explore {
-      margin-top: 55px;
-      background: white;
-      padding: 35px;
-      box-shadow: 0 5px 18px rgba(0,0,0,.06);
-    }
-
-    .explore h2 {
-      font-size: 25px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .explore-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .explore-links a {
-      background: #111;
-      color: white;
-      padding: 10px 14px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .explore-links a:hover {
-      background: #ff5b21;
-    }
-
-    .back {
-      display: inline-block;
-      margin-top: 40px;
-      background: #ff5b21;
-      color: white;
-      padding: 14px 22px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    footer {
-      margin-top: 70px;
-      background: #090909;
-      color: #888;
-      text-align: center;
-      padding: 40px;
-      font-size: 13px;
-    }
-
-    @media(max-width: 950px) {
-      .artist-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .posts {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media(max-width: 650px) {
-      header {
-        display: block;
-      }
-
-      nav {
-        margin-top: 12px;
-      }
-
-      nav a {
-        margin-left: 0;
-        margin-right: 12px;
-      }
-
-      .posts {
-        grid-template-columns: 1fr;
-      }
-
-      .instagram-frame {
-        height: 620px;
-      }
-
-      .artist-copy {
-        padding: 25px;
-      }
-    }
-  </style>
-
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://urbanartsnews.com/#organization","name":"Urban Arts News","url":"https://urbanartsnews.com/"},{"@type":"WebSite","@id":"https://urbanartsnews.com/#website","url":"https://urbanartsnews.com/","name":"Urban Arts News","publisher":{"@id":"https://urbanartsnews.com/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://urbanartsnews.com/artists/ashwan/#webpage","url":"https://urbanartsnews.com/artists/ashwan/","name":"Ashwan | Barcelona Urban Artist | Urban Arts News","description":"Discover Ashwan, a Liverpool-born Barcelona-based urban artist whose work combines hip-hop culture, graffiti influences, lettering, mixed media and upcycled cardboard.","isPartOf":{"@id":"https://urbanartsnews.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://urbanartsnews.com/artists/ashwan/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Urban Arts News","item":"https://urbanartsnews.com/"},{"@type":"ListItem","position":2,"name":"Artists","item":"https://urbanartsnews.com/artists/"},{"@type":"ListItem","position":3,"name":"Ashwan","item":"https://urbanartsnews.com/artists/ashwan/"}]},{"@type":"Person","@id":"https://urbanartsnews.com/artists/ashwan/#artist","name":"Ashwan","url":"https://urbanartsnews.com/artists/ashwan/","description":"Ashwan is a Barcelona-based contemporary artist whose work connects hip-hop culture, graffiti influences, lettering and mixed media. His practice frequently transforms discarded cardboard and everyday materials into layered artworks that move between urban culture and contemporary art.","sameAs":["https://www.instagram.com/ashwanarts/"],"homeLocation":{"@type":"Place","name":"Barcelona, Spain"},"mainEntityOfPage":{"@id":"https://urbanartsnews.com/artists/ashwan/#webpage"}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://urbanartsnews.com/artists/ashwan/#verified-artist","name":"Ashwan","url":"https://urbanartsnews.com/artists/ashwan/","description":"Ashwan is a Liverpool-born, Barcelona-based contemporary urban artist whose mixed-media practice connects lettering, hip-hop culture, graffiti influences and upcycled materials.","sameAs":["https://www.ashwan.co.uk/","https://www.instagram.com/ashwanarts/","https://www.artevistas.eu/artist/ashwan/","https://www.facebook.com/ashwanarts/","https://www.biencuadrado.com/ashwan","https://www.artsy.net/artist/ashwan","https://x.com/ashwanarts"],"homeLocation":{"@type":"Place","name":"Barcelona, Spain"},"mainEntityOfPage":"https://urbanartsnews.com/artists/ashwan/"}</script>
-<meta property="og:site_name" content="Urban Arts News">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://urbanartsnews.com/assets/images/urban-art-gallery-news/group-exhibition-gallery-wall.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ashwan | Barcelona Urban Artist | Urban Arts News">
-<meta name="twitter:description" content="Discover Ashwan, a Liverpool-born Barcelona-based urban artist whose work combines hip-hop culture, graffiti influences, lettering, mixed media and upcycled cardboard.">
-<meta name="twitter:image" content="https://urbanartsnews.com/assets/images/urban-art-gallery-news/group-exhibition-gallery-wall.jpg">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="alternate" type="application/rss+xml" title="Urban Art Gallery News" href="/urban-art-gallery-news/feed.xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-<style>.language-menu{display:inline-block;position:relative;margin-left:18px}.language-menu summary{cursor:pointer;font-size:14px;font-weight:800;text-transform:uppercase;list-style:none}.language-menu summary::-webkit-details-marker{display:none}.language-menu summary:after{content:" â–¾"}.language-menu-list{display:none;position:absolute;right:0;top:100%;min-width:190px;background:#111;padding:10px;box-shadow:0 12px 30px #0006;z-index:100}.language-menu[open] .language-menu-list,.language-menu:hover .language-menu-list{display:block}.language-menu-list a{display:block!important;color:#fff!important;padding:9px 12px!important;margin:0!important;text-align:left;text-transform:none!important}.language-menu-list a:hover,.language-menu-list a:focus{color:#ff5b21!important}@media(max-width:750px){.language-menu{margin:12px 0 0}.language-menu-list{position:static;margin-top:8px}}</style>
-</head>
-
-<body>
-
-<header>
-
-  <a href="/" class="logo">
-    URBAN <span>ARTS</span> NEWS
-  </a>
-
-  <nav>
-    <a href="/">Home</a>
-    <a href="/tags/street-art/">Street Art</a>
-    <a href="/tags/urban-art/">Urban Art</a>
-    <a href="/tags/barcelona-street-art/">Barcelona</a>
-    <a href="/artists/">Artists</a>
-  <details class="language-menu"><summary>Languages</summary><div class="language-menu-list"><a href="/sq/urban-art-news/" hreflang="sq">Shqip</a><a href="/de/urban-art-news/" hreflang="de">Deutsch</a><a href="/es/urban-art-news/" hreflang="es">EspaÃ±ol</a><a href="/ca/urban-art-news/" hreflang="ca">CatalÃ </a><a href="/pt/urban-art-news/" hreflang="pt">PortuguÃªs</a><a href="/it/urban-art-news/" hreflang="it">Italiano</a><a href="/fr/urban-art-news/" hreflang="fr">FranÃ§ais</a><a href="/ja/urban-art-news/" hreflang="ja">æ—¥æœ¬èª</a><a href="/ar/urban-art-news/" hreflang="ar">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</a><a href="/languages/">All Languages</a></div></details></nav>
-
-</header>
-
-
-<section class="hero">
-
-  <div class="hero-label">
-    Urban Arts News Â· Artist Profile
-  </div>
-
-  <h1>
-    <span>ASHWAN</span>
-  </h1>
-
-  <p>
-    Discover the Barcelona-based artist whose work connects hip-hop,
-    graffiti, lettering, recycled materials and contemporary urban culture.
-  </p>
-
-</section>
-
-
-<main class="container">
-
-  <section class="artist-layout">
-
-    <div class="artist-copy">
-
-      <h2>
-        About <span>AshWan</span>
-      </h2>
-
-      <p>
-        AshWan (b.1971) is a Liverpool-born, Barcelona-based visual artist whose practice is rooted in graffiti and hip hop culture, running in parallel to a long career as a DJ and producer. That dual lineage shapes everything: the cypherâ€™s tension, the sampleâ€™s logic of take-break-recombine, carried from sound into surface.
-      </p>
-
-      <p>
-        The work moves through letters, fragments, and shrapnel of urban language: text broken down until it becomes structure rather than sentence. Industrial decay sits next to gold chains: luxury and rust, control and accident, the same collision seen twice. Nothing fully legible. Nothing fully random.
-      </p>
-
-      <p>
-        AshWan holds an MFA from the School of the Art Institute of Chicago and is represented by Galerie Lesmeister in Germany. He is also co-founder and Director of BienCuadrado Galeria in Barcelona and has work in galleries and collections internationally.
-      </p>
-
-    </div>
-
-
-    <aside class="artist-info">
-
-      <h3>
-        Artist Information
-      </h3>
-
-      <div class="meta">
-        <strong>Artist</strong>
-        Ashwan
-      </div>
-
-      <div class="meta">
-        <strong>Born</strong>
-        Liverpool, United Kingdom Â· 1971
-      </div>
-
-      <div class="meta">
-        <strong>Based in</strong>
-        <a href="/urban-art-city/barcelona/spain/">Barcelona, Spain</a>
-      </div>
-
-      <div class="meta">
-        <strong>Urban Art Practice</strong>
-        Urban Art / Contemporary Art / Mixed Media
-      </div>
-
-      <div class="meta">
-        <strong>Influences</strong>
-        Hip-Hop / Graffiti / Lettering
-      </div>
-
-      <div class="meta">
-        <strong>Materials</strong>
-        Upcycled Cardboard / Paint / Mixed Media
-      </div>
-
-      <a class="instagram"
-         href="https://www.instagram.com/ashwanarts/"
-         target="_blank"
-         rel="noopener">
-        View @AshwanArts on Instagram
-      </a>
-
-      <nav class="profile-links" aria-label="Ashwan official links and art profiles">
-        <h3>Ashwan Official Links &amp; Art Profiles</h3>
-        <p>Official channels, gallery representation and verified artist profiles.</p>
-        <a class="profile-link" href="https://www.ashwan.co.uk/" target="_blank" rel="me noopener">Ashwan Official Artist Website</a>
-        <a class="profile-link" href="https://www.instagram.com/ashwanarts/" target="_blank" rel="me noopener">Ashwan on Instagram</a>
-        <a class="profile-link" href="https://www.artevistas.eu/artist/ashwan/" target="_blank" rel="noopener">Ashwan Artworks at Artevistas Gallery</a>
-        <a class="profile-link" href="https://www.facebook.com/ashwanarts/" target="_blank" rel="me noopener">Ashwan Urban Art Facebook</a>
-        <a class="profile-link" href="https://www.biencuadrado.com/ashwan" target="_blank" rel="noopener">Art Gallery Barcelona â€“ Ashwan at BienCuadrado</a>
-        <a class="profile-link" href="https://www.artsy.net/artist/ashwan" target="_blank" rel="noopener">Ashwan Artworks and Artist Profile on Artsy</a>
-        <a class="profile-link" href="https://x.com/ashwanarts" target="_blank" rel="me noopener">Ashwan Urban Art on X</a>
-      </nav>
-
-    </aside>
-
-  </section>
-
-
-  <h2 class="section-title">
-    Selected <span>Ashwan Posts</span>
-  </h2>
-
-
-  <div class="posts">
-
-
-    <article class="card">
-
-      <iframe
-        class="instagram-frame"
-        src="https://www.instagram.com/p/DZV3g7rMe75/embed/"
-        loading="lazy">
-      </iframe>
-
-      <div class="card-content">
-
-        <div class="category">
-          Ashwan Â· Barcelona
-        </div>
-
-        <h3>
-          Urban Art and Lettering by Ashwan
-        </h3>
-
-        <p>
-          Selected work by Barcelona-based artist Ashwan, connecting
-          contemporary art, lettering and urban culture.
-        </p>
-
-        <div class="tags">
-          <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-          <a class="tag" href="/tags/street-art/">#StreetArt</a>
-          <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaArt</a>
-          <a class="tag" href="https://www.instagram.com/ashwanarts/" target="_blank" rel="nofollow noopener">#Ashwan</a>
-        </div>
-
-      </div>
-
-    </article>
-
-
-    <article class="card">
-
-      <iframe
-        class="instagram-frame"
-        src="https://www.instagram.com/p/DX4re3iszBi/embed/"
-        loading="lazy">
-      </iframe>
-
-      <div class="card-content">
-
-        <div class="category">
-          Hip-Hop Inspired Art
-        </div>
-
-        <h3>
-          Ashwan â€“ Visual Rhythm and Urban Culture
-        </h3>
-
-        <p>
-          Explore Ashwan's distinctive combination of text, rhythm,
-          mixed media and influences from hip-hop culture.
-        </p>
-
-        <div class="tags">
-          <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-          <a class="tag" href="/tags/street-art/">#UrbanCulture</a>
-          <a class="tag" href="/tags/barcelona-street-art/">#Barcelona</a>
-          <a class="tag" href="https://www.instagram.com/ashwanarts/" target="_blank" rel="nofollow noopener">#HipHopArt</a>
-        </div>
-
-      </div>
-
-    </article>
-
-
-    <article class="card">
-
-      <iframe
-        class="instagram-frame"
-        src="https://www.instagram.com/p/DR4wIlUjJ_w/embed/"
-        loading="lazy">
-      </iframe>
-
-      <div class="card-content">
-
-        <div class="category">
-          Contemporary Urban Artist
-        </div>
-
-        <h3>
-          Mixed Media and Upcycled Cardboard
-        </h3>
-
-        <p>
-          Discover another work by Ashwan and his approach to transforming
-          everyday materials into contemporary urban art.
-        </p>
-
-        <div class="tags">
-          <a class="tag" href="/tags/urban-art/">#UrbanArt</a>
-          <a class="tag" href="/tags/barcelona-street-art/">#BarcelonaArt</a>
-          <a class="tag" href="https://www.instagram.com/ashwanarts/" target="_blank" rel="nofollow noopener">#MixedMedia</a>
-          <a class="tag" href="https://www.instagram.com/ashwanarts/" target="_blank" rel="nofollow noopener">#AshwanArts</a>
-        </div>
-
-      </div>
-
-    </article>
-
-  </div>
-
-
-  <section class="explore">
-
-    <h2>
-      Explore Related Topics
-    </h2>
-
-    <div class="explore-links">
-
-      <a href="/tags/urban-art/">
-        #UrbanArt
-      </a>
-
-      <a href="/tags/street-art/">
-        #StreetArt
-      </a>
-
-      <a href="/tags/barcelona-street-art/">
-        #BarcelonaStreetArt
-      </a>
-
-      <a href="/artists/art-is-trash/">
-        Art Is Trash
-      </a>
-
-      <a href="/">
-        Urban Arts News
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <a class="back" href="/">
-    â† Back to Urban Arts News
-  </a>
-
-
-<section class="related" id="post-gallery-seo-ashwan">
-<h2>About Ashwan and Urban Art in Barcelona</h2>
-<p>Ashwanâ€™s work connects contemporary urban art with lettering, hip-hop culture and the creative reuse of everyday materials. Cardboard and other modest surfaces become spaces for layered compositions, rhythmic marks and graphic forms. This combination gives the work an informal street-level character while allowing it to move naturally between illustration, painting and mixed-media art.
-
-The Instagram works selected above offer a compact view of Ashwanâ€™s visual practice in Barcelona. Strong lines, written elements and improvised surfaces create a direct link with the cityâ€™s urban culture. Rather than separating studio art from street influences, the work allows both worlds to overlap. Ashwanâ€™s profile on Urban Arts News forms part of the wider Barcelona collection, connecting the artist with other independent creators and with the cityâ€™s evolving visual language.</p>
-</section>
-<section class="explore"><h2>AshWan Art Gallery</h2><p>Explore nine authorised photographs of AshWan artworks, letter sculptures and urban installations.</p><div class="explore-links"><a href="/artists/ashwan/gallery/">View AshWan Gallery â†’</a></div></section></main>
-
-
-<footer>
-<div class="footer-languages" aria-label="Urban art translations" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;margin-bottom:22px;line-height:1.5">
-<a data-translate-lang="de" href="https://urbanartsnews-com.translate.goog/?_x_tr_sl=en&amp;_x_tr_tl=de&amp;_x_tr_hl=de&amp;_x_tr_pto=sc" rel="nofollow noopener">Urbane Kunst</a>
-<a data-translate-lang="es" href="https://urbanartsnews-com.translate.goog/?_x_tr_sl=en&amp;_x_tr_tl=es&amp;_x_tr_hl=es&amp;_x_tr_pto=sc" rel="nofollow noopener">Arte urbano</a>
-<a data-translate-lang="it" href="https://urbanartsnews-com.translate.goog/?_x_tr_sl=en&amp;_x_tr_tl=it&amp;_x_tr_hl=it&amp;_x_tr_pto=sc" rel="nofollow noopener">Arte urbana</a>
-<a data-translate-lang="fr" href="https://urbanartsnews-com.translate.goog/?_x_tr_sl=en&amp;_x_tr_tl=fr&amp;_x_tr_hl=fr&amp;_x_tr_pto=sc" rel="nofollow noopener">Art urbain</a>
-<a data-translate-lang="pt" href="https://urbanartsnews-com.translate.goog/?_x_tr_sl=en&amp;_x_tr_tl=pt&amp;_x_tr_hl=pt&amp;_x_tr_pto=sc" rel="nofollow noopener">Arte urbana</a>
-<a data-translate-lang="ja" href="https://urbanartsnews-com.translate.goog/?_x_tr_sl=en&amp;_x_tr_tl=ja&amp;_x_tr_hl=ja&amp;_x_tr_pto=sc" rel="nofollow noopener">ã‚¢ãƒ¼ãƒãƒ³ã‚¢ãƒ¼ãƒˆ</a>
-<a data-translate-lang="ar" href="https://urbanartsnews-com.translate.goog/?_x_tr_sl=en&amp;_x_tr_tl=ar&amp;_x_tr_hl=ar&amp;_x_tr_pto=sc" rel="nofollow noopener" dir="rtl">Ø§Ù„ÙÙ† Ø§Ù„Ø­Ø¶Ø±ÙŠ</a>
-<a data-original-language href="/" rel="nofollow">Urban Art</a>
-</div>
-<script>
-(function () {
-  var path = window.location.pathname;
-  document.querySelectorAll("[data-translate-lang]").forEach(function (link) {
-    var lang = link.getAttribute("data-translate-lang");
-    link.href = "https://urbanartsnews-com.translate.goog" + path + "?_x_tr_sl=en&_x_tr_tl=" + lang + "&_x_tr_hl=" + lang + "&_x_tr_pto=sc";
-  });
-  document.querySelectorAll("[data-original-language]").forEach(function (link) { link.href = path; });
-}());
-</script>
-  Â© 2026 Urban Arts News Â· Ashwan Â· Barcelona Urban Art Â· Hip-Hop Culture
-</footer>
-
-</body>
-</html>
+      color: #ff5b21;}Ó®í¢G§²ÚîÆ­yÜÙ]˜H°èİXØHÛÛ›™XİHHİ[\˜H\ZÜ\È[™›pê˜ÚY\È[Ü˜Y™š]K[]\š[™ÈH\È0êÛš\]Y\ÈZ^\Ëˆ\È]™\È›È[˜Ú[Û™[ˆ›Ûpê\ÈÛÛHH\˜][\Îˆ\ÈÛÛ™\Z^[ˆ[ˆ›Ü›Y\Ëš]Y\ÈH\İXİ\™\Èš\İX[È[Xˆ[˜HY[]]°ìœXKˆ‹\›ˆšÎ‹Ëİ\˜˜[˜\Û™]ÜË˜ÛÛKØØKØ\\İËØ\ÚØ[‹È‹š\Ô\ÙˆÈ\Hˆ•ÙX”Ú]H‹›˜[YHˆ•\˜˜[ˆ\È™]ÜÈ‹\›ˆšÎ‹Ëİ\˜˜[˜\Û™]ÜË˜ÛÛKÈŸKš[“[™İXYÙHˆ˜ØHŸOÜØÜš\‚ÚXY›ÙOXY\ˆÛ\ÜÏHÜHÛ\ÜÏH›ÙÛÈˆ™YH‹È•TSˆÜ[T•ÏÜÜ[ˆ‘UÔÏØO]Z[ÈÛ\ÜÏH›[™İXYÙK[Y[Hİ[[X\O“[™İXYÙ\ÏÜİ[[X\O]ˆÛ\ÜÏH›[™İXYÙK[Y[K[\İH™YH‹ÜÜKİ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏHœÜH”ÚZ\ØOH™YH‹ÙKİ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏH™H‘]]ØÚØOH™YH‹Ù\Ëİ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏH™\È‘\Üpì[ÛØOH™YH‹ØØKİ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏH˜ØHØ][0èØOH™YH‹Üİ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏHœ”ÜYİpêœÏØOH™YH‹Ú]İ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏHš]’][X[›ÏØOH™YH‹Ùœ‹İ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏH™œˆ‘œ˜[°éØZ\ÏØOH™YH‹Ú˜Kİ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏHš˜H¹¥éy§+:*§ØOH™YH‹Ø\‹İ\˜˜[‹X\[™]ÜËÈˆ™Y›[™ÏH˜\ˆ¶)öa6.v,v*6b¶*OØOH™YH‹Û[™İXYÙ\ËÈ[[™İXYÙ\ÏØOÙ]Ù]Z[ÏÚXY\ÙXİ[ÛˆÛ\ÜÏHš\›È]ˆÛ\ÜÏHš\›ËXÛÜH]ˆÛ\ÜÏH™^YXœ›İÈ\\İH\˜°è0­È˜\˜Ù[Û˜OÙ]O\ÚØ[ˆH˜\˜Ù[Û˜OÚO\ÚØ[ˆ0ê\È[ˆ\\İHÛÛ[\Ü˜[šH\İX›\H˜\˜Ù[Û˜KˆHÙ]˜H°èİXØHÛÛ›™XİHHİ[\˜H\ZÜ\È[™›pê˜ÚY\È[Ü˜Y™š]K[]\š[™ÈH\È0êÛš\]Y\ÈZ^\Ëˆ\È]™\È›È[˜Ú[Û™[ˆ›Ûpê\ÈÛÛHH\˜][\Îˆ\ÈÛÛ™\Z^[ˆ[ˆ›Ü›Y\Ëš]Y\ÈH\İXİ\™\Èš\İX[È[Xˆ[˜HY[]]°ìœXKÜÙ][YÈÜ˜ÏH‹Ø\ÜÙ]ËÚ[XYÙ\ËØ\ÚØ[‹Ø\ÚØ[‹YÜ™^KYÛÛXXœİ˜Xİ[]\‹]ÛÜšËšœÈˆ[H\ÚØ[ˆ˜\˜Ù[Û˜H\˜˜[ˆ\]\š[™ÈˆÚYHŒMŒˆZYÚHŒLÈÜÙXİ[ÛXZ[ˆÛ\ÜÏHÜ˜\\XÛHÛ\ÜÏH˜\XÛHÙXİ[Û”]ZH0ê\È\ÚØ[ÏÚ\ÚØ[ˆ0ê\È[ˆ\\İHÛÛ[\Ü˜[šH\İX›\H˜\˜Ù[Û˜KˆHÙ]˜H°èİXØHÛÛ›™XİHHİ[\˜H\ZÜ\È[™›pê˜ÚY\È[Ü˜Y™š]K[]\š[™ÈH\È0êÛš\]Y\ÈZ^\Ëˆ\È]™\È›È[˜Ú[Û™[ˆ›Ûpê\ÈÛÛHH\˜][\Îˆ\ÈÛÛ™\Z^[ˆ[ˆ›Ü›Y\Ëš]Y\ÈH\İXİ\™\Èš\İX[È[Xˆ[˜HY[]]°ìœXKÜÜÙXİ[ÛÙXİ[Û“X]\šX[ÈH›Øğê\ÈÜ™X]]OÚ“8 &X\\İH™X˜[HÛİš[[XˆØ\°ìÈ™]][]˜]H[™\Èİ\\™°ëXÚY\È][İYX[™\ËˆX\œ]Y\ËØ\\Ë0ë[šY\ÈHœ˜YÛY[È\ÙÜ°èšXÜÈ˜[œÙ›Ü›Y[ˆX]\šX[È[Ù\İÜÈ[ˆÛÛ\ÜÚXÚ[ÛœÈ[°ê™Ú\]Y\Ëˆ\]Y\İH[XØÚpìÈX[0êH[˜H™[XÚpìÈ\™XİH[Xˆ[Ø\œ™\ˆH[XˆHİ[\˜H\˜˜[˜HH˜\˜Ù[Û˜KÜÜÙXİ[ÛÙXİ[Û‘[™H[Ø\œ™\ˆH8 &X\ÛÛ[\Ü˜[šOÚ“8 &[Øœ˜H8 &P\ÚØ[ˆ›ÈÙ\\˜H\İšXİ[Y[\İYKÜ˜Y™š]HHØ[\šXKˆÛÛXš[˜H8 &Y\ÜÛ[™pëİ]\˜˜[˜H[Xˆ[˜HÛÛœİXØÚpìÈš\İX[™XÚ\ØKHİ\\°ê^\ˆÛÛH[\˜KÛÛYÙK[œİ[0­ÛXÚpìÈÈ\Øİ[\˜H\ÙÜ°èšXØKˆHÙ[XØÚpìÈ8 &U\˜˜[ˆ\È™]ÜÈØİ[Y[H\]Y\İH]›ÛXÚpìËÜÜÙXİ[ÛÙXİ[Û\ÚØ[ˆH\˜˜[ˆ\È™]ÜÏÚ\]Y\İ\™š[™][™Z^Øœ™\È\ØÛÛY\Ë[˜HØ[\šXHš\İX[H[›péÛÜÈ[ÛÛ\HÙšXÚX[H8 &X\\İKˆ[X°êHÛÛ›™XİH\ÚØ[ˆ[Xˆ8 &X\]H8 &X\\˜°èH˜\˜Ù[Û˜HH[Xˆ[™\ÈÜ™XYÜœÈ[™\[™[ÈHHÚ]]]ÜÜÙXİ[Û]ˆÛ\ÜÏH˜Xİ[ÛœÈHÛ\ÜÏH˜]Ûˆˆ™YH‹Ø\\İËØ\ÚØ[‹ÙØ[\KÈ•™]\™HHØ[\šXH8 &P\ÚØ[ˆ8¡¤ØOHÛ\ÜÏH˜]Ûˆ\šÈˆ™YH‹İ\˜˜[‹X\XÚ]KØ˜\˜Ù[Û˜KÜÜZ[‹È‘^Ü˜\ˆ8 &X\\˜°èH˜\˜Ù[Û˜H8¡¤ØOHÛ\ÜÏH˜]Ûˆ\šÈˆ™YHšÎ‹ËİİİËš[œİYÜ˜[K˜ÛÛKØ\ÚØ[˜\ËÈˆ\™Ù]H—Ø›[šÈˆ™[H››ÛÜ[™\ˆ’[œİYÜ˜[H8¡¤ØOHÛ\ÜÏH˜]Ûˆ\šÈˆ™YHšÎ‹Ëİ\˜˜[˜\Û™]ÜË˜ÛÛKØ\\İËØ\ÚØ[‹È“YÚ\ˆ8 &X\XÛHÜšYÚ[˜[[ˆ[™Û0êÈ8¡¤ØOÙ]ÙXİ[Û\ÚØ[ˆ0­È[™İXYÙ\ÏÚ]ˆÛ\ÜÏH›[™İXYÙK[[šÜÈHÛ\ÜÏHˆˆ™YHšÎ‹Ëİ\˜˜[˜\Û™]ÜË˜ÛÛKØ\\İËØ\ÚØ[‹Èˆ™Y›[™ÏH™[ˆ‘[™Û\ÚØOHÛ\ÜÏH˜Xİ]™Hˆ™YH‹ØØKØ\\İËØ\ÚØ[‹Èˆ™Y›[™ÏH˜ØHØ][0èØOHÛ\ÜÏHˆˆ™YH‹Ù\ËØ\\İËØ\ÚØ[‹Èˆ™Y›[™ÏH™\È‘\Üpì[ÛØOHÛ\ÜÏHˆˆ™YH‹ÙKØ\\İËØ\ÚØ[‹Èˆ™Y›[™ÏH™H‘]]ØÚØOHÛ\ÜÏHˆˆ™YH‹Ùœ‹Ø\\İËØ\ÚØ[‹Èˆ™Y›[™ÏH™œˆ‘œ˜[°éØZ\ÏØOHÛ\ÜÏHˆˆ™YH‹Ú]Ø\\İËØ\ÚØ[‹Èˆ™Y›[™ÏHš]’][X[›ÏØOHÛ\ÜÏHˆˆ™YH‹ÜØ\\İËØ\ÚØ[‹Èˆ™Y›[™ÏHœ”ÜYİpêœÏØOHÛ\ÜÏHˆˆ™YH‹ÜÜKØ\\İËØ\ÚØ[‹Èˆ™Y›[™ÏHœÜH”ÚZ\ØOHÛ\ÜÏHˆˆ™YH‹Ú˜KØ\\İËØ\ÚØ[‹Èˆ™Y›[™ÏHš˜H¹¥éy§+:*§ØOHÛ\ÜÏHˆˆ™YH‹Ø\‹Ø\\İËØ\ÚØ[‹Èˆ™Y›[™ÏH˜\ˆ¶)öa6.v,v*6b¶*OØOÙ]ÜÙXİ[ÛØ\XÛOÛXZ[›Ûİ\H™YH‹Ø\\İËØ\ÚØ[‹È\ÚØ[ØOˆ0­ÈH™YH‹Ø\\İËÈ•\˜˜[ˆ\\İÏØOˆ0­ÈH™YH‹Û[™İXYÙ\ËÈ“[™İXYÙ\ÏØOÙ›Ûİ\Ø›ÙOÚ[

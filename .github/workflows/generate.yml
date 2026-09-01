@@ -17,6 +17,7 @@ on:
       - "generate_urban_art_gallery_news.py"
       - "generate_language_pages.py"
       - "generate_art_is_trash_languages.py"
+      - "generate_ashwan_languages.py"
       - "seo_finalize.py"
 
   workflow_dispatch:
@@ -69,6 +70,9 @@ jobs:
 
       - name: Generate Art Is Trash language profiles
         run: python generate_art_is_trash_languages.py
+
+      - name: Generate Ashwan language profiles
+        run: python generate_ashwan_languages.py
 
       - name: Apply site-wide SEO baseline
         run: python seo_finalize.py
