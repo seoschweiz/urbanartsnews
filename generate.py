@@ -1,4 +1,4 @@
-# Generates artists, urban-art city directories, mixed galleries, RSS news, link status and sitemap.
+# Generates artists, urban-art city directories, responsive galleries, RSS news, link status and sitemap.
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import re
