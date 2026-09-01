@@ -1408,6 +1408,78 @@ title="{escape(name)} urban art in {escape(city)}"></iframe>
 
     print(f"UPDATE image gallery: {len(works)} works across {len(pages)} pages")
 
+def generate_tag_pages(artists):
+    tag_configs = [
+        {
+            "slug": "street-art",
+            "title": "Street Art Artists | Urban Arts News",
+            "heading": "Street Art",
+            "description": "Discover street artists, graffiti artists, mural artists and contemporary urban interventions from cities around the world.",
+            "filter": lambda artist: any(tag in artist.get("tags", []) for tag in ("Street Art", "Graffiti", "Murals")),
+        },
+        {
+            "slug": "urban-art",
+            "title": "Urban Art Artists | Urban Arts News",
+            "heading": "Urban Art",
+            "description": "Explore all featured urban artists, contemporary visual culture, murals, graffiti and independent creative practices on Urban Arts News.",
+            "filter": lambda artist: True,
+        },
+        {
+            "slug": "barcelona-street-art",
+            "title": "Barcelona Street Art & Urban Artists | Urban Arts News",
+            "heading": "Barcelona Street Art",
+            "description": "Discover featured street artists, graffiti artists and contemporary urban creators connected with Barcelona.",
+            "filter": lambda artist: artist.get("city") == "Barcelona",
+        },
+    ]
+
+    for config in tag_configs:
+        selected = [artist for artist in artists if config["filter"](artist)]
+        cards = ""
+        for artist in selected:
+            name = artist["name"]
+            slug = artist["slug"]
+            city = artist["city"]
+            headline = artist.get("headline", f"{name} – Urban Art")
+            cards += f"""
+<article class="card">
+<div class="card-content">
+<div class="category">{escape(city)} Featured Artist</div>
+<h2>{escape(name)}</h2>
+<p>{escape(headline)}</p>
+<div class="tags">
+<a class="tag" href="/cities/{slugify(city)}/">#{escape(city.replace(" ", ""))}</a>
+<span class="tag">#StreetArt</span>
+<span class="tag">#UrbanArt</span>
+</div>
+<a class="button" href="/artists/{slug}/">Explore {escape(name)} →</a>
+</div>
+</article>
+"""
+
+        canonical = f"{BASE_URL}/tags/{config['slug']}/"
+        html = page_head(config["title"], config["description"], canonical)
+        html += f"""
+<section class="hero">
+<div class="hero-label">Urban Arts News · Artist Topic</div>
+<h1><span>{escape(config["heading"])}</span></h1>
+<p>{escape(config["description"])}</p>
+</section>
+<main class="container">
+<h2 class="section-title">Featured <span>Artists</span></h2>
+<p style="margin-bottom:25px;">Explore {len(selected)} artists connected with {escape(config["heading"])}.</p>
+<div class="grid">
+{cards}
+</div>
+</main>
+"""
+        html += page_footer()
+        output_dir = Path("tags") / config["slug"]
+        ensure_directory(output_dir)
+        (output_dir / "index.html").write_text(html, encoding="utf-8")
+        print(f"UPDATE tag page: {output_dir / 'index.html'}")
+
+
 def generate_sitemap(artists):
     urls = {
         f"{BASE_URL}/",
@@ -1460,6 +1532,7 @@ def main():
 
     generate_artist_directory(artists)
     generate_city_pages(artists)
+    generate_tag_pages(artists)
     generate_homepage(artists)
     generate_image_gallery(artists)
     generate_sitemap(artists)
