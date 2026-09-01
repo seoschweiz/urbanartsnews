@@ -1567,4 +1567,5 @@ def main():
 
 
 if __name__ == "__main__":
+    # Urban Art Music pages are generated separately by generate_urban_art_music.py.
     main()
