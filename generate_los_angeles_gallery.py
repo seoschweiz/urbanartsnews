@@ -41,7 +41,7 @@ def esc(value):
     return html.escape(str(value), quote=True)
 
 def link_los_angeles(value):
-    """Escape visible copy and link every Los Angeles mention to the city hub."""
+    """Escape gallery copy and link every visible Los Angeles mention to the SEO city hub."""
     city_link = '<a href="/cities/los-angeles/" title="Los Angeles Urban Art"><strong>Los Angeles</strong></a>'
     return esc(value).replace("Los Angeles", city_link)
 
