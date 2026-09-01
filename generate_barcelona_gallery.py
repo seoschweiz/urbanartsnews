@@ -12,7 +12,7 @@ RESPONSIVE_DIR = ASSET_DIR / "responsive"
 GALLERY_DIR = Path("cities/barcelona/gallery")
 
 PHOTOS = [
-    {"n": 1, "slug": "park-guell-mosaic-view-barcelona", "title": "Park Güell Mosaic View over Barcelona", "description": "A panoramic Barcelona view framed by Antoni Gaudí's colourful mosaic architecture in Park Güell.", "alt": "Park Güell mosaic architecture overlooking Barcelona", "width": 1600, "height": 1066},
+    {"n": 1, "slug": "park-guell-mosaic-view-barcelona", "title": "Park Güell Mosaic Architecture and Panoramic Barcelona View", "description": "A panoramic view across Barcelona framed by the colourful mosaic architecture of Antoni Gaudí’s Park Güell. The photograph brings together one of the city’s most recognisable Modernist landmarks with Barcelona’s dense urban landscape, distant hills and Mediterranean atmosphere.", "alt": "Park Güell mosaic architecture framing a panoramic view across Barcelona", "portal_note": "Discover more street art, urban photography and contemporary artists on", "width": 1600, "height": 1066},
     {"n": 2, "slug": "barcelona-cathedral-gothic-quarter", "title": "Barcelona Cathedral in the Gothic Quarter", "description": "Barcelona Cathedral and its historic square in the heart of the Gothic Quarter.", "alt": "Barcelona Cathedral and square in the Gothic Quarter", "width": 1600, "height": 1280},
     {"n": 3, "slug": "sagrada-familia-barcelona-park-view", "title": "Sagrada Família from a Barcelona Park", "description": "The towers of the Sagrada Família rising above trees and a reflective pond in Barcelona.", "alt": "Sagrada Família viewed across a park and pond in Barcelona", "width": 1600, "height": 1200},
     {"n": 4, "slug": "barcelona-waterfront-w-hotel", "title": "Barcelona Waterfront and W Hotel", "description": "The Barcelona marina and distinctive W Hotel beside the Mediterranean waterfront.", "alt": "Barcelona marina and W Hotel on the waterfront", "width": 1600, "height": 1067},
@@ -138,6 +138,7 @@ def generate_detail(photo):
 <picture><source type="image/webp" media="(max-width:600px)" srcset="/assets/images/barcelona/responsive/{slug}-480.webp"><source type="image/webp" media="(max-width:1100px)" srcset="/assets/images/barcelona/responsive/{slug}-960.webp"><img src="/assets/images/barcelona/{slug}.jpg" alt="{esc(photo['alt'])}" width="{photo['width']}" height="{photo['height']}" loading="eager" fetchpriority="high" decoding="async"></picture>
 <div class="caption"><h1>{esc(photo['title'])}</h1><p>{esc(photo['description'])}</p>
 <p><strong><a href="https://urbanartsnews.com/urban-art-city/barcelona/spain/">Barcelona Urban Art News</a></strong> presents this photograph as part of its visual documentation of <strong><a href="https://urbanartsnews.com/urban-art-city/barcelona/spain/">Urban Art Barcelona</a></strong>, city culture and the changing metropolitan landscape.</p>
+{f'<p>{esc(photo["portal_note"])} <a href="https://urbanartsnews.com/"><strong>Urban Arts News</strong></a>.</p>' if photo.get('portal_note') else ''}
 <p class="credit">Photograph supplied for publication to Urban Arts News. Rights remain with the respective copyright holder.</p>
 <a class="button" href="/cities/barcelona/gallery/">Barcelona Gallery</a><a class="button" href="/urban-art-city/barcelona/spain/">Barcelona Urban Art</a>
 </div></article></main>""" + footer()
