@@ -55,9 +55,6 @@
     <loc>https://urbanartsnews.com/artists/xavi-ceerre/</loc>
   </url>
   <url>
-    <loc>https://urbanartsnews.com/cities/</loc>
-  </url>
-  <url>
     <loc>https://urbanartsnews.com/cities/badalona/</loc>
   </url>
   <url>
@@ -245,5 +242,8 @@
   </url>
   <url>
     <loc>https://urbanartsnews.com/tags/urban-art/</loc>
+  </url>
+  <url>
+    <loc>https://urbanartsnews.com/urban-art-cities/</loc>
   </url>
 </urlset>
