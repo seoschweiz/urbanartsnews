@@ -88,7 +88,7 @@ def generate_detail(photo):
     markup += f"""<main class="container"><article class="photo">
 <picture><source type="image/webp" media="(max-width:600px)" srcset="/assets/images/buenos-aires/responsive/{slug}-480.webp"><source type="image/webp" media="(max-width:1100px)" srcset="/assets/images/buenos-aires/responsive/{slug}-960.webp"><img src="/assets/images/buenos-aires/{slug}.jpg" alt="{esc(photo['alt'])}" width="{photo['width']}" height="{photo['height']}" loading="eager" fetchpriority="high" decoding="async"></picture>
 <div class="caption"><h1>{esc(photo['title'])}</h1><p>{esc(photo['description'])}</p>
-<p><strong><a href="https://urbanartsnews.com/">Buenos Aires Urban Art News</a></strong> presents this photograph as part of its visual documentation of <strong><a href="https://urbanartsnews.com/">Urban Art Buenos Aires</a></strong>, city culture and the changing metropolitan landscape.</p>
+<p><strong><a href="https://urbanartsnews.com/cities/buenos-aires/">Buenos Aires Urban Art News</a></strong> presents this photograph as part of its visual documentation of <strong><a href="https://urbanartsnews.com/cities/buenos-aires/">Urban Art Buenos Aires</a></strong>, city culture and the changing metropolitan landscape.</p>
 <p class="credit">Photograph supplied for publication to Urban Arts News. Rights remain with the respective copyright holder.</p>
 <a class="button" href="/cities/buenos-aires/gallery/">Buenos Aires Gallery</a><a class="button" href="/cities/buenos-aires/">Buenos Aires Urban Art</a>
 </div></article></main>""" + footer()
