@@ -40,6 +40,11 @@ for photo, urban_art_sentence in zip(PHOTOS, URBAN_ART_CONTEXT, strict=True):
 def esc(value):
     return html.escape(str(value), quote=True)
 
+def link_los_angeles(value):
+    """Escape visible copy and link every Los Angeles mention to the city hub."""
+    city_link = '<a href="/cities/los-angeles/" title="Los Angeles Urban Art"><strong>Los Angeles</strong></a>'
+    return esc(value).replace("Los Angeles", city_link)
+
 def decode_staged_images():
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     for photo in PHOTOS:
@@ -87,7 +92,7 @@ def head(title, description, canonical, image, image_width, image_height, schema
 <header><a class="logo" href="/">URBAN <span>ARTS</span> NEWS</a><nav><a href="/cities/los-angeles/">Los Angeles</a><a href="/urban-art-cities/">Cities</a><a href="/artists/">Artists</a><a href="/subscribe/">Subscribe</a></nav></header>"""
 
 def footer():
-    return '<footer>© 2026 Urban Arts News · Los Angeles Urban Art · City Photography</footer></body></html>'
+    return '<footer>© 2026 Urban Arts News · <a href="/cities/los-angeles/" title="Los Angeles Urban Art"><strong>Los Angeles</strong></a> Urban Art · City Photography</footer></body></html>'
 
 def generate_detail(photo):
     slug = photo["slug"]
@@ -123,9 +128,9 @@ def generate_gallery():
     cards=""
     for i,p in enumerate(PHOTOS):
         attrs='loading="eager" fetchpriority="high"' if i==0 else 'loading="lazy"'
-        cards += f"""<article class="card"><a href="/cities/los-angeles/gallery/{p['slug']}/"><picture><source type="image/webp" srcset="/assets/images/los-angeles/responsive/{p['slug']}-480.webp 480w, /assets/images/los-angeles/responsive/{p['slug']}-960.webp 960w" sizes="(max-width:800px) 92vw, 30vw"><img src="/assets/images/los-angeles/{p['slug']}.jpg" alt="{esc(p['alt'])}" width="{p['width']}" height="{p['height']}" {attrs} decoding="async"></picture></a><div class="card-content"><h2><a href="/cities/los-angeles/gallery/{p['slug']}/">{esc(p['title'])}</a></h2><p>{esc(p['description'])}</p></div></article>"""
+        cards += f"""<article class="card"><a href="/cities/los-angeles/gallery/{p['slug']}/"><picture><source type="image/webp" srcset="/assets/images/los-angeles/responsive/{p['slug']}-480.webp 480w, /assets/images/los-angeles/responsive/{p['slug']}-960.webp 960w" sizes="(max-width:800px) 92vw, 30vw"><img src="/assets/images/los-angeles/{p['slug']}.jpg" alt="{esc(p['alt'])}" width="{p['width']}" height="{p['height']}" {attrs} decoding="async"></picture></a><div class="card-content"><h2>{link_los_angeles(p['title'])}</h2><p>{link_los_angeles(p['description'])}</p><a href="/cities/los-angeles/gallery/{p['slug']}/">View photograph →</a></div></article>"""
     markup=head("Los Angeles Urban Photography Gallery | Urban Arts News",description,canonical,image,hero["width"],hero["height"],schema)
-    markup+=f"""<section class="hero"><small>Urban Arts News · Los Angeles Gallery</small><h1>Los Angeles <span class="accent">City Gallery</span></h1><p>Nine original photographs documenting the Hollywood Sign, Downtown Los Angeles, freeways, night views and the visual identity surrounding Urban Art Los Angeles.</p></section><main class="container"><h2>Los Angeles Urban Art News and City Photography</h2><p>This curated gallery connects Los Angeles city photography with the wider Urban Arts News archive. Each photograph has its own indexable page, descriptive metadata and links to the Los Angeles urban-art directory.</p><div class="grid">{cards}</div></main>"""+footer()
+    markup+=f"""<section class="hero"><small>Urban Arts News · {link_los_angeles('Los Angeles')} Gallery</small><h1>{link_los_angeles('Los Angeles')} <span class="accent">City Gallery</span></h1><p>{link_los_angeles('Nine original photographs documenting the Hollywood Sign, Downtown Los Angeles, freeways, night views and the visual identity surrounding Urban Art Los Angeles.')}</p></section><main class="container"><h2>{link_los_angeles('Los Angeles Urban Art News and City Photography')}</h2><p>{link_los_angeles('This curated gallery connects Los Angeles city photography with the wider Urban Arts News archive. Each photograph has its own indexable page, descriptive metadata and links to the Los Angeles urban-art directory.')}</p><div class="grid">{cards}</div></main>"""+footer()
     (GALLERY_DIR/"index.html").write_text(markup,encoding="utf-8")
 
 def patch_city_page():
