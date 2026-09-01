@@ -119,6 +119,54 @@ LANGUAGES = {
         ],
         "gallery": "شاهد معرض Art Is Trash", "city": "اكتشف الفن الحضري في برشلونة", "original": "اقرأ المقال الأصلي بالإنجليزية",
     },
+    "ru": {
+        "name": "Русский", "title": "Art Is Trash: эфемерное уличное искусство Франсиско де Пахаро",
+        "description": "История Art Is Trash — проекта Франсиско де Пахаро, превращающего выброшенные предметы Барселоны в выразительные эфемерные скульптуры.",
+        "heading": "Art Is Trash в Барселоне", "label": "Урбан-художник · Барселона",
+        "sections": [
+            ("Кто такой Art Is Trash?", "Art Is Trash — художественный проект Франсиско де Пахаро. Художник превращает картон, сломанную мебель, мусорные пакеты и найденные на улице предметы в персонажей с сильной эмоциональной выразительностью. Юмор, импровизация и социальная критика соединяются в работах, которые возникают непосредственно в городской среде."),
+            ("Улица как творческое пространство", "Для работы ему не нужна разрешённая стена или выставочный зал. Де Пахаро реагирует на форму, положение и состояние каждого найденного предмета. Барселона одновременно становится мастерской, сценой и аудиторией. Когда городские службы увозят использованные материалы, произведение может исчезнуть через несколько часов."),
+            ("Отходы, персонажи и общественная критика", "Нарисованные глаза, рты, руки и короткие фразы дают новую идентичность тому, что город считает ненужным. Эти превращения говорят о потреблении, неравенстве, исключении и повседневной жизни. При этом искусство остаётся непосредственным: прохожий может случайно встретить его без билета и специальных знаний."),
+            ("Архив исчезающего искусства", "Поскольку многие интервенции существуют недолго, фотографии и публикации художника становятся важнейшим свидетельством. Urban Arts News объединяет избранные произведения, фотогалерею, официальный Instagram и архив Барселоны, сохраняя историю проекта после исчезновения оригинальных уличных скульптур."),
+        ],
+        "gallery": "Смотреть галерею Art Is Trash", "city": "Исследовать урбан-арт Барселоны", "original": "Читать оригинал на английском",
+    },
+    "sv": {
+        "name": "Svenska", "title": "Art Is Trash: Francisco de Pájaros efemära gatukonst i Barcelona",
+        "description": "Upptäck Art Is Trash, Francisco de Pájaros projekt som förvandlar kasserade föremål på Barcelonas gator till uttrycksfulla, efemära skulpturer.",
+        "heading": "Art Is Trash i Barcelona", "label": "Urban konstnär · Barcelona",
+        "sections": [
+            ("Vem är Art Is Trash?", "Art Is Trash är Francisco de Pájaros konstprojekt. Han förvandlar kartong, trasiga möbler, sopsäckar och övergivna föremål till karaktärer med starkt känslomässigt uttryck. Humor, improvisation och samhällskritik möts i verk som skapas direkt i stadsmiljön."),
+            ("Gatan som kreativt rum", "Konsten väntar varken på en godkänd vägg eller en utställningslokal. De Pájaro reagerar på varje föremåls form, placering och skick. Barcelona blir samtidigt ateljé, scen och publik. När stadens renhållning tar bort materialet kan ett verk försvinna redan efter några timmar."),
+            ("Avfall, karaktärer och samhällskritik", "Målade ögon, munnar, armar och korta texter ger ny identitet åt sådant som staden betraktar som värdelöst. Förvandlingen berör konsumtion, ojämlikhet, utanförskap och vardagsliv, men behåller ett direkt tilltal. Förbipasserande kan möta konsten av en slump, utan biljett eller förkunskaper."),
+            ("Ett arkiv över förgänglig konst", "Eftersom många interventioner bara finns under en kort tid blir fotografier och konstnärens publicerade dokumentation avgörande. Urban Arts News samlar utvalda verk, bildgalleri, officiellt Instagramkonto och Barcelona-arkiv så att projektets utveckling kan följas även när gatans originalverk har försvunnit."),
+        ],
+        "gallery": "Se galleriet med Art Is Trash", "city": "Utforska urban konst i Barcelona", "original": "Läs originalartikeln på engelska",
+    },
+    "ko": {
+        "name": "한국어", "title": "Art Is Trash: 프란시스코 데 파하로의 바르셀로나 일시적 거리 예술",
+        "description": "바르셀로나의 버려진 물건을 강렬한 일시적 조각으로 바꾸는 프란시스코 데 파하로의 Art Is Trash를 소개합니다.",
+        "heading": "바르셀로나의 Art Is Trash", "label": "어반 아티스트 · 바르셀로나",
+        "sections": [
+            ("Art Is Trash는 누구인가", "Art Is Trash는 프란시스코 데 파하로의 예술 프로젝트입니다. 그는 골판지, 부서진 가구, 쓰레기봉투와 길에 버려진 물건을 강한 감정을 지닌 인물로 바꿉니다. 유머와 즉흥성, 사회 비판이 도시 현장에서 직접 태어나는 작품 안에 함께 존재합니다."),
+            ("창작 공간이 되는 거리", "그의 작업은 허가받은 벽이나 전시장을 기다리지 않습니다. 데 파하로는 발견한 물건의 형태, 위치, 손상된 상태에 즉각 반응합니다. 바르셀로나는 작업실이자 무대이며 관객이 됩니다. 청소 서비스가 재료를 수거하면 작품은 불과 몇 시간 만에 사라질 수도 있습니다."),
+            ("폐기물과 인물, 사회 비판", "그려진 눈과 입, 팔, 짧은 문장은 도시가 쓸모없다고 판단한 물건에 새로운 정체성을 줍니다. 이러한 변형은 소비, 불평등, 배제와 일상을 이야기하면서도 직접적인 유머를 유지합니다. 누구나 입장권이나 미술 지식 없이 우연히 작품을 만날 수 있습니다."),
+            ("사라지는 예술의 기록", "많은 개입 작품이 짧은 시간만 존재하기 때문에 사진과 작가의 공개 기록은 매우 중요합니다. Urban Arts News는 선정 작품, 이미지 갤러리, 공식 Instagram과 바르셀로나 아카이브를 연결해 실제 거리 조각이 사라진 뒤에도 프로젝트의 변화를 보여 줍니다."),
+        ],
+        "gallery": "Art Is Trash 갤러리 보기", "city": "바르셀로나 어반 아트 살펴보기", "original": "영어 원문 읽기",
+    },
+    "hi": {
+        "name": "हिन्दी", "title": "Art Is Trash: बार्सिलोना में फ्रांसिस्को दे पाहारो की क्षणभंगुर स्ट्रीट आर्ट",
+        "description": "Art Is Trash की कहानी जानिए, जिसमें फ्रांसिस्को दे पाहारो बार्सिलोना की फेंकी हुई वस्तुओं को प्रभावशाली क्षणभंगुर शिल्प में बदलते हैं।",
+        "heading": "बार्सिलोना में Art Is Trash", "label": "अर्बन आर्टिस्ट · बार्सिलोना",
+        "sections": [
+            ("Art Is Trash कौन हैं?", "Art Is Trash फ्रांसिस्को दे पाहारो की कला परियोजना है। वे गत्ते, टूटे फर्नीचर, कचरे की थैलियों और सड़क पर छोड़ी गई वस्तुओं को तीव्र भावनात्मक अभिव्यक्ति वाले पात्रों में बदलते हैं। हास्य, तात्कालिक रचना और सामाजिक आलोचना उन कृतियों में मिलते हैं जो सीधे शहरी वातावरण में जन्म लेती हैं।"),
+            ("रचनात्मक स्थान के रूप में सड़क", "यह कला किसी स्वीकृत दीवार या प्रदर्शनी कक्ष की प्रतीक्षा नहीं करती। दे पाहारो हर मिली हुई वस्तु के आकार, स्थिति और दशा पर तुरंत प्रतिक्रिया देते हैं। बार्सिलोना एक साथ स्टूडियो, मंच और दर्शक बन जाता है। सफाई सेवा द्वारा सामग्री हटाए जाने पर कोई कृति कुछ ही घंटों में गायब हो सकती है।"),
+            ("कचरा, पात्र और सामाजिक आलोचना", "चित्रित आंखें, मुंह, हाथ और छोटे वाक्य उन वस्तुओं को नई पहचान देते हैं जिन्हें शहर बेकार मानता है। यह बदलाव उपभोग, असमानता, बहिष्कार और रोजमर्रा के जीवन पर प्रश्न उठाता है, फिर भी सीधा और सहज बना रहता है। राहगीर बिना टिकट या कला की पूर्व जानकारी के संयोग से इसे देख सकते हैं।"),
+            ("क्षणभंगुर कला का अभिलेख", "कई हस्तक्षेप बहुत कम समय तक रहते हैं, इसलिए तस्वीरें और कलाकार के सार्वजनिक रिकॉर्ड आवश्यक हैं। Urban Arts News चुनी हुई कृतियों, चित्र गैलरी, आधिकारिक Instagram और बार्सिलोना अभिलेख को जोड़ता है, ताकि मूल सड़क शिल्प के मिट जाने के बाद भी परियोजना की यात्रा देखी जा सके।"),
+        ],
+        "gallery": "Art Is Trash गैलरी देखें", "city": "बार्सिलोना की अर्बन आर्ट खोजें", "original": "अंग्रेज़ी मूल लेख पढ़ें",
+    },
 }
 
 EXTRA_SECTIONS = {
@@ -131,6 +179,10 @@ EXTRA_SECTIONS = {
     "sq": [("Nga Zafra në Barcelonë dhe në botë", "Francisco de Pájaro vjen nga Zafra në Extremadura dhe jeton e punon në Barcelonë. Prej kësaj baze ka udhëtuar nëpër botë, ka realizuar murale të rëndësishme me porosi dhe ka marrë pjesë në ekspozita ndërkombëtare. Veprat e tij gjenden gjithashtu në koleksione të rëndësishme arti."), ("Skulpturë kalimtare, mesazh politik dhe koleksionim", "Art Is Trash zë një vend të rrallë në artin urban: objektet e gjetura bëhen skulptura kalimtare me fuqi të jashtëzakonshme shprehëse. Arti nuk është thjesht dekorativ; trajton konsumin, mbeturinat, pabarazinë dhe përjashtimin. Për koleksionistët afatgjatë, origjinaliteti, karriera ndërkombëtare dhe rrallësia e dokumentuar mund të jenë veçanërisht interesante, megjithëse asnjë vepër nuk garanton kthim financiar.")],
     "ja": [("サフラからバルセロナ、そして世界へ", "フランシスコ・デ・パハロはエストレマドゥーラ州サフラ出身で、現在はバルセロナで生活し制作しています。世界各地を旅し、大規模な壁画制作や国際展に参加してきました。作品は重要なアートコレクションにも収蔵されています。"), ("一時的な彫刻、政治的メッセージ、収集価値", "Art Is Trashは、拾われた物を強い表現力を持つ一時的な都市彫刻へ変える、アーバンアートの中でも珍しい存在です。単なる装飾ではなく、消費、廃棄、不平等、排除を問いかけます。独創性、国際的な活動、記録された希少性は長期的な視点を持つコレクターにとって魅力となり得ますが、芸術作品の経済的利益が保証されることはありません。")],
     "ar": [("من زافرا إلى برشلونة والعالم", "ينحدر فرانسيسكو دي باخارو من زافرا في إكستريمادورا، ويعيش ويعمل اليوم في برشلونة. ومن هذه القاعدة سافر حول العالم، ونفذ تكليفات مهمة لجداريات، وشارك في معارض دولية. كما توجد أعماله ضمن مجموعات فنية مهمة."), ("نحت مؤقت ورسالة سياسية واقتناء فني", "يحتل Art Is Trash موقعاً نادراً في الفن الحضري، إذ يحول الأشياء الموجودة إلى منحوتات مؤقتة ذات قوة تعبيرية استثنائية. ليست الأعمال مجرد زينة؛ فهي تناقش الاستهلاك والنفايات وعدم المساواة والإقصاء. وقد تكون الأصالة والمسيرة الدولية والندرة الموثقة جذابة لهواة الجمع ذوي الرؤية الطويلة، لكن لا يمكن لأي عمل فني أن يضمن عائداً مالياً.")],
+    "ru": [("Из Сафры в Барселону и мир", "Франсиско де Пахаро родом из Сафры в Эстремадуре, а сегодня живёт и работает в Барселоне. Отсюда он путешествовал по миру, выполнял крупные заказы на муралы и участвовал в международных выставках. Его произведения также представлены в значимых художественных коллекциях."), ("Эфемерная скульптура, политика и коллекционирование", "Art Is Trash занимает редкое место в урбан-арте: найденные предметы становятся эфемерными скульптурами исключительной выразительности. Это не просто декоративное искусство — оно говорит о потреблении, отходах, неравенстве и исключении. Оригинальность, международная карьера и документированная редкость могут быть особенно интересны коллекционерам с долгосрочным взглядом, хотя ни одно произведение искусства не гарантирует финансовой доходности.")],
+    "sv": [("Från Zafra till Barcelona och världen", "Francisco de Pájaro kommer från Zafra i Extremadura och bor och arbetar i dag i Barcelona. Därifrån har han rest över hela världen, genomfört stora muraluppdrag och deltagit i internationella utställningar. Hans verk ingår också i betydelsefulla konstsamlingar."), ("Efemär skulptur, politiskt budskap och samlande", "Art Is Trash har en ovanlig position inom urban konst: upphittade föremål blir efemära skulpturer med extraordinär uttryckskraft. Konsten är inte enbart dekorativ utan behandlar konsumtion, avfall, ojämlikhet och utanförskap. För långsiktiga samlare kan originalitet, internationell karriär och dokumenterad sällsynthet vara särskilt intressanta, även om konst aldrig kan garantera ekonomisk avkastning.")],
+    "ko": [("사프라에서 바르셀로나와 세계로", "프란시스코 데 파하로는 에스트레마두라의 사프라 출신이며 현재 바르셀로나에서 생활하고 작업합니다. 이곳을 기반으로 세계를 여행하고 대형 벽화 의뢰를 수행했으며 국제 전시에 참여했습니다. 그의 작품은 중요한 미술 컬렉션에도 포함되어 있습니다."), ("일시적 조각, 정치적 메시지와 컬렉팅", "Art Is Trash는 어반 아트 안에서 드문 위치를 차지합니다. 발견된 물건을 놀라운 표현력을 지닌 일시적 조각으로 바꾸기 때문입니다. 작품은 단순한 장식이 아니라 소비, 폐기물, 불평등과 배제를 다룹니다. 독창성, 국제적 활동과 기록된 희소성은 장기적 관점의 컬렉터에게 매력적일 수 있지만, 어떤 예술 작품도 경제적 수익을 보장하지는 않습니다.")],
+    "hi": [("ज़ाफ्रा से बार्सिलोना और दुनिया तक", "फ्रांसिस्को दे पाहारो स्पेन के एक्स्त्रेमादुरा क्षेत्र के ज़ाफ्रा से हैं और अब बार्सिलोना में रहते तथा काम करते हैं। यहां से उन्होंने दुनिया भर की यात्रा की, बड़े म्यूरल कमीशन पूरे किए और अंतरराष्ट्रीय प्रदर्शनियों में भाग लिया। उनकी कृतियां महत्वपूर्ण कला संग्रहों में भी शामिल हैं।"), ("क्षणभंगुर शिल्प, राजनीतिक संदेश और संग्रह", "Art Is Trash अर्बन आर्ट में एक दुर्लभ स्थान रखता है: मिली हुई वस्तुएं असाधारण अभिव्यक्ति वाले क्षणभंगुर शिल्प बनती हैं। यह केवल सजावटी कला नहीं है; यह उपभोग, कचरे, असमानता और बहिष्कार पर बात करती है। मौलिकता, अंतरराष्ट्रीय यात्रा और दर्ज दुर्लभता दीर्घकालिक सोच वाले संग्रहकर्ताओं के लिए आकर्षक हो सकती है, हालांकि कोई भी कलाकृति आर्थिक लाभ की गारंटी नहीं देती।")],
 }
 
 for _code, _sections in EXTRA_SECTIONS.items():
