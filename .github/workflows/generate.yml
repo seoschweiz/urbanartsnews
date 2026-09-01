@@ -29,8 +29,14 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install image optimizer
+        run: python -m pip install --disable-pip-version-check Pillow
+
       - name: Generate artist and city pages
         run: python generate.py
+
+      - name: Generate responsive Art Is Trash images
+        run: python optimize_art_is_trash_images.py
 
       - name: Commit generated files
         run: |
