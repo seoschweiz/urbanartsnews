@@ -153,7 +153,7 @@ def patch_original():
     path = Path("artists/art-is-trash/index.html")
     html = path.read_text(encoding="utf-8")
     html = re.sub(r'\n?<section class="artist-language-versions[^"]*".*?</section>\n?', "\n", html, flags=re.I | re.S)
-    block = f'''<section class="artist-language-versions"><h2>Read this article in another language</h2><div class="language-links">{language_links('en')}</div></section>'''
+    block = f'''<section class="artist-language-versions"><h2>Urban Art Article Languages</h2><div class="language-links">{language_links('en')}</div></section>'''
     artist_info_marker = '<aside class="artist-info">'
     marker_position = html.find(artist_info_marker)
     if marker_position == -1:
