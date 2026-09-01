@@ -142,7 +142,7 @@ def generate_page(page_number, videos):
 </style></head><body>
 <header><a class="logo" href="/">URBAN <span>ARTS</span> NEWS</a><nav><a href="/">Home</a><a href="/artists/">Artists</a><a href="/urban-art-cities/">Cities</a><a href="/urban-art-music/">Urban Art Music</a><a href="/subscribe/">Subscribe</a></nav></header>
 <section class="hero"><div class="eyebrow">Inspirational listening · Page {page_number} of 3</div><h1>Urban Art <span class="accent">Music</span></h1><p>A cross-genre selection of music connected with creativity, movement, city culture and the energy behind urban art.</p></section>
-<main class="container"><section class="intro"><h2>Selections {start}–{end}</h2><p>Play every video directly on Urban Arts News or open the original publication on YouTube. Artist-curated collections will be introduced separately in the future.</p></section>
+<main class="container"><section class="intro"><h2>Urban Art Music Videos {start}–{end}</h2><p>Play every video directly on Urban Arts News or open the original publication on YouTube. Artist-curated collections will be introduced separately in the future.</p></section>
 <section class="grid" aria-label="Urban Art Music video collection">{video_cards(videos, start)}</section>
 <nav class="pagination" aria-label="Urban Art Music pages">{navigation(page_number)}</nav>
 <section class="about"><h2>Urban Art Music on Urban Arts News</h2><p>This artist-curated music collection is part of <a href="{BASE}/"><strong>Urban Arts News</strong></a>, an international platform for street art, contemporary urban artists, city culture and creative discovery.</p></section></main>
