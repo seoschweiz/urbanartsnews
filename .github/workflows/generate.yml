@@ -16,6 +16,7 @@ on:
       - "generate_buenos_aires_gallery.py"
       - "generate_urban_art_gallery_news.py"
       - "generate_language_pages.py"
+      - "generate_art_is_trash_languages.py"
       - "seo_finalize.py"
 
   workflow_dispatch:
@@ -65,6 +66,9 @@ jobs:
 
       - name: Generate language landing pages
         run: python generate_language_pages.py
+
+      - name: Generate Art Is Trash language profiles
+        run: python generate_art_is_trash_languages.py
 
       - name: Apply site-wide SEO baseline
         run: python seo_finalize.py
