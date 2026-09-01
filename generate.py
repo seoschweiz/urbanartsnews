@@ -158,7 +158,67 @@ def get_active_posts(artist):
             active.append(url)
     return active
 
-def page_head(title, description, canonical):
+def page_head(title, description, canonical, extra_schema=None):
+    parsed = urllib.parse.urlparse(canonical)
+    segments = [part for part in parsed.path.split("/") if part]
+    breadcrumb_items = [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Urban Arts News",
+        "item": f"{BASE_URL}/",
+    }]
+    for position, segment in enumerate(segments, start=2):
+        item_url = f"{BASE_URL}/" + "/".join(segments[:position - 1]) + "/"
+        item_name = title.split("|")[0].strip() if position == len(segments) + 1 else segment.replace("-", " ").title()
+        breadcrumb_items.append({
+            "@type": "ListItem",
+            "position": position,
+            "name": item_name,
+            "item": item_url,
+        })
+
+    graph = [
+        {
+            "@type": "Organization",
+            "@id": f"{BASE_URL}/#organization",
+            "name": "Urban Arts News",
+            "url": f"{BASE_URL}/",
+        },
+        {
+            "@type": "WebSite",
+            "@id": f"{BASE_URL}/#website",
+            "url": f"{BASE_URL}/",
+            "name": "Urban Arts News",
+            "publisher": {"@id": f"{BASE_URL}/#organization"},
+            "inLanguage": "en",
+        },
+        {
+            "@type": "WebPage",
+            "@id": f"{canonical}#webpage",
+            "url": canonical,
+            "name": title,
+            "description": description,
+            "isPartOf": {"@id": f"{BASE_URL}/#website"},
+            "about": {"@id": f"{BASE_URL}/#organization"},
+            "inLanguage": "en",
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": f"{canonical}#breadcrumb",
+            "itemListElement": breadcrumb_items,
+        },
+    ]
+    if extra_schema:
+        if isinstance(extra_schema, list):
+            graph.extend(extra_schema)
+        else:
+            graph.append(extra_schema)
+    schema_json = json.dumps(
+        {"@context": "https://schema.org", "@graph": graph},
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).replace("</", "<\\/")
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,6 +234,8 @@ def page_head(title, description, canonical):
 <meta property="og:description" content="{escape(description)}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{canonical}">
+
+<script type="application/ld+json">{schema_json}</script>
 
 <style>
 * {{
@@ -640,7 +702,20 @@ archive for {escape(city)}, {escape(country)}.
 </article>
 """
 
-    html = page_head(title, description, canonical)
+    artist_schema = {
+        "@type": "Person",
+        "@id": f"{canonical}#artist",
+        "name": name,
+        "url": canonical,
+        "description": bio,
+        "sameAs": [instagram],
+        "homeLocation": {
+            "@type": "Place",
+            "name": f"{city}, {country}",
+        },
+        "mainEntityOfPage": {"@id": f"{canonical}#webpage"},
+    }
+    html = page_head(title, description, canonical, artist_schema)
 
     html += f"""
 <section class="hero">
