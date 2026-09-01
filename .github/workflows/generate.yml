@@ -12,6 +12,8 @@ on:
       - "generate.py"
       - "generate_los_angeles_gallery.py"
       - "generate_barcelona_gallery.py"
+      - "generate_badalona_gallery.py"
+      - "generate_buenos_aires_gallery.py"
 
   workflow_dispatch:
 

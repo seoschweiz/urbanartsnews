@@ -101,7 +101,7 @@ def generate_detail(photo):
     description = photo["meta_description"]
     schema = {"@context":"https://schema.org","@graph":[
         {"@type":"WebPage","@id":canonical+"#webpage","url":canonical,"name":photo["title"],"description":description,"primaryImageOfPage":{"@id":canonical+"#image"}},
-        {"@type":"ImageObject","@id":canonical+"#image","name":photo["title"],"description":description,"caption":photo["description"],"contentUrl":image,"url":canonical,"encodingFormat":"image/jpeg","width":{"@type":"QuantitativeValue","value":photo["width"],"unitCode":"E37"},"height":{"@type":"QuantitativeValue","value":photo["height"],"unitCode":"E37"},"contentLocation":{"@type":"Place","name":"Los Angeles, California, United States"},"creditText":"Urban Arts News Los Angeles Gallery","copyrightNotice":"All rights reserved by the respective copyright holder","representativeOfPage":True,"keywords":["Los Angeles Urban Art News","Urban Art Los Angeles","Los Angeles City Photography","Urban Arts News"]},
+        {"@type":"ImageObject","@id":canonical+"#image","name":photo["title"],"description":description,"caption":photo["description"],"contentUrl":image,"url":canonical,"encodingFormat":"image/jpeg","width":{"@type":"QuantitativeValue","value":photo["width"],"unitCode":"E37"},"height":{"@type":"QuantitativeValue","value":photo["height"],"unitCode":"E37"},"contentLocation":{"@type":"Place","name":"Los Angeles, California, United States"},"creditText":"Pexels contributor via Pexels","copyrightNotice":"Used under the Pexels License; rights remain with the respective contributor","representativeOfPage":True,"keywords":["Los Angeles Urban Art News","Urban Art Los Angeles","Los Angeles City Photography","Urban Arts News"]},
         {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Urban Arts News","item":BASE+"/"},{"@type":"ListItem","position":2,"name":"Los Angeles","item":BASE+"/cities/los-angeles/"},{"@type":"ListItem","position":3,"name":"Los Angeles Gallery","item":BASE+"/cities/los-angeles/gallery/"},{"@type":"ListItem","position":4,"name":photo["title"],"item":canonical}]}
     ]}
     markup = head(photo["title"]+" | Los Angeles Urban Arts News", description, canonical, image, photo["width"], photo["height"], schema)
@@ -110,7 +110,7 @@ def generate_detail(photo):
 <div class="caption"><h1>{esc(photo['title'])}</h1><p>{esc(photo['description'])}</p>
 <p><strong><a href="https://urbanartsnews.com/cities/los-angeles/">Los Angeles Urban Art News</a></strong> presents this photograph as part of its visual documentation of <strong><a href="https://urbanartsnews.com/cities/los-angeles/">Urban Art Los Angeles</a></strong>, city culture and the changing metropolitan landscape.</p>
 <p>Discover more urban photography, contemporary artists and city culture on <a href="https://urbanartsnews.com/"><strong>Urban Arts News</strong></a>.</p>
-<p class="credit">Photograph supplied for publication to Urban Arts News. Rights remain with the respective copyright holder.</p>
+<p class="credit">Photo via <a href="https://www.pexels.com/"><strong>Pexels</strong></a>, used under the <a href="https://www.pexels.com/license/">Pexels License</a>. Rights remain with the respective contributor.</p>
 <a class="button" href="/cities/los-angeles/gallery/">Los Angeles Gallery</a><a class="button" href="/cities/los-angeles/">Los Angeles Urban Art</a>
 </div></article></main>""" + footer()
     out = GALLERY_DIR / slug
