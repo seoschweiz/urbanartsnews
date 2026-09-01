@@ -22,6 +22,21 @@ PHOTOS = [
     {"n": 9, "slug": "downtown-los-angeles-overlook", "title": "Downtown Los Angeles Skyline Viewed from a Scenic Overlook", "description": "A solitary visitor stands in the foreground and looks across the vast urban fabric toward the distant Downtown Los Angeles skyline. The soft focus of the observer creates a personal sense of scale, distance and discovery within the metropolitan panorama.", "meta_description": "A visitor looks across the Los Angeles cityscape toward the distant Downtown skyline from a high scenic viewpoint.", "alt": "Visitor overlooking the expansive Los Angeles cityscape and distant Downtown skyline", "width": 1800, "height": 1200},
 ]
 
+URBAN_ART_CONTEXT = [
+    "Like urban art, the monumental lettering shows how a bold visual statement can transform a landscape and become part of a city’s identity.",
+    "This dialogue between a human-made symbol and its surroundings also reflects how urban art responds to the character of a specific place.",
+    "Within this vast urban fabric, urban art—from murals to installations and street interventions—gives neighbourhoods a distinct visual voice by day and night.",
+    "Seen at this scale, Los Angeles becomes a vast canvas in which urban art connects architecture, communities and public space.",
+    "Urban art similarly uses highly visible signs, symbols and public surfaces to communicate ideas and shape shared cultural memory.",
+    "Its saturated colours and overlapping forms echo the visual energy found in murals and contemporary urban art across the city.",
+    "Concrete corridors and overlooked structures are also important urban-art spaces, where creative interventions can give anonymous infrastructure a human voice.",
+    "The rhythm of lights, signs and movement forms a living visual language that continually inspires urban artists.",
+    "Urban art invites a similar way of looking: beyond individual works to the neighbourhoods, architecture and public spaces that give them meaning.",
+]
+
+for photo, urban_art_sentence in zip(PHOTOS, URBAN_ART_CONTEXT, strict=True):
+    photo["description"] = f'{photo["description"]} {urban_art_sentence}'
+
 def esc(value):
     return html.escape(str(value), quote=True)
 
