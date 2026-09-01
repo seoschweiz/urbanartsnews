@@ -17,6 +17,7 @@ POST_STATUS = {}
 
 ARTISTS_DIR = Path("artists")
 CITIES_DIR = Path("cities")
+CITY_DIRECTORY_DIR = Path("urban-art-cities")
 IMAGES_DIR = Path("images")
 
 MANUAL_ARTIST_PAGES = {
@@ -601,7 +602,7 @@ footer {{
 <a href="/">Home</a>
 <a href="/tags/street-art/">Street Art</a>
 <a href="/tags/urban-art/">Urban Art</a>
-<a href="/cities/">Cities</a>
+<a href="/urban-art-cities/">Cities</a>
 <a href="/artists/">Artists</a>
 <a href="/images/">Images</a>
 <a href="/subscribe/">Subscribe</a>
@@ -1042,7 +1043,7 @@ visual culture connected with {escape(city)}.
     cities_html = page_head(
         "Urban Art Cities | Urban Arts News",
         "Explore featured street artists and contemporary urban art city by city.",
-        f"{BASE_URL}/cities/"
+        f"{BASE_URL}/urban-art-cities/"
     )
 
     cities_html += """
@@ -1070,9 +1071,29 @@ with one selected featured artist.
 """
     cities_html += page_footer()
 
-    cities_output = CITIES_DIR / "index.html"
+    ensure_directory(CITY_DIRECTORY_DIR)
+    cities_output = CITY_DIRECTORY_DIR / "index.html"
     cities_output.write_text(cities_html, encoding="utf-8")
     print(f"UPDATE city directory: {cities_output}")
+
+    # Preserve existing backlinks and search signals from the former directory URL.
+    redirect_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url=/urban-art-cities/">
+<link rel="canonical" href="https://urbanartsnews.com/urban-art-cities/">
+<title>Urban Art Cities | Urban Arts News</title>
+<script>window.location.replace("/urban-art-cities/");</script>
+</head>
+<body>
+<p>This directory has moved to <a href="/urban-art-cities/">Urban Art Cities</a>.</p>
+</body>
+</html>
+"""
+    (CITIES_DIR / "index.html").write_text(redirect_html, encoding="utf-8")
+    print(f"UPDATE city directory redirect: {CITIES_DIR / 'index.html'}")
 
 
 def generate_homepage(artists):
@@ -1219,7 +1240,7 @@ Cities
 """
     html += city_links
     html += """
-<a href="/cities/">View All Cities →</a>
+<a href="/urban-art-cities/">View All Cities →</a>
 
 </section>
 
@@ -1486,7 +1507,7 @@ def generate_sitemap(artists):
     urls = {
         f"{BASE_URL}/",
         f"{BASE_URL}/artists/",
-        f"{BASE_URL}/cities/",
+        f"{BASE_URL}/urban-art-cities/",
         f"{BASE_URL}/tags/street-art/",
         f"{BASE_URL}/tags/urban-art/",
         f"{BASE_URL}/tags/barcelona-street-art/",
