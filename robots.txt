@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://urbanartsnews.com/sitemap.xml
+Sitemap: https://urbanartsnews.com/image-sitemap.xml
