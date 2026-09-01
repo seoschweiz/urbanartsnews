@@ -8,3 +8,4 @@ Sitemap: https://urbanartsnews.com/image-sitemap-barcelona.xml
 Sitemap: https://urbanartsnews.com/image-sitemap-badalona.xml
 Sitemap: https://urbanartsnews.com/image-sitemap-buenos-aires.xml
 Sitemap: https://urbanartsnews.com/image-sitemap-ashwan.xml
+Sitemap: https://urbanartsnews.com/image-sitemap-urban-art-gallery-news.xml
