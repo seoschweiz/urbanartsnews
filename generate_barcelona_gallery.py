@@ -4,7 +4,10 @@ import html
 import json
 import re
 import unicodedata
-from PIL import Image
+from PIL import Image, ImageFile
+
+# Some source JPEGs contain a valid image with an incomplete final data block.
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 BASE = "https://urbanartsnews.com"
 UPLOAD_DIR = Path("data/image_uploads")
