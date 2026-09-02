@@ -2,6 +2,8 @@
 
 import json
 import re
+import subprocess
+from datetime import date
 from html import escape, unescape
 from pathlib import Path
 from urllib.parse import urljoin
@@ -10,8 +12,56 @@ from urllib.parse import urljoin
 BASE_URL = "https://urbanartsnews.com"
 DEFAULT_IMAGE = f"{BASE_URL}/assets/images/urban-art-gallery-news/group-exhibition-gallery-wall.jpg"
 SITE_NAME = "Urban Arts News"
-LANGUAGE_MENU = '''<details class="language-menu"><summary>Languages</summary><div class="language-menu-list"><a href="/sq/urban-art-news/" hreflang="sq">Shqip</a><a href="/de/urban-art-news/" hreflang="de">Deutsch</a><a href="/es/urban-art-news/" hreflang="es">Español</a><a href="/ca/urban-art-news/" hreflang="ca">Català</a><a href="/pt/urban-art-news/" hreflang="pt">Português</a><a href="/it/urban-art-news/" hreflang="it">Italiano</a><a href="/fr/urban-art-news/" hreflang="fr">Français</a><a href="/ja/urban-art-news/" hreflang="ja">日本語</a><a href="/ar/urban-art-news/" hreflang="ar">العربية</a><a href="/languages/">All Languages</a></div></details>'''
+LANGUAGE_MENU = '''<details class="language-menu"><summary>Languages</summary><div class="language-menu-list"><a href="/sq/urban-art-news/" hreflang="sq">Shqip</a><a href="/de/urban-art-news/" hreflang="de">Deutsch</a><a href="/es/urban-art-news/" hreflang="es">Español</a><a href="/ca/urban-art-news/" hreflang="ca">Català</a><a href="/pt/urban-art-news/" hreflang="pt">Português</a><a href="/it/urban-art-news/" hreflang="it">Italiano</a><a href="/fr/urban-art-news/" hreflang="fr">Français</a><a href="/ja/urban-art-news/" hreflang="ja">日本語</a><a href="/ar/urban-art-news/" hreflang="ar">العربية</a><a href="/ru/urban-art-news/" hreflang="ru">Русский</a><a href="/sv/urban-art-news/" hreflang="sv">Svenska</a><a href="/ko/urban-art-news/" hreflang="ko">한국어</a><a href="/hi/urban-art-news/" hreflang="hi">हिन्दी</a><a href="/languages/">All Languages</a></div></details>'''
 LANGUAGE_CSS = '''<style>.language-menu{display:inline-block;position:relative;margin-left:18px}.language-menu summary{cursor:pointer;font-size:14px;font-weight:800;text-transform:uppercase;list-style:none}.language-menu summary::-webkit-details-marker{display:none}.language-menu summary:after{content:" ▾"}.language-menu-list{display:none;position:absolute;right:0;top:100%;min-width:190px;background:#111;padding:10px;box-shadow:0 12px 30px #0006;z-index:100}.language-menu[open] .language-menu-list,.language-menu:hover .language-menu-list{display:block}.language-menu-list a{display:block!important;color:#fff!important;padding:9px 12px!important;margin:0!important;text-align:left;text-transform:none!important}.language-menu-list a:hover,.language-menu-list a:focus{color:#ff5b21!important}@media(max-width:750px){.language-menu{margin:12px 0 0}.language-menu-list{position:static;margin-top:8px}}</style>'''
+
+ARTIST_GALLERY_LOCATIONS = {
+    "art-is-trash": {
+        "@type": "Place",
+        "name": "Artevistas Gallery Born",
+        "sameAs": "https://www.google.com/maps/search/?api=1&query=41.38510%2C2.18058",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Carrer de la Barra de Ferro, 8",
+            "postalCode": "08003",
+            "addressLocality": "Barcelona",
+            "addressRegion": "Catalonia",
+            "addressCountry": "ES",
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.38510,
+            "longitude": 2.18058,
+        },
+    },
+    "ashwan": {
+        "@type": "Place",
+        "name": "BienCuadrado Art Gallery",
+        "sameAs": "https://www.google.com/maps/search/?api=1&query=41.3809952%2C2.1790367",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Carrer d'Ataülf, 14",
+            "postalCode": "08002",
+            "addressLocality": "Barcelona",
+            "addressRegion": "Catalonia",
+            "addressCountry": "ES",
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.3809952,
+            "longitude": 2.1790367,
+        },
+    },
+}
+
+
+def artist_gallery_location(*values):
+    haystack = " ".join(str(value or "").lower() for value in values)
+    if "art-is-trash" in haystack or "francisco-de-pajaro" in haystack:
+        return json.loads(json.dumps(ARTIST_GALLERY_LOCATIONS["art-is-trash"]))
+    if "ashwan" in haystack:
+        return json.loads(json.dumps(ARTIST_GALLERY_LOCATIONS["ashwan"]))
+    return None
 
 
 def first_match(pattern, text, flags=re.I | re.S):
@@ -55,6 +105,12 @@ def normalize_json_ld(html, canonical="", title="", description="", page_languag
                 item_type = item.get("@type")
                 item_id = str(item.get("@id", ""))
                 item_url = str(item.get("url", ""))
+                if item_type == "ImageObject":
+                    location = artist_gallery_location(
+                        item.get("contentUrl"), item_url, item_id, canonical
+                    )
+                    if location:
+                        item["contentLocation"] = location
                 if canonical and item_type in {"WebPage", "CollectionPage", "ProfilePage"} and (
                     item_url == canonical or item_id.startswith(canonical + "#")
                 ):
@@ -116,6 +172,34 @@ def replace_or_add_meta(html, attribute, key, content):
     if re.search(pattern, html, re.I):
         return re.sub(pattern, replacement, html, count=1, flags=re.I)
     return add_before_head(html, replacement)
+
+
+def enrich_artist_schema(path, html, canonical, title, description, page_language, image):
+    is_english_profile = len(path.parts) == 3 and path.parts[0] == "artists" and path.parts[-1] == "index.html"
+    is_localized_profile = len(path.parts) == 4 and path.parts[1] == "artists" and path.parts[-1] == "index.html"
+    if not (is_english_profile or is_localized_profile) or '"ProfilePage"' in html:
+        return html
+    slug = path.parts[-2]
+    heading = plain_text(first_match(r"<h1[^>]*>(.*?)</h1>", html)) or slug.replace("-", " ").title()
+    instagram = first_match(r'<a[^>]+href=["\'](https://www\.instagram\.com/[^"\']+)', html)
+    artist_id = f"{BASE_URL}/artists/{slug}/#artist"
+    graph = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "Organization", "@id": f"{BASE_URL}/#organization", "name": SITE_NAME, "url": f"{BASE_URL}/"},
+            {"@type": "WebSite", "@id": f"{BASE_URL}/#website", "name": SITE_NAME, "url": f"{BASE_URL}/", "publisher": {"@id": f"{BASE_URL}/#organization"}},
+            {"@type": "ImageObject", "@id": f"{canonical}#primaryimage", "url": image, "contentUrl": image, "caption": heading},
+            {"@type": "Person", "@id": artist_id, "name": heading, "url": f"{BASE_URL}/artists/{slug}/", **({"sameAs": [instagram]} if instagram else {})},
+            {"@type": "ProfilePage", "@id": f"{canonical}#webpage", "url": canonical, "name": title, "description": description, "inLanguage": page_language, "isPartOf": {"@id": f"{BASE_URL}/#website"}, "mainEntity": {"@id": artist_id}, "primaryImageOfPage": {"@id": f"{canonical}#primaryimage"}},
+            {"@type": "Article", "@id": f"{canonical}#article", "headline": title, "description": description, "url": canonical, "inLanguage": page_language, "author": {"@id": artist_id}, "publisher": {"@id": f"{BASE_URL}/#organization"}, "image": {"@id": f"{canonical}#primaryimage"}, "mainEntityOfPage": {"@id": f"{canonical}#webpage"}},
+            {"@type": "BreadcrumbList", "@id": f"{canonical}#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": SITE_NAME, "item": f"{BASE_URL}/"}, {"@type": "ListItem", "position": 2, "name": "Urban Artists", "item": f"{BASE_URL}/artists/"}, {"@type": "ListItem", "position": 3, "name": heading, "item": canonical}]},
+        ],
+    }
+    markup = f'<script type="application/ld+json">{json.dumps(graph, ensure_ascii=False, separators=(",", ":"))}</script>'
+    pattern = r'<script\s+type=["\']application/ld\+json["\']>.*?</script>'
+    if re.search(pattern, html, re.I | re.S):
+        return re.sub(pattern, lambda _: markup, html, count=1, flags=re.I | re.S)
+    return add_before_head(html, markup)
 
 
 def activate_known_tag_links(html):
@@ -222,7 +306,7 @@ def finalize_page(path):
         ("property", "og:type", "website"),
         ("property", "og:url", canonical),
         ("property", "og:site_name", SITE_NAME),
-        ("property", "og:locale", {"ca": "ca_ES", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "it": "it_IT", "fr": "fr_FR", "sq": "sq_AL", "ja": "ja_JP", "ar": "ar_AR"}.get(page_language, "en_US")),
+        ("property", "og:locale", {"ca": "ca_ES", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "it": "it_IT", "fr": "fr_FR", "sq": "sq_AL", "ja": "ja_JP", "ar": "ar_AR", "ru": "ru_RU", "sv": "sv_SE", "ko": "ko_KR", "hi": "hi_IN"}.get(page_language, "en_US")),
         ("property", "og:image", image),
         ("name", "twitter:card", "summary_large_image"),
         ("name", "twitter:title", title),
@@ -232,19 +316,33 @@ def finalize_page(path):
     for attribute, key, value in social:
         html = replace_or_add_meta(html, attribute, key, value)
 
+    html = enrich_artist_schema(path, html, canonical, title, description, page_language, image)
+
     if not re.search(r'<meta\s+name=["\']referrer["\']', html, re.I):
         html = add_before_head(html, '<meta name="referrer" content="strict-origin-when-cross-origin">')
-    if not re.search(r'<link\s+rel=["\']alternate["\'][^>]+application/rss\+xml', html, re.I):
-        html = add_before_head(
-            html,
-            '<link rel="alternate" type="application/rss+xml" title="Urban Art Gallery News" href="/urban-art-gallery-news/feed.xml">',
-        )
-    if path != Path("cities/barcelona/index.html") and "language-menu" not in html and re.search(r"<header\b", html, re.I):
-        if re.search(r"</nav>", html, re.I):
-            html = re.sub(r"</nav>", LANGUAGE_MENU + "</nav>", html, count=1, flags=re.I)
+    if path.parts and path.parts[0] == "urban-art-gallery-news":
+        rss_url, rss_title = "/urban-art-gallery-news/feed.xml", "Urban Art Gallery News"
+    elif len(path.parts) >= 4 and path.parts[1] == "artists":
+        rss_url, rss_title = f"/{path.parts[0]}/feed.xml", f"Urban Artist Articles ({page_language})"
+    elif len(path.parts) >= 3 and path.parts[0] == "artists":
+        rss_url, rss_title = "/artists/feed.xml", "Urban Artist Articles"
+    else:
+        rss_url, rss_title = "/feed.xml", "Urban Arts News"
+    rss_markup = f'<link rel="alternate" type="application/rss+xml" title="{rss_title}" href="{rss_url}">'
+    rss_pattern = r'<link\s+rel=["\']alternate["\'][^>]*type=["\']application/rss\+xml["\'][^>]*>'
+    if re.search(rss_pattern, html, re.I):
+        html = re.sub(rss_pattern, rss_markup, html, count=1, flags=re.I)
+    else:
+        html = add_before_head(html, rss_markup)
+    if path != Path("cities/barcelona/index.html") and re.search(r"<header\b", html, re.I):
+        if "language-menu" in html:
+            html = re.sub(r'<details\s+class=["\']language-menu["\']>.*?</details>', LANGUAGE_MENU, html, count=1, flags=re.I | re.S)
         else:
-            html = re.sub(r"</header>", LANGUAGE_MENU + "</header>", html, count=1, flags=re.I)
-        html = add_before_head(html, LANGUAGE_CSS)
+            if re.search(r"</nav>", html, re.I):
+                html = re.sub(r"</nav>", LANGUAGE_MENU + "</nav>", html, count=1, flags=re.I)
+            else:
+                html = re.sub(r"</header>", LANGUAGE_MENU + "</header>", html, count=1, flags=re.I)
+            html = add_before_head(html, LANGUAGE_CSS)
     if not re.search(r'<script\s+type=["\']application/ld\+json["\']', html, re.I):
         schema = {
             "@context": "https://schema.org",
@@ -293,8 +391,39 @@ def enforce_url_migrations(pages):
             path.write_text(updated, encoding="utf-8")
 
 
-def rebuild_sitemap(indexed_urls):
-    rows = "\n".join(f"  <url>\n    <loc>{escape(url)}</loc>\n  </url>" for url in sorted(indexed_urls))
+def last_modified(path):
+    try:
+        dirty = subprocess.run(
+            ["git", "diff", "--quiet", "--", str(path)],
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        ).returncode != 0
+        untracked = subprocess.run(
+            ["git", "ls-files", "--error-unmatch", str(path)],
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        ).returncode != 0
+        if dirty or untracked:
+            return date.today().isoformat()
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cs", "--", str(path)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        value = result.stdout.strip()
+        return value if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value) else date.today().isoformat()
+    except OSError:
+        return date.today().isoformat()
+
+
+def rebuild_sitemap(indexed_pages):
+    rows = "\n".join(
+        f"  <url>\n    <loc>{escape(url)}</loc>\n    <lastmod>{last_modified(path)}</lastmod>\n  </url>"
+        for url, path in sorted(indexed_pages.items())
+    )
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -308,13 +437,13 @@ def main():
     pages = sorted(path for path in Path(".").rglob("index.html") if ".git" not in path.parts)
     enforce_url_migrations(pages)
     uniquify_image_titles(pages)
-    indexed_urls = set()
+    indexed_pages = {}
     for path in pages:
         canonical, noindex = finalize_page(path)
         if not noindex and canonical.startswith(f"{BASE_URL}/"):
-            indexed_urls.add(canonical)
-    rebuild_sitemap(indexed_urls)
-    print(f"SEO finalized: {len(pages)} pages checked; {len(indexed_urls)} canonical URLs in sitemap")
+            indexed_pages[canonical] = path
+    rebuild_sitemap(indexed_pages)
+    print(f"SEO finalized: {len(pages)} pages checked; {len(indexed_pages)} canonical URLs in sitemap")
 
 
 if __name__ == "__main__":
