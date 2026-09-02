@@ -55,6 +55,18 @@ PAGE2_PHOTOS = [
     {"n": 18, "slug": "gran-via-barcelona-night-culture", "title": "Gran Via Barcelona and Night Culture", "description": "Central Barcelona glows after sunset as traffic, illuminated façades and rooftop spaces activate the city. The transition from day to night changes how architecture and public space are experienced. Music, nightlife, design and visual art become part of a wider urban culture that connects local creators with visitors from around the world.", "meta_description": "Explore Gran Via and Barcelona night culture in this branded evening photograph from Urban Arts News.", "alt": "Illuminated Gran Via Barcelona at night with Urban Arts News branding", "width": 1536, "height": 1024},
 ]
 
+ARTEVISTAS_IMAGES = [
+    {"slug": "street-art-gallery-barcelona-artevistas-born-interior", "title": "Artevistas Born – Street Art Gallery Barcelona", "alt": "Panoramic interior of Artevistas Born, a contemporary and street art gallery in Barcelona", "caption": "Inside Artevistas Born, a Barcelona gallery presenting contemporary art, collectible street art and emerging artists near the Picasso Museum.", "description": "A panoramic view inside Artevistas Gallery Born showing its vaulted exhibition rooms and a selection of contemporary and urban artworks in Barcelona.", "width": 1600, "height": 738, "location": "born", "keywords": ["Street Art Gallery Barcelona", "Urban Art Gallery Barcelona", "Artevistas Born", "El Born Barcelona", "Gallery Interior Barcelona"]},
+    {"slug": "street-art-gallery-barcelona-artevistas-exhibitions-events", "title": "Artevistas Exhibitions and Events in Barcelona", "alt": "Artevistas Gallery Barcelona exhibition and event programme featuring contemporary and urban artists", "caption": "Artevistas Gallery connects Barcelona audiences with changing exhibitions, openings and events involving contemporary and urban artists.", "description": "Screenshot documenting upcoming and past exhibitions at Artevistas Gallery Barcelona, including artist presentations and urban-art-related cultural events.", "width": 1600, "height": 725, "location": "both", "keywords": ["Street Art Gallery Barcelona", "Barcelona Art Events", "Barcelona Exhibitions", "Gallery Openings Barcelona"]},
+    {"slug": "street-art-gallery-barcelona-artevistas-gotic", "title": "Artevistas Gòtic – Urban Art Gallery Barcelona", "alt": "Artevistas Gallery Gòtic in Barcelona with entrance and interior views of contemporary urban art", "caption": "Artevistas Gòtic presents original artworks and editions in Barcelona's historic centre at Passatge del Crèdit 4.", "description": "A visual overview of the Artevistas Gòtic location, combining its Barcelona entrance with interior views and displays of contemporary and urban art.", "width": 1600, "height": 733, "location": "gotic", "keywords": ["Urban Art Gallery Barcelona", "Artevistas Gòtic", "Gothic Quarter Barcelona", "Passatge del Crèdit"]},
+    {"slug": "street-art-gallery-barcelona-artevistas-born-gallery-views", "title": "Artevistas Born Gallery Views – Barcelona", "alt": "Multiple interior views of Artevistas Born street art and contemporary art gallery in Barcelona", "caption": "A series of gallery views from Artevistas Born showing the scale, architecture and changing presentation of art in the Barcelona space.", "description": "A gallery grid documenting the Artevistas Born interior, its historic vaulted rooms and varied displays of street art and contemporary artworks.", "width": 1600, "height": 716, "location": "born", "keywords": ["Street Art Gallery Barcelona", "Artevistas Born Interior", "Barcelona Gallery Views", "Urban Art Exhibition Space"]},
+]
+
+ARTEVISTAS_LOCATIONS = {
+    "born": {"name": "Artevistas Gallery Born", "address": "Carrer de la Barra de Ferro, 8, 08003 Barcelona, Spain", "latitude": 41.3849551, "longitude": 2.1804722, "maps": "https://www.google.com/maps/search/?api=1&query=Artevistas%20Gallery%20Born%2C%20Carrer%20de%20la%20Barra%20de%20Ferro%208%2C%20Barcelona"},
+    "gotic": {"name": "Artevistas Gallery Gòtic", "address": "Passatge del Crèdit, 4, 08002 Barcelona, Spain", "latitude": 41.38185, "longitude": 2.17644, "maps": "https://www.google.com/maps/search/?api=1&query=Artevistas%20Gallery%20Gotic%2C%20Passatge%20del%20Credit%204%2C%20Barcelona"},
+}
+
 ALL_PHOTOS = PHOTOS + PAGE2_PHOTOS
 
 def esc(value):
@@ -192,16 +204,27 @@ def generate_gallery_page2():
     hero = PAGE2_PHOTOS[0]
     canonical = BASE + "/cities/barcelona/gallery/page/2/"
     image = BASE + f"/assets/images/barcelona/{hero['slug']}.jpg"
-    description = "Explore nine branded Barcelona photographs celebrating new urban culture, public art, architecture and Mediterranean city life on Urban Arts News."
+    description = "Explore Barcelona urban culture and four documented views of Artevistas, a street art and contemporary art gallery with spaces in Born and the Gothic Quarter."
     item_list = [{"@type":"ListItem","position":i+1,"url":BASE+f"/cities/barcelona/gallery/{p['slug']}/","name":p["title"]} for i,p in enumerate(PAGE2_PHOTOS)]
-    schema={"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":canonical+"#collection","url":canonical,"name":"Barcelona Urban Culture Gallery – Page 2","description":description,"mainEntity":{"@type":"ItemList","numberOfItems":9,"itemListElement":item_list}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Urban Arts News","item":BASE+"/"},{"@type":"ListItem","position":2,"name":"Barcelona","item":BASE+"/cities/barcelona/"},{"@type":"ListItem","position":3,"name":"Barcelona Gallery","item":BASE+"/cities/barcelona/gallery/"},{"@type":"ListItem","position":4,"name":"Page 2","item":canonical}]}]}
+    item_list += [{"@type":"ListItem","position":len(PAGE2_PHOTOS)+i+1,"url":canonical+"#"+image_item["slug"],"name":image_item["title"]} for i,image_item in enumerate(ARTEVISTAS_IMAGES)]
+    place_nodes = [{"@type":"ArtGallery","@id":canonical+"#"+key,"name":location["name"],"url":"https://www.artevistas.eu/","address":location["address"],"hasMap":location["maps"],"geo":{"@type":"GeoCoordinates","latitude":location["latitude"],"longitude":location["longitude"]}} for key,location in ARTEVISTAS_LOCATIONS.items()]
+    image_nodes = []
+    for image_item in ARTEVISTAS_IMAGES:
+        location_ids = ["born", "gotic"] if image_item["location"] == "both" else [image_item["location"]]
+        image_nodes.append({"@type":"ImageObject","@id":canonical+"#"+image_item["slug"],"name":image_item["title"],"description":image_item["description"],"caption":image_item["caption"],"contentUrl":BASE+"/assets/images/barcelona/"+image_item["slug"]+".webp","encodingFormat":"image/webp","width":image_item["width"],"height":image_item["height"],"contentLocation":[{"@id":canonical+"#"+location_id} for location_id in location_ids],"creditText":"Website screenshot courtesy of Artevistas Gallery. Editorial presentation by Urban Arts News.","copyrightNotice":"The website, logo, photographs and displayed artworks remain the property of their respective rights holders.","acquireLicensePage":"https://www.artevistas.eu/","creator":{"@type":"Organization","name":"Artevistas Gallery","url":"https://www.artevistas.eu/"},"publisher":{"@type":"Organization","name":"Urban Arts News","url":BASE+"/"},"keywords":image_item["keywords"],"representativeOfPage":False})
+    schema={"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":canonical+"#collection","url":canonical,"name":"Barcelona Urban Culture Gallery – Page 2","description":description,"mainEntity":{"@type":"ItemList","numberOfItems":13,"itemListElement":item_list}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Urban Arts News","item":BASE+"/"},{"@type":"ListItem","position":2,"name":"Barcelona","item":BASE+"/cities/barcelona/"},{"@type":"ListItem","position":3,"name":"Barcelona Gallery","item":BASE+"/cities/barcelona/gallery/"},{"@type":"ListItem","position":4,"name":"Page 2","item":canonical}]}] + place_nodes + image_nodes}
     cards=""
     for i,p in enumerate(PAGE2_PHOTOS):
         attrs='loading="eager" fetchpriority="high"' if i==0 else 'loading="lazy"'
         cards += f"""<article class="card"><a href="/cities/barcelona/gallery/{p['slug']}/"><picture><source type="image/webp" srcset="/assets/images/barcelona/responsive/{p['slug']}-480.webp 480w, /assets/images/barcelona/responsive/{p['slug']}-960.webp 960w" sizes="(max-width:800px) 92vw, 30vw"><img src="/assets/images/barcelona/{p['slug']}.jpg" alt="{esc(p['alt'])}" width="{p['width']}" height="{p['height']}" {attrs} decoding="async"></picture></a><div class="card-content"><h2>{link_barcelona(p['title'])}</h2><p>{link_barcelona(p['description'])}</p><a href="/cities/barcelona/gallery/{p['slug']}/">View photograph →</a></div></article>"""
+    artevistas_cards = ""
+    for image_item in ARTEVISTAS_IMAGES:
+        location_ids = ["born", "gotic"] if image_item["location"] == "both" else [image_item["location"]]
+        map_links = " ".join(f'<a class="button" href="{esc(ARTEVISTAS_LOCATIONS[location_id]["maps"])}" rel="noopener" target="_blank">{esc(ARTEVISTAS_LOCATIONS[location_id]["name"])} Map →</a>' for location_id in location_ids)
+        artevistas_cards += f"""<article class="card"><picture><source type="image/webp" srcset="/assets/images/barcelona/{image_item['slug']}.webp"><img src="/assets/images/barcelona/{image_item['slug']}.jpg" alt="{esc(image_item['alt'])}" width="{image_item['width']}" height="{image_item['height']}" loading="lazy" decoding="async"></picture><div class="card-content"><h2>{esc(image_item['title'])}</h2><p>{esc(image_item['caption'])}</p><p class="credit">Website screenshot courtesy of <a href="https://www.artevistas.eu/" rel="noopener" target="_blank"><strong>Artevistas Gallery</strong></a>. The website, photographs, logo and displayed artworks remain the property of their respective rights holders. Editorial presentation by <a href="https://urbanartsnews.com/"><strong>Urban Arts News</strong></a>.</p>{map_links}</div></article>"""
     markup=head("Barcelona Urban Culture Gallery – Page 2 | Urban Arts News",description,canonical,image,hero["width"],hero["height"],schema)
     markup=markup.replace("</head>", '<link rel="prev" href="https://urbanartsnews.com/cities/barcelona/gallery/"></head>')
-    markup+=f"""<section class="hero"><small>New Urban Culture · ★★★★★</small><h1>{link_barcelona('Barcelona')} <span class="accent">Gallery · Page 2</span></h1><p>{link_barcelona('Branded Barcelona photography connecting architecture, public space and New Urban Culture with Urban Arts News.')}</p></section><main class="container"><h2>{link_barcelona('New Urban Culture in Barcelona')}</h2><p>Each photograph carries the UrbanArtsNews.Com identity and an invitation to subscribe for free. Every image also has its own indexable page, descriptive metadata and links into the Barcelona urban-art archive.</p><div class="grid">{cards}</div><p><a class="button" href="/cities/barcelona/gallery/">← Barcelona Gallery · Page 1</a><a class="button" href="/subscribe/">Subscribe for Free →</a></p></main>"""+footer()
+    markup+=f"""<section class="hero"><small>New Urban Culture · ★★★★★</small><h1>{link_barcelona('Barcelona')} <span class="accent">Gallery · Page 2</span></h1><p>{link_barcelona('Branded Barcelona photography connecting architecture, public space and New Urban Culture with Urban Arts News.')}</p></section><main class="container"><h2>{link_barcelona('New Urban Culture in Barcelona')}</h2><p>Each photograph carries the UrbanArtsNews.Com identity and an invitation to subscribe for free. Every image also has its own indexable page, descriptive metadata and links into the Barcelona urban-art archive.</p><div class="grid">{cards}</div><section><h2>Street Art Gallery Barcelona · Artevistas</h2><p>Urban Arts News documents Artevistas Gallery through four website views connecting its Born and Gòtic locations with contemporary art, collectible street art, exhibitions and Barcelona urban culture.</p><div class="grid">{artevistas_cards}</div></section><p><a class="button" href="/cities/barcelona/gallery/">← Barcelona Gallery · Page 1</a><a class="button" href="/subscribe/">Subscribe for Free →</a></p></main>"""+footer()
     (page_dir/"index.html").write_text(markup,encoding="utf-8")
 
 def generate_redirects():
@@ -246,6 +269,10 @@ def image_sitemap():
         page=BASE+f"/cities/barcelona/gallery/{p['slug']}/"
         image=BASE+f"/assets/images/barcelona/{p['slug']}.jpg"
         rows.append(f"  <url><loc>{page}</loc><image:image><image:loc>{image}</image:loc></image:image></url>")
+    page2=BASE+"/cities/barcelona/gallery/page/2/"
+    for image_item in ARTEVISTAS_IMAGES:
+        image=BASE+f"/assets/images/barcelona/{image_item['slug']}.webp"
+        rows.append(f"  <url><loc>{page2}</loc><image:image><image:loc>{image}</image:loc><image:title>{esc(image_item['title'])}</image:title><image:caption>{esc(image_item['caption'])}</image:caption></image:image></url>")
     xml='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'+"\n".join(rows)+"\n</urlset>\n"
     Path("image-sitemap-barcelona.xml").write_text(xml,encoding="utf-8")
     robots=Path("robots.txt")
@@ -266,7 +293,7 @@ def main():
     patch_city_page()
     update_sitemap()
     image_sitemap()
-    print("DONE Barcelona gallery: 18 photographs across 2 pages")
+    print("DONE Barcelona gallery: 18 photographs plus 4 Artevistas gallery images across 2 pages")
 
 if __name__=="__main__":
     main()
