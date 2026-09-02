@@ -4,7 +4,10 @@ import html, json, unicodedata
 import urllib.request
 import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
-from PIL import Image
+from PIL import Image, ImageFile
+
+# Accept still-renderable source JPEGs with an incomplete final data block.
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 BASE="https://urbanartsnews.com"
 ROOT=Path("urban-art-gallery-news")
