@@ -5,7 +5,7 @@ import re
 
 BASE = "https://urbanartsnews.com"
 OUT = Path("urban-art-music")
-GENERATOR_VERSION = "2026-09-02-multilingual-video-pages.1"
+GENERATOR_VERSION = "2026-09-02-multilingual-video-pages.2"
 
 VIDEOS = [
     ("fJZd5IhTlsE", "DJ Key Song - Break in Tokyo 2012", "Breakdance Music"),
