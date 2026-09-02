@@ -454,8 +454,20 @@ def ensure_ashwan_urban_art_gallery_link():
     path.write_text(html, encoding="utf-8")
 
 
+def ensure_artevistas_map_labels():
+    """Keep the full Urban Art Gallery keyword in both Artevistas map buttons."""
+    path = Path("street-art-galleries-barcelona/index.html")
+    if not path.exists():
+        return
+    html = path.read_text(encoding="utf-8", errors="ignore")
+    html = html.replace("Artevistas Gallery Map I →", "Artevistas Urban Art Gallery Map I →")
+    html = html.replace("Artevistas Gallery Map II →", "Artevistas Urban Art Gallery Map II →")
+    path.write_text(html, encoding="utf-8")
+
+
 def main():
     ensure_ashwan_urban_art_gallery_link()
+    ensure_artevistas_map_labels()
     pages = sorted(path for path in Path(".").rglob("index.html") if ".git" not in path.parts)
     enforce_url_migrations(pages)
     uniquify_image_titles(pages)
