@@ -1,6 +1,7 @@
 from pathlib import Path
 import html
 import json
+import re
 
 BASE = "https://urbanartsnews.com"
 OUT = Path("urban-art-music")
@@ -33,14 +34,98 @@ VIDEOS = [
     ("n9FMvfvkBro", "Lou Monte - Che La Luna Mezzo Mare", "prendona"),
     ("_HEHD8UnF4E", "Electronic Music - Shuffle Dance", "Pixel Music"),
     ("1XS7OyZKLTc", "Suie Paparude - Pentru inimi", "Cat Music Gold"),
-    ("PBsjggc5jHM", "Digital Underground - The Humpty Dance", "Tommy Boy"),
 ]
 
 PAGES = [VIDEOS[:9], VIDEOS[9:18], VIDEOS[18:]]
 
+LANGUAGES = {
+    "en": {"name": "English", "dir": "ltr", "watch": "View on YouTube", "back": "Back to Urban Art Music", "languages": "Explore this video in 14 languages", "label": "Urban Art Music Selection", "about": "Why urban music matters", "meta": "Urban music can inspire street art, graffiti and urban artists in cities around the world."},
+    "ca": {"name": "Català", "dir": "ltr", "watch": "Veure a YouTube", "back": "Tornar a Urban Art Music", "languages": "Explora aquest vídeo en 14 idiomes", "label": "Selecció d'Urban Art Music", "about": "Per què importa la música urbana", "meta": "La música urbana pot inspirar l'art de carrer, el grafiti i els artistes urbans de ciutats de tot el món."},
+    "es": {"name": "Español", "dir": "ltr", "watch": "Ver en YouTube", "back": "Volver a Urban Art Music", "languages": "Explora este vídeo en 14 idiomas", "label": "Selección de Urban Art Music", "about": "Por qué importa la música urbana", "meta": "La música urbana puede inspirar el arte callejero, el grafiti y a artistas urbanos de ciudades de todo el mundo."},
+    "de": {"name": "Deutsch", "dir": "ltr", "watch": "Auf YouTube ansehen", "back": "Zurück zu Urban Art Music", "languages": "Dieses Video in 14 Sprachen entdecken", "label": "Urban Art Music Auswahl", "about": "Warum urbane Musik wichtig ist", "meta": "Urbane Musik kann Street Art, Graffiti und urbane Künstler in Städten auf der ganzen Welt inspirieren."},
+    "fr": {"name": "Français", "dir": "ltr", "watch": "Voir sur YouTube", "back": "Retour à Urban Art Music", "languages": "Découvrir cette vidéo en 14 langues", "label": "Sélection Urban Art Music", "about": "Pourquoi la musique urbaine compte", "meta": "La musique urbaine peut inspirer le street art, le graffiti et les artistes urbains dans les villes du monde entier."},
+    "it": {"name": "Italiano", "dir": "ltr", "watch": "Guarda su YouTube", "back": "Torna a Urban Art Music", "languages": "Scopri questo video in 14 lingue", "label": "Selezione Urban Art Music", "about": "Perché la musica urbana è importante", "meta": "La musica urbana può ispirare street art, graffiti e artisti urbani nelle città di tutto il mondo."},
+    "pt": {"name": "Português", "dir": "ltr", "watch": "Ver no YouTube", "back": "Voltar a Urban Art Music", "languages": "Explore este vídeo em 14 idiomas", "label": "Seleção Urban Art Music", "about": "Porque a música urbana importa", "meta": "A música urbana pode inspirar street art, graffiti e artistas urbanos em cidades de todo o mundo."},
+    "sq": {"name": "Shqip", "dir": "ltr", "watch": "Shiko në YouTube", "back": "Kthehu te Urban Art Music", "languages": "Eksploro këtë video në 14 gjuhë", "label": "Përzgjedhje Urban Art Music", "about": "Pse ka rëndësi muzika urbane", "meta": "Muzika urbane mund të frymëzojë artin e rrugës, grafitin dhe artistët urbanë në qytete në mbarë botën."},
+    "ja": {"name": "日本語", "dir": "ltr", "watch": "YouTubeで見る", "back": "Urban Art Musicへ戻る", "languages": "この動画を14言語で見る", "label": "Urban Art Music セレクション", "about": "アーバンミュージックの価値", "meta": "アーバンミュージックは、世界中の都市でストリートアート、グラフィティ、アーバンアーティストを刺激します。"},
+    "ar": {"name": "العربية", "dir": "rtl", "watch": "المشاهدة على يوتيوب", "back": "العودة إلى Urban Art Music", "languages": "استكشف هذا الفيديو بـ14 لغة", "label": "مختارات Urban Art Music", "about": "لماذا تهم الموسيقى الحضرية", "meta": "يمكن للموسيقى الحضرية أن تلهم فن الشارع والغرافيتي والفنانين الحضريين في مدن العالم."},
+    "ru": {"name": "Русский", "dir": "ltr", "watch": "Смотреть на YouTube", "back": "Назад к Urban Art Music", "languages": "Смотреть это видео на 14 языках", "label": "Подборка Urban Art Music", "about": "Почему важна городская музыка", "meta": "Городская музыка вдохновляет стрит-арт, граффити и городских художников в городах по всему миру."},
+    "sv": {"name": "Svenska", "dir": "ltr", "watch": "Visa på YouTube", "back": "Tillbaka till Urban Art Music", "languages": "Utforska videon på 14 språk", "label": "Urban Art Music-utval", "about": "Varför urban musik är viktig", "meta": "Urban musik kan inspirera gatukonst, graffiti och urbana konstnärer i städer över hela världen."},
+    "ko": {"name": "한국어", "dir": "ltr", "watch": "YouTube에서 보기", "back": "Urban Art Music으로 돌아가기", "languages": "이 동영상을 14개 언어로 보기", "label": "Urban Art Music 셀렉션", "about": "도시 음악의 가치", "meta": "도시 음악은 전 세계 도시의 스트리트 아트, 그래피티와 도시 예술가들에게 영감을 줄 수 있습니다."},
+    "hi": {"name": "हिन्दी", "dir": "ltr", "watch": "YouTube पर देखें", "back": "Urban Art Music पर वापस जाएँ", "languages": "इस वीडियो को 14 भाषाओं में देखें", "label": "Urban Art Music चयन", "about": "शहरी संगीत क्यों महत्वपूर्ण है", "meta": "शहरी संगीत दुनिया भर के शहरों में स्ट्रीट आर्ट, ग्रैफिटी और शहरी कलाकारों को प्रेरित कर सकता है।"},
+}
+
+MOTIVATION_TEXTS = [
+    "Urban music turns rhythm into creative momentum, giving street artists and graffiti writers fresh energy for ideas that can travel far beyond one city.",
+    "A powerful beat can open a space for experimentation, helping urban artists translate movement, memory and city life into visual expression.",
+    "Music and street art share an instinct for freedom: both can transform everyday public space into a place of surprise, identity and imagination.",
+    "Motivating urban music supports the creative flow behind murals, lettering and independent art, connecting artists from Barcelona to cities worldwide.",
+    "Rhythm can become a creative companion during long painting sessions, encouraging focus, courage and the confidence to try something new.",
+    "Urban sound carries the voices of neighbourhoods and helps visual artists turn local experience into work that can speak across borders.",
+    "When music creates momentum, a blank wall, recycled surface or overlooked corner can begin to feel like an invitation to create.",
+    "Hip-hop culture has long connected sound, movement, graffiti and community, showing how different art forms can strengthen one another.",
+    "An inspiring track can shift the mood of a creative process and help an artist discover unexpected colours, forms, letters and gestures.",
+    "Urban music links personal expression with collective energy, reminding creators that street art can belong to a worldwide cultural conversation.",
+    "The pulse of music can encourage spontaneous decisions, giving graffiti and mural work the movement and immediacy of a live performance.",
+    "Creative music offers more than background sound: it can shape atmosphere, sustain attention and help visual ideas grow into finished urban artworks.",
+    "From Badalona and Barcelona to Buenos Aires and beyond, music helps artists feel connected to a larger network of independent creativity.",
+    "Strong rhythms can support resilience and motivation, especially when urban artists are developing demanding work in changing public environments.",
+    "Music can turn solitude into connection, accompanying an individual artist while linking the work to audiences and creative communities worldwide.",
+    "The exchange between sound and image encourages new perspectives, allowing graffiti, street art and music to continually reinvent urban culture.",
+    "A memorable song can become part of an artwork's creative history, preserving the mood, energy and ideas present while the piece was made.",
+    "Urban music invites movement, and that sense of movement can appear in flowing letters, dynamic characters and expansive mural compositions.",
+    "Independent music and independent street art share a valuable spirit: each can create visibility for voices outside traditional cultural spaces.",
+    "Listening across genres can widen an artist's visual vocabulary and inspire combinations that would not emerge from a single cultural influence.",
+    "Music gives creative work an emotional tempo, helping artists move between reflection, experimentation and decisive action.",
+    "The energy of urban music can make public-space creativity feel possible, immediate and connected to everyday life rather than distant institutions.",
+    "Sound can activate memory and place, helping artists express how a neighbourhood feels as well as how it looks.",
+    "A motivating soundtrack can support creative risk, encouraging urban artists to explore unfamiliar materials, scales and visual languages.",
+    "Urban art and music both build bridges between generations, carrying cultural knowledge forward while leaving room for new interpretations.",
+    "The right rhythm can bring clarity to a complex idea and help an artist organise colour, composition and movement with greater confidence.",
+    "Across continents and languages, urban music can unite people who value graffiti, street art and the creative transformation of shared spaces.",
+]
+
 
 def esc(value):
     return html.escape(str(value), quote=True)
+
+
+def slugify(value):
+    value = value.lower().strip()
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    return value.strip("-")[:80] or "urban-art-music-video"
+
+
+def video_slug(video):
+    video_id, title, _author = video
+    return f"{slugify(title)}-{video_id.lower()}"
+
+
+def detail_relative_url(language, video):
+    prefix = "" if language == "en" else f"/{language}"
+    return f"{prefix}/urban-art-music/{video_slug(video)}/"
+
+
+def detail_url(language, video):
+    return BASE + detail_relative_url(language, video)
+
+
+def hreflang_links(video):
+    links = []
+    for code in LANGUAGES:
+        links.append(f'<link rel="alternate" hreflang="{code}" href="{esc(detail_url(code, video))}">')
+    links.append(f'<link rel="alternate" hreflang="x-default" href="{esc(detail_url("en", video))}">')
+    return "".join(links)
+
+
+def language_buttons(video, current_language):
+    links = []
+    for code, config in LANGUAGES.items():
+        current = ' aria-current="page"' if code == current_language else ""
+        links.append(
+            f'<a class="language-button" lang="{code}" href="{esc(detail_relative_url(code, video))}"{current}>{esc(config["name"])}</a>'
+        )
+    return "".join(links)
 
 
 def url_for(page_number):
@@ -57,7 +142,7 @@ def video_cards(videos, start_position):
         position = start_position + offset
         cards.append(f'''<article class="video-card">
 <div class="player"><iframe src="https://www.youtube-nocookie.com/embed/{video_id}" title="{esc(title)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-<div class="video-copy"><div class="number">Selection {position}</div><h2>{esc(title)}</h2><p>Featured on Urban Art Music · Video published by {esc(author)} on YouTube.</p><a href="https://www.youtube.com/watch?v={video_id}" rel="nofollow noopener" target="_blank">View on YouTube →</a></div>
+<div class="video-copy"><div class="number">Selection {position}</div><h2><a href="{esc(detail_relative_url('en', (video_id, title, author)))}">{esc(title)}</a></h2><p>{esc(MOTIVATION_TEXTS[position - 1])}</p><a href="{esc(detail_relative_url('en', (video_id, title, author)))}">Explore video →</a></div>
 </article>''')
     return "\n".join(cards)
 
@@ -152,6 +237,66 @@ def generate_page(page_number, videos):
     (target / "index.html").write_text(markup, encoding="utf-8")
 
 
+def generate_video_page(video, position, language):
+    video_id, title, author = video
+    config = LANGUAGES[language]
+    canonical = detail_url(language, video)
+    paragraph = MOTIVATION_TEXTS[position - 1] if language == "en" else config["meta"]
+    meta_description = f'{title}. {config["meta"]}'
+    page_title = f"{title} | Urban Art Music | Urban Arts News"
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "VideoObject",
+                "@id": canonical + "#video",
+                "name": title,
+                "description": meta_description,
+                "thumbnailUrl": [f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"],
+                "embedUrl": f"https://www.youtube-nocookie.com/embed/{video_id}",
+                "contentUrl": f"https://www.youtube.com/watch?v={video_id}",
+                "url": canonical,
+                "inLanguage": language,
+                "isPartOf": {"@type": "CollectionPage", "name": "Urban Art Music", "url": BASE + "/urban-art-music/"},
+                "publisher": {"@type": "Organization", "name": "Urban Arts News", "url": BASE + "/"},
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Urban Arts News", "item": BASE + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Urban Art Music", "item": BASE + "/urban-art-music/"},
+                    {"@type": "ListItem", "position": 3, "name": title, "item": canonical},
+                ],
+            },
+        ],
+    }
+    schema_json = json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    markup = f'''<!DOCTYPE html>
+<html lang="{language}" dir="{config['dir']}"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#090909">
+<title>{esc(page_title)}</title>
+<meta name="description" content="{esc(meta_description)}"><meta name="robots" content="index,follow,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="{esc(canonical)}">{hreflang_links(video)}
+<meta property="og:type" content="video.other"><meta property="og:title" content="{esc(page_title)}"><meta property="og:description" content="{esc(meta_description)}"><meta property="og:url" content="{esc(canonical)}"><meta property="og:site_name" content="Urban Arts News"><meta property="og:image" content="https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"><meta property="og:video" content="https://www.youtube-nocookie.com/embed/{video_id}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(page_title)}"><meta name="twitter:description" content="{esc(meta_description)}"><meta name="twitter:image" content="https://i.ytimg.com/vi/{video_id}/hqdefault.jpg">
+<script type="application/ld+json">{schema_json}</script>
+<style>
+*{{box-sizing:border-box}}body{{margin:0;background:#f3f3f3;color:#171717;font-family:Arial,Helvetica,sans-serif;line-height:1.65}}a{{color:inherit;text-decoration:none}}header{{background:#090909;color:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center}}.logo{{font-size:28px;font-weight:900;letter-spacing:-1px}}.logo span,.accent{{color:#ff5b21}}nav{{display:flex;gap:18px;align-items:center}}nav a{{font-size:13px;font-weight:800;text-transform:uppercase}}.hero{{background:#111;color:#fff;padding:64px 6% 52px}}.eyebrow{{color:#ff5b21;font-size:13px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}}h1{{max-width:1050px;font-size:clamp(36px,6vw,72px);line-height:1;letter-spacing:-2px;margin:12px 0 16px}}.hero p{{color:#bbb;font-size:17px}}main{{width:min(1050px,92%);margin:48px auto}}.video-panel,.copy-panel,.language-panel{{background:#fff;box-shadow:0 7px 22px rgba(0,0,0,.08);margin-bottom:28px}}.player{{position:relative;aspect-ratio:16/9;background:#000}}.player iframe{{position:absolute;inset:0;width:100%;height:100%;border:0}}.video-meta{{padding:24px}}.video-meta a,.back{{color:#ff5b21;font-weight:900}}.copy-panel,.language-panel{{padding:30px}}.copy-panel h2,.language-panel h2{{margin-top:0}}.copy-panel p{{font-size:18px;color:#555}}.language-buttons{{display:flex;flex-wrap:wrap;gap:9px}}.language-button{{background:#111;color:#fff;padding:10px 13px;font-weight:800}}.language-button[aria-current="page"]{{background:#ff5b21}}.back{{display:inline-block;margin-top:10px}}footer{{background:#090909;color:#888;text-align:center;padding:35px;margin-top:60px}}@media(max-width:760px){{header{{display:block}}nav{{margin-top:12px;flex-wrap:wrap}}}}
+</style></head><body>
+<header><a class="logo" href="/">URBAN <span>ARTS</span> NEWS</a><nav><a href="/">Home</a><a href="/artists/">Artists</a><a href="/urban-art-cities/">Cities</a><a href="/urban-art-music/">Urban Art Music</a><a href="/subscribe/">Subscribe</a></nav></header>
+<section class="hero"><div class="eyebrow">{esc(config['label'])} {position:02d}</div><h1>{esc(title)}</h1><p>{esc(author)} · YouTube · Urban Arts News</p></section>
+<main>
+<article class="video-panel"><div class="player"><iframe src="https://www.youtube-nocookie.com/embed/{video_id}" title="{esc(title)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-meta"><a href="https://www.youtube.com/watch?v={video_id}" rel="nofollow noopener" target="_blank">{esc(config['watch'])} →</a></div></article>
+<section class="copy-panel"><h2>{esc(config['about'])}</h2><p>{esc(paragraph)}</p><p><a href="{BASE}/"><strong>Urban Arts News</strong></a> connects music, graffiti, street art and independent urban creativity from Barcelona, Badalona and Buenos Aires to cities worldwide.</p></section>
+<section class="language-panel"><h2>{esc(config['languages'])}</h2><div class="language-buttons">{language_buttons(video, language)}</div></section>
+<a class="back" href="/urban-art-music/">← {esc(config['back'])}</a>
+</main><footer>© 2026 Urban Arts News · Urban Art Music · {esc(title)}</footer></body></html>'''
+    target = OUT / video_slug(video) if language == "en" else Path(language) / OUT / video_slug(video)
+    target.mkdir(parents=True, exist_ok=True)
+    (target / "index.html").write_text(markup, encoding="utf-8")
+
+
 def update_sitemap():
     sitemap = Path("sitemap.xml")
     text = sitemap.read_text(encoding="utf-8")
@@ -159,14 +304,22 @@ def update_sitemap():
         url = url_for(page_number)
         if f"<loc>{url}</loc>" not in text:
             text = text.replace("</urlset>", f"  <url>\n    <loc>{url}</loc>\n  </url>\n</urlset>")
+    for video in VIDEOS:
+        for language in LANGUAGES:
+            url = detail_url(language, video)
+            if f"<loc>{url}</loc>" not in text:
+                text = text.replace("</urlset>", f"  <url>\n    <loc>{url}</loc>\n  </url>\n</urlset>")
     sitemap.write_text(text, encoding="utf-8")
 
 
 def main():
     for page_number, videos in enumerate(PAGES, start=1):
         generate_page(page_number, videos)
+    for position, video in enumerate(VIDEOS, start=1):
+        for language in LANGUAGES:
+            generate_video_page(video, position, language)
     update_sitemap()
-    print(f"Generated 3 Urban Art Music pages with {len(VIDEOS)} videos")
+    print(f"Generated 3 Urban Art Music pages and {len(VIDEOS) * len(LANGUAGES)} localized video pages for {len(VIDEOS)} videos")
 
 
 if __name__ == "__main__":
