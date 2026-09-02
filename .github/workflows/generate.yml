@@ -15,6 +15,7 @@ on:
       - "generate_badalona_gallery.py"
       - "generate_buenos_aires_gallery.py"
       - "generate_urban_art_gallery_news.py"
+      - "generate_urban_art_music.py"
       - "generate_language_pages.py"
       - "generate_art_is_trash_languages.py"
       - "generate_ashwan_languages.py"
