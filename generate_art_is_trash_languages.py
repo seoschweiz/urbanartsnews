@@ -2,6 +2,7 @@
 
 from html import escape
 from pathlib import Path
+import json
 import re
 
 
@@ -9,6 +10,7 @@ BASE = "https://urbanartsnews.com"
 ORIGINAL = f"{BASE}/artists/art-is-trash/"
 IMAGE = "/assets/images/art-is-trash/discarded-furniture-street-art.jpg"
 INSTAGRAM = "https://www.instagram.com/artistrash/"
+UPDATED_RFC822 = "Tue, 01 Sep 2026 00:00:00 GMT"
 
 LANGUAGES = {
     "ca": {
@@ -188,7 +190,23 @@ EXTRA_SECTIONS = {
 for _code, _sections in EXTRA_SECTIONS.items():
     LANGUAGES[_code]["sections"].extend(_sections)
 
-CSS = """*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f2;color:#171717;line-height:1.75}a{color:inherit}.top{background:#090909;color:#fff;padding:20px 6%}.logo{text-decoration:none;font-size:28px;font-weight:900}.logo span,.accent{color:#ff5b21}.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);background:#111;color:#fff}.hero-copy{padding:75px 8%}.eyebrow{color:#ff5b21;font-weight:900;text-transform:uppercase}.hero h1{font-size:clamp(42px,7vw,78px);line-height:.98;margin:14px 0 22px}.hero p{font-size:20px;color:#ccc}.hero img{width:100%;height:100%;min-height:470px;object-fit:cover}.wrap{width:min(1020px,90%);margin:55px auto}.article{background:#fff;padding:clamp(28px,6vw,60px);box-shadow:0 10px 35px #00000012}.article h2{font-size:clamp(25px,4vw,36px);line-height:1.15;margin:38px 0 12px}.article h2:first-child{margin-top:0}.article p{font-size:18px}.actions,.language-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:35px}.button,.language-links a{display:inline-block;background:#ff5b21;color:#fff;text-decoration:none;font-weight:800;padding:12px 16px}.button.dark,.language-links a{background:#111}.language-box{margin-top:45px;border-top:4px solid #ff5b21;padding-top:25px}.language-box h2{margin-top:0}.language-links a.active{background:#ff5b21}footer{background:#090909;color:#aaa;text-align:center;padding:35px;margin-top:60px}@media(max-width:800px){.hero{grid-template-columns:1fr}.hero img{min-height:300px}.hero-copy{padding:55px 6%}}"""
+SUBSCRIBE_LABELS = {
+    "ca": "Subscriu-t'hi gratis",
+    "es": "Suscríbete gratis",
+    "de": "Kostenlos abonnieren",
+    "fr": "S’abonner gratuitement",
+    "it": "Iscriviti gratuitamente",
+    "pt": "Subscreva gratuitamente",
+    "sq": "Abonohu falas",
+    "ja": "無料で購読",
+    "ar": "اشترك مجاناً",
+    "ru": "Подписаться бесплатно",
+    "sv": "Prenumerera gratis",
+    "ko": "무료 구독",
+    "hi": "मुफ़्त सदस्यता लें",
+}
+
+CSS = """*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f2;color:#171717;line-height:1.75}a{color:inherit}.top{background:#090909;color:#fff;padding:20px 6%}.logo{text-decoration:none;font-size:28px;font-weight:900}.logo span,.accent{color:#ff5b21}.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);background:#111;color:#fff}.hero-copy{padding:75px 8%}.eyebrow{color:#ff5b21;font-weight:900;text-transform:uppercase}.hero h1{font-size:clamp(42px,7vw,78px);line-height:.98;margin:14px 0 22px}.hero p{font-size:20px;color:#ccc}.hero img{width:100%;height:100%;min-height:470px;object-fit:cover}.wrap{width:min(1020px,90%);margin:55px auto}.article{position:relative;background:#fff;padding:clamp(28px,6vw,60px);box-shadow:0 10px 35px #00000012}.article>section:first-of-type{padding-right:230px}.subscribe-link{position:absolute;top:clamp(28px,6vw,60px);right:clamp(28px,6vw,60px);display:inline-block;background:#ff5b21;color:#fff;text-decoration:none;font-weight:900;padding:12px 16px;line-height:1.25;box-shadow:0 7px 18px #ff5b2130}.subscribe-link:hover,.subscribe-link:focus{background:#111}.article h2{font-size:clamp(25px,4vw,36px);line-height:1.15;margin:38px 0 12px}.article h2:first-child{margin-top:0}.article p{font-size:18px}.actions,.language-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:35px}.button,.language-links a{display:inline-block;background:#ff5b21;color:#fff;text-decoration:none;font-weight:800;padding:12px 16px}.button.dark,.language-links a{background:#111}.language-box{margin-top:45px;border-top:4px solid #ff5b21;padding-top:25px}.language-box h2{margin-top:0}.language-links a.active{background:#ff5b21}footer{background:#090909;color:#aaa;text-align:center;padding:35px;margin-top:60px}@media(max-width:800px){.hero{grid-template-columns:1fr}.hero img{min-height:300px}.hero-copy{padding:55px 6%}.article>section:first-of-type{padding-right:0}.subscribe-link{position:static;margin:0 0 28px}}"""
 
 
 def language_url(code):
@@ -209,17 +227,68 @@ def language_links(active="en"):
     return "".join(links)
 
 
+def schema_markup(code, item, canonical=None):
+    canonical = canonical or language_url(code)
+    title = f"{item['title']} | Urban Arts News"
+    graph = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "Organization", "@id": f"{BASE}/#organization", "name": "Urban Arts News", "url": f"{BASE}/"},
+            {"@type": "WebSite", "@id": f"{BASE}/#website", "name": "Urban Arts News", "url": f"{BASE}/", "publisher": {"@id": f"{BASE}/#organization"}},
+            {"@type": "ImageObject", "@id": f"{canonical}#primaryimage", "url": f"{BASE}{IMAGE}", "contentUrl": f"{BASE}{IMAGE}", "caption": item["heading"]},
+            {"@type": "Person", "@id": f"{ORIGINAL}#artist", "name": "Francisco de Pájaro", "alternateName": "Art Is Trash", "url": ORIGINAL, "sameAs": [INSTAGRAM], "description": item["sections"][0][1], "homeLocation": {"@type": "Place", "name": "Barcelona, Spain"}, "birthPlace": {"@type": "Place", "name": "Zafra, Extremadura, Spain"}},
+            {"@type": "ProfilePage", "@id": f"{canonical}#webpage", "url": canonical, "name": title, "description": item["description"], "inLanguage": code, "isPartOf": {"@id": f"{BASE}/#website"}, "mainEntity": {"@id": f"{ORIGINAL}#artist"}, "primaryImageOfPage": {"@id": f"{canonical}#primaryimage"}},
+            {"@type": "Article", "@id": f"{canonical}#article", "headline": item["title"], "description": item["description"], "url": canonical, "inLanguage": code, "author": {"@id": f"{ORIGINAL}#artist"}, "publisher": {"@id": f"{BASE}/#organization"}, "image": {"@id": f"{canonical}#primaryimage"}, "mainEntityOfPage": {"@id": f"{canonical}#webpage"}, "dateModified": "2026-09-01"},
+            {"@type": "BreadcrumbList", "@id": f"{canonical}#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Urban Arts News", "item": f"{BASE}/"}, {"@type": "ListItem", "position": 2, "name": "Urban Artists", "item": f"{BASE}/artists/"}, {"@type": "ListItem", "position": 3, "name": "Art Is Trash", "item": canonical}]},
+        ],
+    }
+    payload = json.dumps(graph, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    return f'<script type="application/ld+json">{payload}</script>'
+
+
+def english_schema_markup():
+    item = {
+        "title": "Art Is Trash | Francisco de Pájaro | Barcelona Street Artist",
+        "description": "Discover Art Is Trash by Francisco de Pájaro, the artist from Zafra who creates politically charged ephemeral street-art sculptures and lives and works in Barcelona.",
+        "heading": "Art Is Trash",
+        "sections": [("About Art Is Trash", "Francisco de Pájaro, known as Art Is Trash, comes from Zafra in Extremadura and lives and works in Barcelona. His international practice transforms discarded objects into expressive, politically charged ephemeral street-art sculptures.")],
+    }
+    return schema_markup("en", item, ORIGINAL)
+
+
+def rss_document(code=None):
+    if code is None:
+        channel_url = f"{BASE}/artists/feed.xml"
+        title = "Urban Artist Articles | Urban Arts News"
+        items = []
+        data_path = Path("data/artists.json")
+        if data_path.exists():
+            for artist in json.loads(data_path.read_text(encoding="utf-8")):
+                url = f"{BASE}/artists/{artist['slug']}/"
+                items.append((artist.get("headline") or artist["name"], artist.get("bio", ""), url))
+    else:
+        item = LANGUAGES[code]
+        channel_url = f"{BASE}/{code}/feed.xml"
+        title = f"Urban Artist Articles – {item['name']}"
+        items = [(item["title"], item["description"], language_url(code))]
+    entries = "".join(f'<item><title>{escape(t)}</title><link>{escape(u)}</link><guid isPermaLink="true">{escape(u)}</guid><description>{escape(d)}</description><pubDate>{UPDATED_RFC822}</pubDate></item>' for t, d, u in items)
+    return f'''<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>{escape(title)}</title><link>{escape(channel_url)}</link><atom:link href="{escape(channel_url)}" rel="self" type="application/rss+xml"/><description>Original urban art artist profiles, biographies and visual archives.</description><language>{code or 'en'}</language><lastBuildDate>{UPDATED_RFC822}</lastBuildDate>{entries}</channel></rss>\n'''
+
+
 def render_page(code, item):
     canonical = language_url(code)
     direction = ' dir="rtl"' if code == "ar" else ""
     sections = "".join(f'<section><h2>{escape(title)}</h2><p>{escape(text)}</p></section>' for title, text in item["sections"])
-    return f'''<!DOCTYPE html><html lang="{code}"{direction}><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(item['title'])} | Urban Arts News</title><meta name="description" content="{escape(item['description'], quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{canonical}">{alternates()}<style>{CSS}</style></head><body><header class="top"><a class="logo" href="/">URBAN <span>ARTS</span> NEWS</a></header><section class="hero"><div class="hero-copy"><div class="eyebrow">{escape(item['label'])}</div><h1>{escape(item['heading'])}</h1><p>{escape(item['description'])}</p></div><img src="{IMAGE}" alt="Art Is Trash Francisco de Pájaro Barcelona street art" width="1600" height="1067"></section><main class="wrap"><article class="article">{sections}<div class="actions"><a class="button" href="/artists/art-is-trash/gallery/">{escape(item['gallery'])} →</a><a class="button dark" href="/urban-art-city/barcelona/spain/">{escape(item['city'])} →</a><a class="button dark" href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram →</a><a class="button dark" href="{ORIGINAL}">{escape(item['original'])} →</a></div><section class="language-box"><h2>Art Is Trash · Languages</h2><div class="language-links">{language_links(code)}</div></section></article></main><footer><a href="/artists/art-is-trash/">Art Is Trash</a> · <a href="/artists/">Urban Artists</a> · <a href="/languages/">Languages</a></footer></body></html>'''
+    subscribe_url = f"/subscribe/?language={code}&utm_source=artist-language-page&utm_campaign=art-is-trash"
+    subscribe_label = SUBSCRIBE_LABELS[code]
+    return f'''<!DOCTYPE html><html lang="{code}"{direction}><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(item['title'])} | Urban Arts News</title><meta name="description" content="{escape(item['description'], quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{canonical}">{alternates()}<link rel="alternate" type="application/rss+xml" title="Urban Artist Articles – {escape(item['name'])}" href="/{code}/feed.xml">{schema_markup(code, item)}<style>{CSS}</style></head><body><header class="top"><a class="logo" href="/">URBAN <span>ARTS</span> NEWS</a></header><section class="hero"><div class="hero-copy"><div class="eyebrow">{escape(item['label'])}</div><h1>{escape(item['heading'])}</h1><p>{escape(item['description'])}</p></div><img src="{IMAGE}" alt="Art Is Trash Francisco de Pájaro Barcelona street art" width="1600" height="1067"></section><main class="wrap"><article class="article"><a class="subscribe-link" href="{subscribe_url}" rel="nofollow">{escape(subscribe_label)} →</a>{sections}<div class="actions"><a class="button" href="/artists/art-is-trash/gallery/">{escape(item['gallery'])} →</a><a class="button dark" href="/urban-art-city/barcelona/spain/">{escape(item['city'])} →</a><a class="button dark" href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram →</a><a class="button dark" href="{ORIGINAL}">{escape(item['original'])} →</a></div><section class="language-box"><h2>Art Is Trash · Languages</h2><div class="language-links">{language_links(code)}</div></section></article></main><footer><a href="/artists/art-is-trash/">Art Is Trash</a> · <a href="/artists/">Urban Artists</a> · <a href="/languages/">Languages</a></footer></body></html>'''
 
 
 def patch_original():
     path = Path("artists/art-is-trash/index.html")
     html = path.read_text(encoding="utf-8")
     html = re.sub(r'\n?<section class="artist-language-versions[^"]*".*?</section>\n?', "\n", html, flags=re.I | re.S)
+    html = re.sub(r'<link\s+rel=["\']alternate["\'][^>]*hreflang=["\'][^"\']+["\'][^>]*>\s*', '', html, flags=re.I)
     block = f'''<section class="artist-language-versions"><h2>Urban Art Article Languages</h2><div class="language-links">{language_links('en')}</div></section>'''
     artist_info_marker = '<aside class="artist-info">'
     marker_position = html.find(artist_info_marker)
@@ -230,9 +299,15 @@ def patch_original():
         raise RuntimeError("Artist text ending not found")
     html = html[:copy_end] + block + "\n\n" + html[copy_end:]
     html = re.sub(r'\n{3,}(?=<section class="artist-language-versions")', "\n\n", html)
+    html = html.replace("</head>", alternates() + "\n</head>", 1)
     if "artist-language-style" not in html:
         style = '<style id="artist-language-style">.language-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.language-links a{background:#111;color:#fff;padding:9px 12px;text-decoration:none;font-weight:800}.language-links a:hover,.language-links a.active{background:#ff5b21}</style>'
-        html = html.replace("</head>", alternates() + style + "</head>", 1)
+        html = html.replace("</head>", style + "</head>", 1)
+    schema_pattern = r'<script\s+type=["\']application/ld\+json["\']>.*?</script>'
+    if re.search(schema_pattern, html, re.I | re.S):
+        html = re.sub(schema_pattern, lambda _: english_schema_markup(), html, count=1, flags=re.I | re.S)
+    else:
+        html = html.replace("</head>", english_schema_markup() + "</head>", 1)
     html = re.sub(r'(?m)^[ \t]+$', '', html)
     path.write_text(html, encoding="utf-8")
 
@@ -242,7 +317,13 @@ def main():
         output = Path(code) / "artists" / "art-is-trash" / "index.html"
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(render_page(code, item), encoding="utf-8")
+        feed = Path(code) / "feed.xml"
+        feed.parent.mkdir(parents=True, exist_ok=True)
+        feed.write_text(rss_document(code), encoding="utf-8")
     patch_original()
+    artist_feed = rss_document()
+    Path("artists/feed.xml").write_text(artist_feed, encoding="utf-8")
+    Path("feed.xml").write_text(artist_feed.replace(f"{BASE}/artists/feed.xml", f"{BASE}/feed.xml"), encoding="utf-8")
     print(f"Art Is Trash language profiles generated: {len(LANGUAGES)} plus English original")
 
 
