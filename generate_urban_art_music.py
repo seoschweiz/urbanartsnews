@@ -147,7 +147,7 @@ def video_cards(videos, start_position):
         position = start_position + offset
         cards.append(f'''<article class="video-card">
 <div class="player"><iframe src="https://www.youtube-nocookie.com/embed/{video_id}" title="{esc(title)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-<div class="video-copy"><div class="number">Selection {position}</div><h2><a href="{esc(detail_relative_url('en', (video_id, title, author)))}">{esc(title)}</a></h2><p>{esc(MOTIVATION_TEXTS[position - 1])}</p><div class="video-actions"><a href="{esc(detail_relative_url('en', (video_id, title, author)))}">Explore video →</a><a class="subscribe-action" href="/subscribe/">Subscribe 4 Urban News →</a></div></div>
+<div class="video-copy"><div class="number">Selection {position}</div><h2><a href="{esc(detail_relative_url('en', (video_id, title, author)))}">{esc(title)}</a></h2><p>{esc(MOTIVATION_TEXTS[position - 1])}</p><div class="video-actions"><a href="{esc(detail_relative_url('en', (video_id, title, author)))}">Explore New Urban Music Video →</a><a class="subscribe-action" href="/subscribe/">Subscribe 4 Urban News →</a></div></div>
 </article>''')
     return "\n".join(cards)
 
