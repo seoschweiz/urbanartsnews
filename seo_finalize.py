@@ -433,7 +433,29 @@ def rebuild_sitemap(indexed_pages):
     Path("sitemap.xml").write_text(xml, encoding="utf-8")
 
 
+def ensure_ashwan_urban_art_gallery_link():
+    """Keep the requested external gallery link after every site regeneration."""
+    path = Path("artists/ashwan/index.html")
+    if not path.exists():
+        return
+    html = path.read_text(encoding="utf-8", errors="ignore")
+    url = "https://share.google/xT8q0dObkLHEcJ0j3"
+    if url in html:
+        return
+    link = f'<a class="profile-link" href="{url}" target="_blank" rel="noopener">Urban Art Gallery</a>'
+    marker = '<nav class="profile-links" aria-label="Ashwan official links and art profiles">'
+    start = html.find(marker)
+    if start >= 0:
+        end = html.find("</nav>", start)
+        if end >= 0:
+            html = html[:end] + "        " + link + "\n      " + html[end:]
+    else:
+        html = html.replace("</main>", f'<p>{link}</p></main>', 1)
+    path.write_text(html, encoding="utf-8")
+
+
 def main():
+    ensure_ashwan_urban_art_gallery_link()
     pages = sorted(path for path in Path(".").rglob("index.html") if ".git" not in path.parts)
     enforce_url_migrations(pages)
     uniquify_image_titles(pages)

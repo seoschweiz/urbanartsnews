@@ -43,6 +43,20 @@ PHOTOS = [
     {"n": 9, "slug": "park-guell-mosaic-view-barcelona", "title": "Park Güell Mosaic Terrace Overlooking Barcelona", "description": "Colourful mosaic architecture in Antoni Gaudí’s Park Güell frames a panoramic view across Barcelona, from the dense city blocks to the distant hills. The textured stone and broken-tile surfaces turn the viewpoint itself into a distinctive visual composition. Their expressive colour and handcrafted detail anticipate the way urban art transforms architecture into an experience shared in public space.", "meta_description": "Explore Gaudí’s colourful Park Güell mosaic terrace and its panoramic view across Barcelona in this Urban Arts News photograph.", "alt": "Colourful Park Güell mosaic terrace overlooking the Barcelona cityscape", "width": 2048, "height": 1365},
 ]
 
+PAGE2_PHOTOS = [
+    {"n": 10, "slug": "barcelona-sagrada-familia-aerial-culture", "title": "Sagrada Família and Barcelona from Above", "description": "An aerial view places the Sagrada Família at the centre of Barcelona’s dense street grid. The photograph shows how monumental architecture, neighbourhood life and the Mediterranean cityscape meet in one urban environment. Creative expression at this scale provides the setting in which Barcelona’s graffiti, street art and independent urban culture continue to evolve.", "meta_description": "See the Sagrada Família at the centre of Barcelona in this branded aerial city photograph from Urban Arts News.", "alt": "Aerial Barcelona cityscape with the Sagrada Família and Urban Arts News branding", "width": 1536, "height": 1024},
+    {"n": 11, "slug": "park-guell-entrance-urban-culture", "title": "Park Güell Entrance and Barcelona Coast", "description": "Gaudí’s sculptural entrance buildings frame a broad view toward Barcelona and the Mediterranean. Their mosaic details, playful shapes and public setting connect architecture with the same accessible visual energy found in contemporary urban art. The scene presents Barcelona as a city where historic design and new creative voices continually share public space.", "meta_description": "Explore the Park Güell entrance and Barcelona coast in this branded Urban Arts News city photograph.", "alt": "Park Güell entrance buildings overlooking Barcelona with Urban Arts News branding", "width": 1448, "height": 1086},
+    {"n": 12, "slug": "barcelona-coast-torre-glories-panorama", "title": "Barcelona Coast and Torre Glòries Panorama", "description": "The Torre Glòries rises from Barcelona’s metropolitan landscape while the Mediterranean defines the horizon. Seen from the hills, the city becomes a layered field of architecture, neighbourhoods and creative districts. Within that panorama, murals and street interventions give individual places a recognisable identity and bring urban culture closer to everyday life.", "meta_description": "View Barcelona’s coastline, Torre Glòries and metropolitan panorama in a branded Urban Arts News photograph.", "alt": "Barcelona coastline and Torre Glòries panorama with Urban Arts News branding", "width": 1536, "height": 1024},
+    {"n": 13, "slug": "arc-de-triomf-public-culture", "title": "Arc de Triomf and Barcelona Public Culture", "description": "Barcelona’s red-brick Arc de Triomf anchors a wide pedestrian avenue used for encounters, performances and public events. The open urban setting demonstrates how architecture becomes meaningful through the communities moving around it. Street art and graffiti participate in the same living culture by adding contemporary images, messages and identities to the city.", "meta_description": "Discover Barcelona’s Arc de Triomf and public urban culture in this branded Urban Arts News photograph.", "alt": "Arc de Triomf in Barcelona with pedestrians, palms and Urban Arts News branding", "width": 1448, "height": 1086},
+    {"n": 14, "slug": "barcelona-beaches-urban-coast", "title": "Barcelona Beaches and Mediterranean Urban Coast", "description": "Barcelona’s beaches curve alongside dense neighbourhoods, promenades and contemporary waterfront architecture. The view reveals how public leisure, city planning and Mediterranean identity overlap along the coast. Urban culture develops in these shared spaces through music, design, performance, graffiti and the many informal encounters that make a city visually distinctive.", "meta_description": "Explore Barcelona’s beaches and Mediterranean urban coast in this branded Urban Arts News city photograph.", "alt": "Barcelona beaches and Mediterranean coastline with Urban Arts News branding", "width": 1536, "height": 1024},
+    {"n": 15, "slug": "park-guell-mosaic-public-art", "title": "Park Güell Mosaic Forms and Public Art", "description": "Colourful mosaic surfaces curve across Park Güell while Barcelona and the sea extend into the distance. The handcrafted fragments transform functional architecture into an immersive public artwork. Their accessibility, colour and relationship to place anticipate qualities that remain central to street art: visual invention experienced directly within everyday urban space.", "meta_description": "See Park Güell’s colourful mosaic forms and Barcelona panorama in a branded Urban Arts News photograph.", "alt": "Colourful Park Güell mosaic architecture with Barcelona and Urban Arts News branding", "width": 1448, "height": 1086},
+    {"n": 16, "slug": "gran-via-barcelona-golden-hour", "title": "Gran Via Barcelona at Golden Hour", "description": "Ornate façades and broad avenues fill central Barcelona with strong architectural rhythm in the warm evening light. Historic buildings provide a dramatic backdrop for the movement of contemporary city life below. New murals, graphic interventions and urban artists add further layers to this inherited streetscape without erasing the identity already present.", "meta_description": "View central Barcelona and Gran Via architecture at golden hour in a branded Urban Arts News photograph.", "alt": "Gran Via and central Barcelona architecture at golden hour with Urban Arts News branding", "width": 1536, "height": 1024},
+    {"n": 17, "slug": "tibidabo-sunset-urban-landscape", "title": "Tibidabo Sunset Above Barcelona", "description": "The Temple of the Sacred Heart stands above Barcelona as sunset colours spread across the mountains and Mediterranean coast. From Tibidabo, the city appears as a vast connected landscape shaped by architecture, mobility and creative communities. At street level, urban artists turn sections of that landscape into personal, political and shared visual narratives.", "meta_description": "Experience a vivid Tibidabo sunset above Barcelona in this branded Urban Arts News city photograph.", "alt": "Tibidabo church and Barcelona at sunset with Urban Arts News branding", "width": 1537, "height": 1023},
+    {"n": 18, "slug": "gran-via-barcelona-night-culture", "title": "Gran Via Barcelona and Night Culture", "description": "Central Barcelona glows after sunset as traffic, illuminated façades and rooftop spaces activate the city. The transition from day to night changes how architecture and public space are experienced. Music, nightlife, design and visual art become part of a wider urban culture that connects local creators with visitors from around the world.", "meta_description": "Explore Gran Via and Barcelona night culture in this branded evening photograph from Urban Arts News.", "alt": "Illuminated Gran Via Barcelona at night with Urban Arts News branding", "width": 1536, "height": 1024},
+]
+
+ALL_PHOTOS = PHOTOS + PAGE2_PHOTOS
+
 def esc(value):
     return html.escape(str(value), quote=True)
 
@@ -71,6 +85,17 @@ def prepare_original(source, photo):
         image = original.convert("RGB")
         image.save(source, "JPEG", quality=88, optimize=True, progressive=True, exif=seo_exif(photo))
 
+def ensure_page2_metadata():
+    """Embed descriptive metadata once without repeatedly recompressing images."""
+    for photo in PAGE2_PHOTOS:
+        source = ASSET_DIR / f"{photo['slug']}.jpg"
+        if not source.exists():
+            continue
+        with Image.open(source) as image:
+            has_description = bool(image.getexif().get(270))
+        if not has_description:
+            prepare_original(source, photo)
+
 def decode_staged_images():
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     for photo in PHOTOS:
@@ -84,7 +109,7 @@ def decode_staged_images():
 
 def responsive_images():
     RESPONSIVE_DIR.mkdir(parents=True, exist_ok=True)
-    for photo in PHOTOS:
+    for photo in ALL_PHOTOS:
         source = ASSET_DIR / f"{photo['slug']}.jpg"
         with Image.open(source) as original:
             image = original.convert("RGB")
@@ -138,7 +163,7 @@ def generate_detail(photo):
 <p><strong><a href="https://urbanartsnews.com/cities/barcelona/">Barcelona Urban Art News</a></strong> presents this photograph as part of its visual documentation of <strong><a href="https://urbanartsnews.com/cities/barcelona/">Urban Art Barcelona</a></strong>, city culture and the changing metropolitan landscape.</p>
 <p>Discover more urban photography, contemporary artists and city culture on <a href="https://urbanartsnews.com/"><strong>Urban Arts News</strong></a>.</p>
 <p class="credit">Photo via <a href="https://www.pexels.com/"><strong>Pexels</strong></a>, used under the <a href="https://www.pexels.com/license/">Pexels License</a>. Rights remain with the respective contributor.</p>
-<a class="button" href="/cities/barcelona/gallery/">Barcelona Gallery</a><a class="button" href="/cities/barcelona/">Barcelona Urban Art</a>
+<a class="button" href="/cities/barcelona/gallery/{'page/2/' if photo in PAGE2_PHOTOS else ''}">Barcelona Gallery</a><a class="button" href="/cities/barcelona/">Barcelona Urban Art</a>
 </div></article></main>""" + footer()
     out = GALLERY_DIR / slug
     out.mkdir(parents=True, exist_ok=True)
@@ -157,8 +182,27 @@ def generate_gallery():
         attrs='loading="eager" fetchpriority="high"' if i==0 else 'loading="lazy"'
         cards += f"""<article class="card"><a href="/cities/barcelona/gallery/{p['slug']}/"><picture><source type="image/webp" srcset="/assets/images/barcelona/responsive/{p['slug']}-480.webp 480w, /assets/images/barcelona/responsive/{p['slug']}-960.webp 960w" sizes="(max-width:800px) 92vw, 30vw"><img src="/assets/images/barcelona/{p['slug']}.jpg" alt="{esc(p['alt'])}" width="{p['width']}" height="{p['height']}" {attrs} decoding="async"></picture></a><div class="card-content"><h2>{link_barcelona(p['title'])}</h2><p>{link_barcelona(p['description'])}</p><a href="/cities/barcelona/gallery/{p['slug']}/">View photograph →</a></div></article>"""
     markup=head("Barcelona Urban Photography Gallery | Urban Arts News",description,canonical,image,hero["width"],hero["height"],schema)
-    markup+=f"""<section class="hero"><small>Urban Arts News · {link_barcelona('Barcelona')} Gallery</small><h1>{link_barcelona('Barcelona')} <span class="accent">City Gallery</span></h1><p>{link_barcelona('Nine original photographs documenting Park Güell, the Gothic Quarter, Sagrada Família, the waterfront and the visual identity surrounding Urban Art Barcelona.')}</p></section><main class="container"><h2>{link_barcelona('Barcelona Urban Art News and City Photography')}</h2><p>{link_barcelona('This curated gallery connects Barcelona city photography with the wider Urban Arts News archive. Each photograph has its own indexable page, descriptive metadata and links to the Barcelona urban-art directory.')}</p><div class="grid">{cards}</div></main>"""+footer()
+    markup=markup.replace("</head>", '<link rel="next" href="https://urbanartsnews.com/cities/barcelona/gallery/page/2/"></head>')
+    markup+=f"""<section class="hero"><small>Urban Arts News · {link_barcelona('Barcelona')} Gallery</small><h1>{link_barcelona('Barcelona')} <span class="accent">City Gallery</span></h1><p>{link_barcelona('Nine original photographs documenting Park Güell, the Gothic Quarter, Sagrada Família, the waterfront and the visual identity surrounding Urban Art Barcelona.')}</p></section><main class="container"><h2>{link_barcelona('Barcelona Urban Art News and City Photography')}</h2><p>{link_barcelona('This curated gallery connects Barcelona city photography with the wider Urban Arts News archive. Each photograph has its own indexable page, descriptive metadata and links to the Barcelona urban-art directory.')}</p><div class="grid">{cards}</div><p><a class="button" href="/cities/barcelona/gallery/page/2/">Barcelona Gallery · Page 2 →</a></p></main>"""+footer()
     (GALLERY_DIR/"index.html").write_text(markup,encoding="utf-8")
+
+def generate_gallery_page2():
+    page_dir = GALLERY_DIR / "page" / "2"
+    page_dir.mkdir(parents=True, exist_ok=True)
+    hero = PAGE2_PHOTOS[0]
+    canonical = BASE + "/cities/barcelona/gallery/page/2/"
+    image = BASE + f"/assets/images/barcelona/{hero['slug']}.jpg"
+    description = "Explore nine branded Barcelona photographs celebrating new urban culture, public art, architecture and Mediterranean city life on Urban Arts News."
+    item_list = [{"@type":"ListItem","position":i+1,"url":BASE+f"/cities/barcelona/gallery/{p['slug']}/","name":p["title"]} for i,p in enumerate(PAGE2_PHOTOS)]
+    schema={"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":canonical+"#collection","url":canonical,"name":"Barcelona Urban Culture Gallery – Page 2","description":description,"mainEntity":{"@type":"ItemList","numberOfItems":9,"itemListElement":item_list}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Urban Arts News","item":BASE+"/"},{"@type":"ListItem","position":2,"name":"Barcelona","item":BASE+"/cities/barcelona/"},{"@type":"ListItem","position":3,"name":"Barcelona Gallery","item":BASE+"/cities/barcelona/gallery/"},{"@type":"ListItem","position":4,"name":"Page 2","item":canonical}]}]}
+    cards=""
+    for i,p in enumerate(PAGE2_PHOTOS):
+        attrs='loading="eager" fetchpriority="high"' if i==0 else 'loading="lazy"'
+        cards += f"""<article class="card"><a href="/cities/barcelona/gallery/{p['slug']}/"><picture><source type="image/webp" srcset="/assets/images/barcelona/responsive/{p['slug']}-480.webp 480w, /assets/images/barcelona/responsive/{p['slug']}-960.webp 960w" sizes="(max-width:800px) 92vw, 30vw"><img src="/assets/images/barcelona/{p['slug']}.jpg" alt="{esc(p['alt'])}" width="{p['width']}" height="{p['height']}" {attrs} decoding="async"></picture></a><div class="card-content"><h2>{link_barcelona(p['title'])}</h2><p>{link_barcelona(p['description'])}</p><a href="/cities/barcelona/gallery/{p['slug']}/">View photograph →</a></div></article>"""
+    markup=head("Barcelona Urban Culture Gallery – Page 2 | Urban Arts News",description,canonical,image,hero["width"],hero["height"],schema)
+    markup=markup.replace("</head>", '<link rel="prev" href="https://urbanartsnews.com/cities/barcelona/gallery/"></head>')
+    markup+=f"""<section class="hero"><small>New Urban Culture · ★★★★★</small><h1>{link_barcelona('Barcelona')} <span class="accent">Gallery · Page 2</span></h1><p>{link_barcelona('Branded Barcelona photography connecting architecture, public space and New Urban Culture with Urban Arts News.')}</p></section><main class="container"><h2>{link_barcelona('New Urban Culture in Barcelona')}</h2><p>Each photograph carries the UrbanArtsNews.Com identity and an invitation to subscribe for free. Every image also has its own indexable page, descriptive metadata and links into the Barcelona urban-art archive.</p><div class="grid">{cards}</div><p><a class="button" href="/cities/barcelona/gallery/">← Barcelona Gallery · Page 1</a><a class="button" href="/subscribe/">Subscribe for Free →</a></p></main>"""+footer()
+    (page_dir/"index.html").write_text(markup,encoding="utf-8")
 
 def generate_redirects():
     """Preserve retired gallery URLs without serving the superseded photographs."""
@@ -188,7 +232,7 @@ def update_sitemap():
     for old_slug in REDIRECTS:
         old_url = BASE + f"/cities/barcelona/gallery/{old_slug}/"
         text = re.sub(r"\s*<url>\s*<loc>" + re.escape(old_url) + r"</loc>\s*</url>", "", text)
-    urls=[BASE+"/cities/barcelona/gallery/"]+[BASE+f"/cities/barcelona/gallery/{p['slug']}/" for p in PHOTOS]
+    urls=[BASE+"/cities/barcelona/gallery/", BASE+"/cities/barcelona/gallery/page/2/"]+[BASE+f"/cities/barcelona/gallery/{p['slug']}/" for p in ALL_PHOTOS]
     additions=""
     for url in urls:
         if f"<loc>{url}</loc>" not in text:
@@ -198,7 +242,7 @@ def update_sitemap():
 
 def image_sitemap():
     rows=[]
-    for p in PHOTOS:
+    for p in ALL_PHOTOS:
         page=BASE+f"/cities/barcelona/gallery/{p['slug']}/"
         image=BASE+f"/assets/images/barcelona/{p['slug']}.jpg"
         rows.append(f"  <url><loc>{page}</loc><image:image><image:loc>{image}</image:loc></image:image></url>")
@@ -213,14 +257,16 @@ def image_sitemap():
 
 def main():
     decode_staged_images()
+    ensure_page2_metadata()
     responsive_images()
-    for photo in PHOTOS: generate_detail(photo)
+    for photo in ALL_PHOTOS: generate_detail(photo)
     generate_gallery()
+    generate_gallery_page2()
     generate_redirects()
     patch_city_page()
     update_sitemap()
     image_sitemap()
-    print("DONE Barcelona gallery: 9 photographs")
+    print("DONE Barcelona gallery: 18 photographs across 2 pages")
 
 if __name__=="__main__":
     main()
