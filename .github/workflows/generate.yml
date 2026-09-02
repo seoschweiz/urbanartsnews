@@ -73,6 +73,7 @@ jobs:
         run: python generate_art_is_trash_languages.py
 
       - name: Generate Ashwan language profiles
+        continue-on-error: true
         run: python generate_ashwan_languages.py
 
       - name: Apply site-wide SEO baseline
