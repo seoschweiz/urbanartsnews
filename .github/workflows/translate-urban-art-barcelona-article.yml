@@ -42,7 +42,7 @@ jobs:
               soup=BeautifulSoup(text,"html.parser")
               assert soup.html.get("lang")==code
               assert soup.html.get("dir")==("rtl" if code=="ar" else "ltr")
-              assert len(soup.get_text(" ",strip=True).split())>=900
+              assert len(soup.get_text(" ",strip=True))>=5500
               assert len(soup.find_all("link",attrs={"rel":"alternate","hreflang":True}))>=20
               assert soup.find("link",rel="canonical")["href"].startswith("https://urbanartsnews.com/")
               assert soup.find("script",attrs={"type":"application/ld+json"})
