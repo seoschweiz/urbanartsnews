@@ -1,0 +1,61 @@
+name: Translate Urban Art Barcelona Article
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "articles/urban-art-barcelona/index.html"
+      - "translate_urban_art_barcelona_article.py"
+      - ".github/workflows/translate-urban-art-barcelona-article.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: translate-urban-art-barcelona-article
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install translation tools
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 deep-translator
+      - name: Create all article translations
+        run: python translate_urban_art_barcelona_article.py
+      - name: Validate all 19 language pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          from translate_urban_art_barcelona_article import LANGUAGES
+          source=Path("articles/urban-art-barcelona/index.html")
+          assert source.exists()
+          for code,(_,slug) in LANGUAGES.items():
+              page=Path(code)/"articles"/slug/"index.html"
+              text=page.read_text(encoding="utf-8")
+              soup=BeautifulSoup(text,"html.parser")
+              assert soup.html.get("lang")==code
+              assert soup.html.get("dir")==("rtl" if code=="ar" else "ltr")
+              assert len(soup.get_text(" ",strip=True).split())>=900
+              assert len(soup.find_all("link",attrs={"rel":"alternate","hreflang":True}))>=20
+              assert soup.find("link",rel="canonical")["href"].startswith("https://urbanartsnews.com/")
+              assert soup.find("script",attrs={"type":"application/ld+json"})
+          print("Validated English plus",len(LANGUAGES),"translations")
+          PY
+      - name: Commit translated article pages and sitemap
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ar ca da de el es fr it ja ko nl no pl pt ru sv tr zh-hans sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No translation changes."
+          else
+            git commit -m "Publish Urban Art Barcelona article in 19 languages"
+            git push
+          fi
