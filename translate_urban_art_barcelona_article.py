@@ -139,7 +139,9 @@ def translate_page(code,target):
     out=Path(code)/"articles"/LANGUAGES[code][1]/"index.html"
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(str(soup),encoding="utf-8")
-    visible=soup.get_text(" ",strip=True)\n    if len(visible)<5500: raise RuntimeError(f"{code}: incomplete translation ({len(visible)} characters)")\n    print(code,out,len(visible))
+    visible=soup.get_text(" ",strip=True)
+    if len(visible)<5500: raise RuntimeError(f"{code}: incomplete translation ({len(visible)} characters)")
+    print(code,out,len(visible))
 
 def update_sitemap():
     path=Path("sitemap.xml"); text=path.read_text(encoding="utf-8")
