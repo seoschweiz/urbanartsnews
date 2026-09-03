@@ -10,7 +10,7 @@ import re
 import time
 from pathlib import Path
 
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup, Doctype, NavigableString
 from deep_translator import GoogleTranslator
 
 BASE = "https://urbanartsnews.com"
@@ -172,7 +172,8 @@ def translate_page(code: str, target: str):
 
     nodes = []
     for node in soup.find_all(string=True):
-        if not isinstance(node, NavigableString) or node.parent.name in {"script", "style"}:
+        if (not isinstance(node, NavigableString) or isinstance(node, Doctype)
+                or node.parent.name in {"script", "style"}):
             continue
         text = str(node)
         if text.strip():
