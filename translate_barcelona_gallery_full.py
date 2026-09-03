@@ -80,6 +80,18 @@ def translate_values(values: list[str], target: str) -> list[str]:
     output = [""] * len(values)
     batch, batch_indices, size = [], [], 0
 
+    def request(value: str) -> str:
+        for attempt in range(3):
+            try:
+                result = translator.translate(value)
+                if result:
+                    return result
+            except Exception:
+                if attempt == 2:
+                    raise
+                time.sleep(1.5 * (attempt + 1))
+        raise RuntimeError(f"No translation returned for {target}")
+
     def flush():
         nonlocal batch, batch_indices, size
         if not batch:
@@ -91,11 +103,15 @@ def translate_values(values: list[str], target: str) -> list[str]:
             protected.append(item)
             maps.append(mapping)
         joined = marker.join(protected)
-        translated = translator.translate(joined)
-        parts = re.split(r"\s*ZXSEPZX\s*", translated, flags=re.I)
+        try:
+            translated = request(joined)
+            parts = re.split(r"\s*ZXSEPZX\s*", translated, flags=re.I)
+        except Exception:
+            parts = []
         if len(parts) != len(batch):
-            # Safe fallback for a batch whose separators were changed.
-            parts = [translator.translate(item) for item in protected]
+            # Some targets reject large joined requests or alter separators.
+            # Translating each item is slower, but preserves complete output.
+            parts = [request(item) for item in protected]
         for idx, part, mapping in zip(batch_indices, parts, maps):
             output[idx] = restore(part, mapping)
         batch, batch_indices, size = [], [], 0
@@ -106,7 +122,7 @@ def translate_values(values: list[str], target: str) -> list[str]:
             output[idx] = value
             continue
         projected = size + len(value) + 14
-        if projected > 4300:
+        if projected > 1800:
             flush()
         batch.append(value)
         batch_indices.append(idx)
@@ -237,3 +253,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
