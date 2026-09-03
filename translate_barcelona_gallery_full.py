@@ -80,17 +80,27 @@ def translate_values(values: list[str], target: str) -> list[str]:
     output = [""] * len(values)
     batch, batch_indices, size = [], [], 0
 
-    def request(value: str) -> str:
+    def request(value: str, depth: int = 0) -> str:
+        last_error = None
         for attempt in range(3):
             try:
-                result = translator.translate(value)
+                # A fresh translator instance avoids stale throttled sessions.
+                result = GoogleTranslator(source="en", target=target).translate(value)
                 if result:
                     return result
-            except Exception:
-                if attempt == 2:
-                    raise
+            except Exception as exc:
+                last_error = exc
                 time.sleep(1.5 * (attempt + 1))
-        raise RuntimeError(f"No translation returned for {target}")
+        # Google legitimately returns the source unchanged for technical tokens
+        # such as "html". Longer rejected passages are recursively reduced so
+        # one difficult request never prevents the complete page translation.
+        words = value.split()
+        if len(words) <= 3 or depth >= 4:
+            return value
+        midpoint = len(words) // 2
+        return request(" ".join(words[:midpoint]), depth + 1) + " " + request(
+            " ".join(words[midpoint:]), depth + 1
+        )
 
     def flush():
         nonlocal batch, batch_indices, size
@@ -253,4 +263,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
