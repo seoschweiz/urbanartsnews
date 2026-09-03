@@ -17,6 +17,25 @@ LANGUAGES={
 "pl":("pl","miasto-sztuki-miejskiej/barcelona/hiszpania"),"tr":("tr","kentsel-sanat-sehri/barselona/ispanya"),
 "zh-hans":("zh-CN","城市艺术/巴塞罗那/西班牙"),"ru":("ru","gorod-ulichnogo-iskusstva/barselona/ispaniya"),
 "da":("da","urban-kunst-by/barcelona/spanien"),"no":("no","urban-kunst-by/barcelona/spania")}
+TITLES={
+"ca":"Art urbà i artistes de carrer de Barcelona | Urban Arts News",
+"es":"Arte urbano y artistas callejeros de Barcelona | Urban Arts News",
+"de":"Urbane Kunst und Street-Art-Künstler in Barcelona | Urban Arts News",
+"fr":"Art urbain et artistes de rue à Barcelone | Urban Arts News",
+"it":"Arte urbana e street artist a Barcellona | Urban Arts News",
+"pt":"Arte urbana e artistas de rua de Barcelona | Urban Arts News",
+"nl":"Urban art en straatkunstenaars in Barcelona | Urban Arts News",
+"sv":"Urban konst och gatukonstnärer i Barcelona | Urban Arts News",
+"ja":"バルセロナのアーバンアートとストリートアーティスト | Urban Arts News",
+"ar":"الفن الحضري وفنانو الشوارع في برشلونة | Urban Arts News",
+"el":"Αστική τέχνη και καλλιτέχνες δρόμου στη Βαρκελώνη | Urban Arts News",
+"ko":"바르셀로나 도시 예술과 거리 예술가 | Urban Arts News",
+"pl":"Sztuka miejska i artyści uliczni w Barcelonie | Urban Arts News",
+"tr":"Barselona kentsel sanatı ve sokak sanatçıları | Urban Arts News",
+"zh-hans":"巴塞罗那城市艺术与街头艺术家 | Urban Arts News",
+"ru":"Городское искусство и уличные художники Барселоны | Urban Arts News",
+"da":"Urban kunst og gadekunstnere i Barcelona | Urban Arts News",
+"no":"Urban kunst og gatekunstnere i Barcelona | Urban Arts News"}
 PROTECTED=["Urban Arts News","Barcelona","Art Is Trash","Ashwan","Si Beriana","Xavi Ceerre","Camil Escruela",
 "Mark Rox","Pop Art POV","Eslicer","Werens Graffiti","El Rughi","Stefano Phen","CINO","Instagram",
 "Festival Cruïlla","BAS Museum","Time Out Worldwide","Barcelona Secreta","Google Maps",
@@ -84,6 +103,10 @@ def translate_page(code,target):
     soup=BeautifulSoup(SOURCE.read_text(encoding="utf-8"),"html.parser")
     soup.html["lang"]=code;soup.html["dir"]="rtl" if code=="ar" else "ltr"
     canonical=page_url(code)
+    soup.title.string=TITLES[code]
+    for meta in soup.find_all("meta"):
+        key=meta.get("property") or meta.get("name")
+        if key in {"og:title","twitter:title"}:meta["content"]=TITLES[code]
     soup.find("link",rel="canonical")["href"]=canonical
     for tag in soup.find_all("meta"):
         key=tag.get("property") or tag.get("name")
