@@ -1,0 +1,58 @@
+name: Repair translated page doctypes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/repair-translation-doctypes.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore HTML doctypes and harden generator
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          language_roots = {"ar", "ca", "da", "de", "el", "es", "fr", "it", "ja", "ko", "nl", "no", "pl", "pt", "ru", "sv", "tr", "zh-hans"}
+          pages = [p for root in language_roots for p in Path(root).glob("*/index.html")]
+          repaired = 0
+          for page in pages:
+              text = page.read_text(encoding="utf-8")
+              lines = text.splitlines()
+              if lines and lines[0].strip() != "<!DOCTYPE html>":
+                  lines[0] = "<!DOCTYPE html>"
+                  page.write_text("\n".join(lines) + "\n", encoding="utf-8")
+                  repaired += 1
+
+          generator = Path("translate_barcelona_gallery_full.py")
+          source = generator.read_text(encoding="utf-8")
+          source = source.replace(
+              "from bs4 import BeautifulSoup, NavigableString",
+              "from bs4 import BeautifulSoup, Doctype, NavigableString",
+          )
+          source = source.replace(
+              "if not isinstance(node, NavigableString) or node.parent.name in {\"script\", \"style\"}:",
+              "if (not isinstance(node, NavigableString) or isinstance(node, Doctype)\n                or node.parent.name in {\"script\", \"style\"}):",
+          )
+          generator.write_text(source, encoding="utf-8")
+          assert repaired == 18, repaired
+          print("Restored doctypes on", repaired, "translated pages")
+          PY
+      - name: Validate and publish repair
+        run: |
+          python -m py_compile translate_barcelona_gallery_full.py
+          for page in ar/*/index.html ca/*/index.html da/*/index.html de/*/index.html el/*/index.html es/*/index.html fr/*/index.html it/*/index.html ja/*/index.html ko/*/index.html nl/*/index.html no/*/index.html pl/*/index.html pt/*/index.html ru/*/index.html sv/*/index.html tr/*/index.html zh-hans/*/index.html; do
+            head -n 1 "$page" | grep -Fx '<!DOCTYPE html>' >/dev/null
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add translate_barcelona_gallery_full.py ar ca da de el es fr it ja ko nl no pl pt ru sv tr zh-hans
+          git commit -m "Restore doctypes on translated gallery pages"
+          git push
