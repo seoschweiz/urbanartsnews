@@ -21,7 +21,11 @@ jobs:
           from pathlib import Path
 
           language_roots = {"ar", "ca", "da", "de", "el", "es", "fr", "it", "ja", "ko", "nl", "no", "pl", "pt", "ru", "sv", "tr", "zh-hans"}
-          pages = [p for root in language_roots for p in Path(root).glob("*/index.html")]
+          pages = []
+          for root in language_roots:
+              for page in Path(root).glob("*/index.html"):
+                  if "mark-rox-urban-art-astronaut-bas-museum-barcelona" in page.read_text(encoding="utf-8"):
+                      pages.append(page)
           repaired = 0
           for page in pages:
               text = page.read_text(encoding="utf-8")
