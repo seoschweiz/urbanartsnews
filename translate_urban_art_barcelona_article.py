@@ -57,13 +57,29 @@ def translate_one(value,target,depth=0):
     return value
 
 def translate_values(values,target):
-    out=[]
-    for value in values:
+    output=[""]*len(values)
+    batch=[]; indices=[]; size=0
+    def flush():
+        nonlocal batch,indices,size
+        if not batch: return
+        marker="\nZXSEPZX\n"; protected=[]; maps=[]
+        for value in batch:
+            item,mapping=protect(value); protected.append(item); maps.append(mapping)
+        joined=marker.join(protected)
+        translated=translate_one(joined,target)
+        parts=re.split(r"\s*ZXSEPZX\s*",translated,flags=re.I)
+        if len(parts)!=len(batch):
+            parts=[translate_one(item,target) for item in protected]
+        for idx,part,mapping in zip(indices,parts,maps):
+            output[idx]=restore(part,mapping)
+        batch=[]; indices=[]; size=0; time.sleep(.3)
+    for idx,value in enumerate(values):
         if not value.strip() or re.fullmatch(r"[\d\W_]+",value,re.UNICODE):
-            out.append(value); continue
-        out.append(translate_one(value,target))
-        time.sleep(.12)
-    return out
+            output[idx]=value; continue
+        if size+len(value)+14>1800: flush()
+        batch.append(value); indices.append(idx); size+=len(value)+14
+    flush()
+    return output
 
 def collect_json(obj,items):
     if isinstance(obj,dict):
