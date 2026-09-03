@@ -103,10 +103,6 @@ def translate_page(code,target):
     soup=BeautifulSoup(SOURCE.read_text(encoding="utf-8"),"html.parser")
     soup.html["lang"]=code;soup.html["dir"]="rtl" if code=="ar" else "ltr"
     canonical=page_url(code)
-    soup.title.string=TITLES[code]
-    for meta in soup.find_all("meta"):
-        key=meta.get("property") or meta.get("name")
-        if key in {"og:title","twitter:title"}:meta["content"]=TITLES[code]
     soup.find("link",rel="canonical")["href"]=canonical
     for tag in soup.find_all("meta"):
         key=tag.get("property") or tag.get("name")
@@ -147,6 +143,10 @@ def translate_page(code,target):
         localize(data);tag.string=json.dumps(data,ensure_ascii=False,separators=(",",":")).replace("</","<\\/")
     for a in soup.find_all("a",href=True):
         if a["href"].startswith("/") and not a.get("hreflang"):a["hreflang"]="en"
+    soup.title.string=TITLES[code]
+    for meta in soup.find_all("meta"):
+        key=meta.get("property") or meta.get("name")
+        if key in {"og:title","twitter:title"}:meta["content"]=TITLES[code]
     out=Path(code)/LANGUAGES[code][1]/"index.html";out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(str(soup),encoding="utf-8")
     visible=soup.get_text(" ",strip=True)
