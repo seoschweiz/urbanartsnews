@@ -12,6 +12,8 @@ from urllib.parse import urljoin
 BASE_URL = "https://urbanartsnews.com"
 DEFAULT_IMAGE = f"{BASE_URL}/assets/images/urban-art-gallery-news/group-exhibition-gallery-wall.jpg"
 SITE_NAME = "Urban Arts News"
+CONTRIBUTOR_NAME = "Rodriquez Ventura"
+CONTRIBUTOR_URL = "https://www.facebook.com/street.art.galleries.barcelona/"
 LANGUAGE_MENU = '''<details class="language-menu"><summary>Languages</summary><div class="language-menu-list"><a href="/sq/urban-art-news/" hreflang="sq">Shqip</a><a href="/de/urban-art-news/" hreflang="de">Deutsch</a><a href="/es/urban-art-news/" hreflang="es">Español</a><a href="/ca/urban-art-news/" hreflang="ca">Català</a><a href="/pt/urban-art-news/" hreflang="pt">Português</a><a href="/it/urban-art-news/" hreflang="it">Italiano</a><a href="/fr/urban-art-news/" hreflang="fr">Français</a><a href="/ja/urban-art-news/" hreflang="ja">日本語</a><a href="/ar/urban-art-news/" hreflang="ar">العربية</a><a href="/ru/urban-art-news/" hreflang="ru">Русский</a><a href="/sv/urban-art-news/" hreflang="sv">Svenska</a><a href="/ko/urban-art-news/" hreflang="ko">한국어</a><a href="/hi/urban-art-news/" hreflang="hi">हिन्दी</a><a href="/languages/">All Languages</a></div></details>'''
 LANGUAGE_CSS = '''<style>.language-menu{display:inline-block;position:relative;margin-left:18px}.language-menu summary{cursor:pointer;font-size:14px;font-weight:800;text-transform:uppercase;list-style:none}.language-menu summary::-webkit-details-marker{display:none}.language-menu summary:after{content:" ▾"}.language-menu-list{display:none;position:absolute;right:0;top:100%;min-width:190px;background:#111;padding:10px;box-shadow:0 12px 30px #0006;z-index:100}.language-menu[open] .language-menu-list,.language-menu:hover .language-menu-list{display:block}.language-menu-list a{display:block!important;color:#fff!important;padding:9px 12px!important;margin:0!important;text-align:left;text-transform:none!important}.language-menu-list a:hover,.language-menu-list a:focus{color:#ff5b21!important}@media(max-width:750px){.language-menu{margin:12px 0 0}.language-menu-list{position:static;margin-top:8px}}</style>'''
 
@@ -111,6 +113,12 @@ def normalize_json_ld(html, canonical="", title="", description="", page_languag
                     )
                     if location:
                         item["contentLocation"] = location
+                    item["contributor"] = {
+                        "@type": "Person",
+                        "name": CONTRIBUTOR_NAME,
+                        "url": CONTRIBUTOR_URL,
+                        "sameAs": [CONTRIBUTOR_URL],
+                    }
                 if canonical and item_type in {"WebPage", "CollectionPage", "ProfilePage"} and (
                     item_url == canonical or item_id.startswith(canonical + "#")
                 ):
@@ -306,6 +314,9 @@ def finalize_page(path):
         ("property", "og:type", "website"),
         ("property", "og:url", canonical),
         ("property", "og:site_name", SITE_NAME),
+        ("property", "article:author", CONTRIBUTOR_URL),
+        ("property", "og:see_also", CONTRIBUTOR_URL),
+        ("name", "author", CONTRIBUTOR_NAME),
         ("property", "og:locale", {"ca": "ca_ES", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "it": "it_IT", "fr": "fr_FR", "sq": "sq_AL", "ja": "ja_JP", "ar": "ar_AR", "ru": "ru_RU", "sv": "sv_SE", "ko": "ko_KR", "hi": "hi_IN"}.get(page_language, "en_US")),
         ("property", "og:image", image),
         ("name", "twitter:card", "summary_large_image"),
