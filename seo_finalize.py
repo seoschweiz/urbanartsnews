@@ -334,6 +334,10 @@ def finalize_page(path):
         )
 
     image = absolute_image(html)
+    if len(path.parts) == 3 and path.parts[0] == "artists" and path.parts[-1] == "index.html":
+        artist_share_card = Path("assets/images/social/artists") / f"{path.parts[1]}.jpg"
+        if artist_share_card.exists():
+            image = f"{SITE_URL}/{artist_share_card.as_posix()}"
     social = (
         ("property", "og:title", title),
         ("property", "og:description", description),
@@ -345,10 +349,16 @@ def finalize_page(path):
         ("name", "author", CONTRIBUTOR_NAME),
         ("property", "og:locale", {"ca": "ca_ES", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "it": "it_IT", "fr": "fr_FR", "sq": "sq_AL", "ja": "ja_JP", "ar": "ar_AR", "ru": "ru_RU", "sv": "sv_SE", "ko": "ko_KR", "hi": "hi_IN"}.get(page_language, "en_US")),
         ("property", "og:image", image),
+        ("property", "og:image:secure_url", image),
+        ("property", "og:image:type", "image/jpeg"),
+        ("property", "og:image:width", "1200"),
+        ("property", "og:image:height", "630"),
+        ("property", "og:image:alt", f"{title} — artist profile preview"),
         ("name", "twitter:card", "summary_large_image"),
         ("name", "twitter:title", title),
         ("name", "twitter:description", description),
         ("name", "twitter:image", image),
+        ("name", "twitter:image:alt", f"{title} — artist profile preview"),
     )
     for attribute, key, value in social:
         html = replace_or_add_meta(html, attribute, key, value)
