@@ -191,7 +191,9 @@ def add_whatsapp_share(html, canonical, title):
         html,
         flags=re.I | re.S,
     )
-    share_url = "https://wa.me/?text=" + quote(f"{title} {canonical}")
+    separator = "&" if "?" in canonical else "?"
+    tracked_url = f"{canonical}{separator}utm_source=whatsapp&utm_medium=social&utm_campaign=page_share"
+    share_url = "https://wa.me/?text=" + quote(f"{title} {tracked_url}")
     markup = f'''<!-- WhatsApp Share -->
 <style id="whatsapp-share-style">
 .whatsapp-share-button{{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:999px;background:#25D366;color:#fff!important;font:700 15px/1 Arial,Helvetica,sans-serif;text-decoration:none!important;box-shadow:0 6px 22px rgba(0,0,0,.28);transition:transform .2s ease,box-shadow .2s ease}}
