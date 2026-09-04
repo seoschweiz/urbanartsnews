@@ -334,6 +334,15 @@ def finalize_page(path):
         )
 
     image = absolute_image(html)
+    is_artist_profile = (
+        (len(path.parts) == 3 and path.parts[0] == "artists" and path.parts[-1] == "index.html")
+        or (len(path.parts) == 4 and path.parts[1] == "artists" and path.parts[-1] == "index.html")
+    )
+    if is_artist_profile:
+        artist_slug = path.parts[-2]
+        social_card = Path("assets/images/social") / f"{artist_slug}-whatsapp-preview.jpg"
+        if social_card.exists():
+            image = f"{BASE_URL}/assets/images/social/{artist_slug}-whatsapp-preview.jpg"
     social = (
         ("property", "og:title", title),
         ("property", "og:description", description),
@@ -345,6 +354,11 @@ def finalize_page(path):
         ("name", "author", CONTRIBUTOR_NAME),
         ("property", "og:locale", {"ca": "ca_ES", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "it": "it_IT", "fr": "fr_FR", "sq": "sq_AL", "ja": "ja_JP", "ar": "ar_AR", "ru": "ru_RU", "sv": "sv_SE", "ko": "ko_KR", "hi": "hi_IN"}.get(page_language, "en_US")),
         ("property", "og:image", image),
+        ("property", "og:image:secure_url", image),
+        ("property", "og:image:type", "image/jpeg"),
+        ("property", "og:image:width", "1200"),
+        ("property", "og:image:height", "630"),
+        ("property", "og:image:alt", title),
         ("name", "twitter:card", "summary_large_image"),
         ("name", "twitter:title", title),
         ("name", "twitter:description", description),
