@@ -119,7 +119,7 @@ def normalize_json_ld(html, canonical="", title="", description="", page_languag
                         "url": CONTRIBUTOR_URL,
                         "sameAs": [CONTRIBUTOR_URL],
                     }
-                if canonical and item_type in {"WebPage", "CollectionPage", "ProfilePage"} and (
+                if canonical and isinstance(item_type, str) and item_type in {"WebPage", "CollectionPage", "ProfilePage"} and (
                     item_url == canonical or item_id.startswith(canonical + "#")
                 ):
                     item["name"] = title
