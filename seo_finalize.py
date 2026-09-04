@@ -6,7 +6,7 @@ import subprocess
 from datetime import date
 from html import escape, unescape
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin
 
 
 BASE_URL = "https://urbanartsnews.com"
@@ -181,6 +181,32 @@ def replace_or_add_meta(html, attribute, key, content):
         return re.sub(pattern, replacement, html, count=1, flags=re.I)
     return add_before_head(html, replacement)
 
+
+
+def add_whatsapp_share(html, canonical, title):
+    """Add one accessible WhatsApp share button using the current canonical URL."""
+    html = re.sub(
+        r'<!-- WhatsApp Share -->.*?<!-- /WhatsApp Share -->',
+        '',
+        html,
+        flags=re.I | re.S,
+    )
+    share_url = "https://wa.me/?text=" + quote(f"{title} {canonical}")
+    markup = f'''<!-- WhatsApp Share -->
+<style id="whatsapp-share-style">
+.whatsapp-share-button{{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:999px;background:#25D366;color:#fff!important;font:700 15px/1 Arial,Helvetica,sans-serif;text-decoration:none!important;box-shadow:0 6px 22px rgba(0,0,0,.28);transition:transform .2s ease,box-shadow .2s ease}}
+.whatsapp-share-button:hover,.whatsapp-share-button:focus{{transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.34)}}
+.whatsapp-share-button svg{{width:22px;height:22px;fill:currentColor;flex:none}}
+@media(max-width:600px){{.whatsapp-share-button{{right:12px;bottom:12px;padding:12px 15px;font-size:14px}}}}
+</style>
+<a class="whatsapp-share-button" href="{escape(share_url, quote=True)}" target="_blank" rel="nofollow noopener noreferrer" aria-label="Share this page on WhatsApp" title="Share on WhatsApp">
+<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.21c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.19-1.35-.81-.72-1.36-1.62-1.52-1.89-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.72.34-.25.27-.95.93-.95 2.26s.97 2.62 1.11 2.8c.14.18 1.91 2.91 4.62 4.08.65.28 1.15.45 1.54.57.65.21 1.24.18 1.71.11.52-.08 1.6-.66 1.83-1.29.23-.63.23-1.18.16-1.29-.07-.11-.25-.18-.52-.32M16.03 27.06h-.01a11 11 0 0 1-5.61-1.54l-.4-.24-4.17 1.09 1.11-4.06-.26-.42a11.02 11.02 0 1 1 9.34 5.17m9.38-20.36A13.17 13.17 0 0 0 4.68 22.58L2.81 29.4l6.98-1.83a13.14 13.14 0 0 0 6.23 1.59h.01A13.17 13.17 0 0 0 25.41 6.7"/></svg>
+<span>Share</span>
+</a>
+<!-- /WhatsApp Share -->'''
+    if re.search(r"</body>", html, re.I):
+        return re.sub(r"</body>", lambda match: markup + "\n" + match.group(0), html, count=1, flags=re.I)
+    return html + "\n" + markup + "\n"
 
 def enrich_artist_schema(path, html, canonical, title, description, page_language, image):
     is_english_profile = len(path.parts) == 3 and path.parts[0] == "artists" and path.parts[-1] == "index.html"
@@ -369,6 +395,7 @@ def finalize_page(path):
             f'<script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(",", ":"))}</script>',
         )
 
+    html = add_whatsapp_share(html, canonical, title)
     path.write_text(html, encoding="utf-8")
     return canonical, "noindex" in robots.lower()
 
