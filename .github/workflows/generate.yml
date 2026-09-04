@@ -20,6 +20,7 @@ on:
       - "generate_art_is_trash_languages.py"
       - "generate_ashwan_languages.py"
       - "seo_finalize.py"
+      - "add_contributor_metadata.py"
 
   workflow_dispatch:
 
@@ -39,8 +40,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install image optimizer
-        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Install image tools
+        run: |
+          python -m pip install --disable-pip-version-check Pillow
+          sudo apt-get update
+          sudo apt-get install -y libimage-exiftool-perl
 
       - name: Generate artist and city pages
         run: python generate.py
@@ -78,6 +82,9 @@ jobs:
 
       - name: Apply site-wide SEO baseline
         run: python seo_finalize.py
+
+      - name: Add Rodriquez Ventura contributor metadata to images
+        run: python add_contributor_metadata.py
 
       - name: Commit generated files
         run: |
