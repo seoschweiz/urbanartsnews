@@ -1,3 +1,4 @@
+# Contributor metadata refresh: Rodriquez Ventura
 # Generates artists, international urban-art city photo galleries, RSS news, link status and sitemap.
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
