@@ -20,6 +20,7 @@ on:
       - "generate_art_is_trash_languages.py"
       - "generate_ashwan_languages.py"
       - "seo_finalize.py"
+      - "generate_artist_social_cards.py"
       - "add_contributor_metadata.py"
 
   workflow_dispatch:
@@ -79,6 +80,9 @@ jobs:
       - name: Generate Ashwan language profiles
         continue-on-error: true
         run: python generate_ashwan_languages.py
+
+      - name: Generate artist social preview cards
+        run: python generate_artist_social_cards.py
 
       - name: Apply site-wide SEO baseline
         run: python seo_finalize.py
