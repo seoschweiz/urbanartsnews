@@ -192,8 +192,8 @@ def add_whatsapp_share(html, canonical, title):
         flags=re.I | re.S,
     )
     separator = "&" if "?" in canonical else "?"
-    tracked_url = f"{canonical}{separator}utm_source=whatsapp&utm_medium=social&utm_campaign=page_share"
-    share_url = "https://wa.me/?text=" + quote(f"{title} {tracked_url}")
+    share_target = f"{canonical}{separator}wa=1"
+    share_url = "https://wa.me/?text=" + quote(f"{title} {share_target}")
     markup = f'''<!-- WhatsApp Share -->
 <style id="whatsapp-share-style">
 .whatsapp-share-button{{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:999px;background:#25D366;color:#fff!important;font:700 15px/1 Arial,Helvetica,sans-serif;text-decoration:none!important;box-shadow:0 6px 22px rgba(0,0,0,.28);transition:transform .2s ease,box-shadow .2s ease}}
@@ -342,9 +342,9 @@ def finalize_page(path):
     )
     if is_artist_profile:
         artist_slug = path.parts[-2]
-        social_card = Path("assets/images/social") / f"{artist_slug}-whatsapp-preview.jpg"
+        social_card = Path("assets/images/social") / f"{artist_slug}-whatsapp-preview-v2.jpg"
         if social_card.exists():
-            image = f"{BASE_URL}/assets/images/social/{artist_slug}-whatsapp-preview.jpg"
+            image = f"{BASE_URL}/assets/images/social/{artist_slug}-whatsapp-preview-v2.jpg"
     social = (
         ("property", "og:title", title),
         ("property", "og:description", description),
